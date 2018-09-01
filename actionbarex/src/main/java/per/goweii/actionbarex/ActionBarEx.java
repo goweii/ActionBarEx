@@ -6,10 +6,12 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -47,6 +49,8 @@ public class ActionBarEx extends FrameLayout {
     protected int titleBarLayoutRes;
     protected View view_title_bar;
 
+    private SparseArray<View> views = null;
+
     public ActionBarEx(Context context) {
         this(context, null);
     }
@@ -62,6 +66,8 @@ public class ActionBarEx extends FrameLayout {
         initAttrs(attrs);
         initView();
         setClickable(true);
+        setFocusable(true);
+        setFocusableInTouchMode(true);
     }
 
     @Override
@@ -69,18 +75,21 @@ public class ActionBarEx extends FrameLayout {
         return true;
     }
 
-    public LinearLayout getActionBarLayout() {
+    public LinearLayout getActionBar() {
         return root;
     }
 
-    public View getStatusBarView() {
+    public View getStatusBar() {
         return view_status_bar;
     }
 
-    public View getBottomLineView() {
-        return view_line;
+    public FrameLayout getTitleBar() {
+        return fl_title_bar;
     }
 
+    public View getBottomLine() {
+        return view_line;
+    }
 
     protected void initAttrs(AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
@@ -146,7 +155,7 @@ public class ActionBarEx extends FrameLayout {
         view_line = root.findViewById(R.id.view_line);
         fl_title_bar = root.findViewById(R.id.fl_title_bar);
 
-        if (titleBarLayoutRes > 0){
+        if (titleBarLayoutRes > 0) {
             view_title_bar = inflate(getContext(), titleBarLayoutRes, null);
         }
 
@@ -175,7 +184,7 @@ public class ActionBarEx extends FrameLayout {
             blurView.addView(root);
             addView(blurView);
         } else {
-            if (actionBarImageRes > 0){
+            if (actionBarImageRes > 0) {
                 ImageView actionBarImageView = new ImageView(context);
                 actionBarImageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, getActionBarHeight()));
                 actionBarImageView.setImageResource(actionBarImageRes);
@@ -186,11 +195,38 @@ public class ActionBarEx extends FrameLayout {
         }
     }
 
+    protected void initTitleBar() {
+    }
+
+    public <V extends View> V getView(@IdRes int id) {
+        if (view_title_bar == null){
+            return null;
+        }
+        if (views == null) {
+            views = new SparseArray<>();
+        }
+        View view = views.get(id);
+        if (view == null) {
+            view = view_title_bar.findViewById(id);
+            views.put(id, view);
+        }
+        return (V) view;
+    }
+
     public int getActionBarHeight() {
         return (int) (utils.getStatusBarHeight() + titleBarHeight + bottomLineHeight);
     }
 
-    protected void initTitleBar() {
+    public int getStatusBarHeight() {
+        return utils.getStatusBarHeight();
+    }
+
+    public int getTitleBarHeight() {
+        return (int) titleBarHeight;
+    }
+
+    public int getBottomHeight() {
+        return (int) bottomLineHeight;
     }
 
     public void setOnTitleBarClickListener(final OnTitleBarClickListener onTitleBarClickListener) {
