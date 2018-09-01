@@ -1,0 +1,37 @@
+<resources>
+
+    <style name="action_bar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/action_bar_height</item>
+    </style>
+
+    <style name="action_bar_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">13dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="action_bar_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">13dp</item>
+        <item name="android:paddingRight">13dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="action_bar_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">13dp</item>
+        <item name="android:paddingRight">13dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxWidth">164dp</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+</resources>

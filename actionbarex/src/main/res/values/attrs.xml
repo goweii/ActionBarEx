@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ActionBarEx">
+        <attr name="ab_action_bar_blur_radio" format="integer" />
+        <attr name="ab_action_bar_image_res" format="reference" />
+        <attr name="ab_status_bar_mode" format="enum">
+            <enum name="light" value="0" />
+            <enum name="dark" value="1" />
+        </attr>
+        <attr name="ab_status_bar_color" format="color|reference" />
+        <attr name="ab_title_bar_layout" format="reference" />
+        <attr name="ab_title_bar_height" format="dimension|reference" />
+        <attr name="ab_bottom_line_height" format="dimension|reference" />
+        <attr name="ab_bottom_line_color" format="color|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SimpleActionBar">
+        <attr name="simple_left_text" format="string|dimension" />
+        <attr name="simple_left_text_size" format="dimension|reference" />
+        <attr name="simple_left_text_color" format="color|reference" />
+        <attr name="simple_left_image_res" format="reference" />
+        <attr name="simple_right_text" format="string|dimension" />
+        <attr name="simple_right_text_size" format="dimension|reference" />
+        <attr name="simple_right_text_color" format="color|reference" />
+        <attr name="simple_right_image_res" format="reference" />
+        <attr name="simple_title_text" format="string|reference" />
+        <attr name="simple_title_text_size" format="dimension|reference" />
+        <attr name="simple_title_text_color" format="color|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SearchActionBar">
+        <attr name="search_left_text" format="string|dimension" />
+        <attr name="search_left_text_size" format="dimension|reference" />
+        <attr name="search_left_text_color" format="color|reference" />
+        <attr name="search_left_image_res" format="reference" />
+        <attr name="search_right_text" format="string|dimension" />
+        <attr name="search_right_text_size" format="dimension|reference" />
+        <attr name="search_right_text_color" format="color|reference" />
+        <attr name="search_right_image_res" format="reference" />
+        <attr name="search_title_hint_text" format="string|reference" />
+        <attr name="search_title_text_size" format="dimension|reference" />
+        <attr name="search_title_text_color" format="color|reference" />
+        <attr name="search_title_hint_color" format="color|reference" />
+    </declare-styleable>
+
+</resources>

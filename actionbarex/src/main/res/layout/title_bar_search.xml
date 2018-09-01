@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_title_bar_search"
+    style="@style/action_bar">
+
+    <LinearLayout
+        android:id="@+id/ll_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true">
+
+        <per.goweii.actionbarex.SquareHeightImageView
+            android:id="@+id/iv_left"
+            style="@style/action_bar_icon"
+            android:visibility="gone"
+            tools:src="@color/black"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_left"
+            style="@style/action_bar_text"
+            android:visibility="gone"
+            tools:text="返回"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/ll_left"
+        android:layout_toLeftOf="@+id/ll_right"
+        android:background="@color/transparent"
+        android:singleLine="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/text_black"
+        android:textSize="15sp"
+        tools:hint="请输入搜索内容"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/ll_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:id="@+id/tv_right"
+            style="@style/action_bar_text"
+            android:textColor="@color/text_black"
+            android:visibility="gone"
+            tools:text="搜索"
+            tools:visibility="visible" />
+
+        <per.goweii.actionbarex.SquareHeightImageView
+            android:id="@+id/iv_right"
+            style="@style/action_bar_icon"
+            android:visibility="gone"
+            tools:src="@color/black"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</RelativeLayout>
