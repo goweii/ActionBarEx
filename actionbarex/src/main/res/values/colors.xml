@@ -4,7 +4,7 @@
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
     <!--状态栏颜色-->
-    <color name="view_status_bar">#11000000</color>
+    <color name="view_status_bar">#00000000</color>
     <!--标题栏图标颜色-->
     <color name="action_bar_icon">#000000</color>
     <!--文字颜色-->

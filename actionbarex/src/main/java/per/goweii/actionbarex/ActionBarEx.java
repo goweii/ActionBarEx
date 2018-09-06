@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -23,31 +22,39 @@ import android.widget.LinearLayout;
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 import per.goweii.actionbarex.listener.OnTitleBarClickListener;
+import per.goweii.actionbarex.statusbar.StatusBarUtils;
 
 /**
+ * 高拓展性和定制性的ActionBar
+ * 在这里定义几个概念：
+ * ActionBar：这里指包含下面三个的整体
+ * StatusBar：系统状态栏
+ * TitleBar：显示标题和返回按钮等的View，位于StatusBar和BottomLine之间，可自定义布局
+ * BottomLine：最下面的一条分割线
+ *
  * @author Cuizhen
  * @date 2018/8/30-上午11:10
  */
 public class ActionBarEx extends FrameLayout {
 
     protected final Context context;
-    protected final DisplayInfoUtils utils;
+    private final DisplayInfoUtils utils;
 
-    protected int actionBarImageRes;
-    protected float actionBarBlurRadio = 0;
-    protected boolean statusBarDarkMode;
-    protected int statusBarColor;
-    protected int bottomLineColor;
-    protected float bottomLineHeight;
-    protected float titleBarHeight;
+    private int actionBarImageRes;
+    private float actionBarBlurRadio = 0;
+    private boolean statusBarDarkMode;
+    private int statusBarColor;
+    private int bottomLineColor;
+    private float bottomLineHeight;
+    private float titleBarHeight;
 
-    protected LinearLayout root;
-    protected View view_status_bar;
-    protected FrameLayout fl_title_bar;
-    protected View view_line;
+    private LinearLayout mActionBar;
+    private View mStatusBar;
+    private FrameLayout mTitleBar;
+    private View mBottomLine;
 
-    protected int titleBarLayoutRes;
-    protected View view_title_bar;
+    private int titleBarLayoutRes;
+    private View mTitleBarChild;
 
     private SparseArray<View> views = null;
 
@@ -63,11 +70,11 @@ public class ActionBarEx extends FrameLayout {
         super(context, attrs, defStyleAttr);
         this.context = context;
         utils = DisplayInfoUtils.getInstance(context);
-        initAttrs(attrs);
-        initView();
         setClickable(true);
         setFocusable(true);
         setFocusableInTouchMode(true);
+        initAttrs(attrs);
+        initView();
     }
 
     @Override
@@ -76,130 +83,29 @@ public class ActionBarEx extends FrameLayout {
     }
 
     public LinearLayout getActionBar() {
-        return root;
+        return mActionBar;
     }
 
     public View getStatusBar() {
-        return view_status_bar;
+        return mStatusBar;
     }
 
     public FrameLayout getTitleBar() {
-        return fl_title_bar;
+        return mTitleBar;
     }
 
     public View getBottomLine() {
-        return view_line;
+        return mBottomLine;
     }
 
-    protected void initAttrs(AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
-
-        int statusBarColorDef = ContextCompat.getColor(context, R.color.view_status_bar);
-        int titleBarHeightDef = utils.dp2px(48);
-        int bottomLineHeightDef = utils.dp2px(1);
-        int bottomLineColorDef = ContextCompat.getColor(context, R.color.line);
-
-        actionBarImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_action_bar_image_res, 0);
-        actionBarBlurRadio = typedArray.getInteger(R.styleable.ActionBarEx_ab_action_bar_blur_radio, 0);
-        statusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_status_bar_mode, 0) == 1;
-        statusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_status_bar_color, statusBarColorDef);
-        titleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_title_bar_layout, 0);
-        titleBarHeight = typedArray.getDimension(R.styleable.ActionBarEx_ab_title_bar_height, titleBarHeightDef);
-        bottomLineHeight = typedArray.getDimension(R.styleable.ActionBarEx_ab_bottom_line_height, bottomLineHeightDef);
-        bottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottom_line_color, bottomLineColorDef);
-
-        typedArray.recycle();
-    }
-
-    protected void initView() {
-        BlurView blurView = null;
-
-        if (context instanceof Activity) {
-            Activity activity = (Activity) context;
-            Window window = activity.getWindow();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            }
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.setStatusBarColor(Color.TRANSPARENT);
-            }
-            if (activity.getActionBar() != null) {
-                activity.getActionBar().hide();
-            }
-            if (activity instanceof AppCompatActivity) {
-                AppCompatActivity compatActivity = (AppCompatActivity) activity;
-                if (compatActivity.getSupportActionBar() != null) {
-                    compatActivity.getSupportActionBar().hide();
-                }
-            }
-            StatusBarUtils.translucentStatusBar(activity);
-            StatusBarUtils.setStatusBarMode(activity, statusBarDarkMode);
-
-            if (actionBarBlurRadio > 0) {
-                View decorView = activity.getWindow().getDecorView();
-                ViewGroup rootView = decorView.findViewById(android.R.id.content);
-                Drawable windowBackground = decorView.getBackground();
-                blurView = new BlurView(context);
-                blurView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-                blurView.setupWith(rootView)
-                        .blurRadius(actionBarBlurRadio)
-                        .setOverlayColor(getDrawingCacheBackgroundColor())
-                        .windowBackground(windowBackground)
-                        .blurAlgorithm(new RenderScriptBlur(context));
-            }
-        }
-
-        root = (LinearLayout) inflate(getContext(), R.layout.action_bar, null);
-        view_status_bar = root.findViewById(R.id.view_status_bar);
-        view_line = root.findViewById(R.id.view_line);
-        fl_title_bar = root.findViewById(R.id.fl_title_bar);
-
-        if (titleBarLayoutRes > 0) {
-            view_title_bar = inflate(getContext(), titleBarLayoutRes, null);
-        }
-
-        ViewGroup.LayoutParams view_status_bar_params = view_status_bar.getLayoutParams();
-        view_status_bar_params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        view_status_bar_params.height = utils.getStatusBarHeight();
-        view_status_bar.setLayoutParams(view_status_bar_params);
-        view_status_bar.setBackgroundColor(statusBarColor);
-
-        ViewGroup.LayoutParams view_line_params = view_line.getLayoutParams();
-        view_line_params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        view_line_params.height = (int) bottomLineHeight;
-        view_line.setLayoutParams(view_line_params);
-        view_line.setBackgroundColor(bottomLineColor);
-
-        ViewGroup.LayoutParams fl_title_bar_params = fl_title_bar.getLayoutParams();
-        fl_title_bar_params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        fl_title_bar_params.height = (int) titleBarHeight;
-        fl_title_bar.setLayoutParams(fl_title_bar_params);
-
-        if (view_title_bar != null) {
-            initTitleBar();
-            fl_title_bar.addView(view_title_bar);
-        }
-        if (blurView != null) {
-            blurView.addView(root);
-            addView(blurView);
-        } else {
-            if (actionBarImageRes > 0) {
-                ImageView actionBarImageView = new ImageView(context);
-                actionBarImageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, getActionBarHeight()));
-                actionBarImageView.setImageResource(actionBarImageRes);
-                actionBarImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                addView(actionBarImageView);
-            }
-            addView(root);
-        }
-    }
-
-    protected void initTitleBar() {
-    }
-
+    /**
+     * 获取一个TitleBar中的View并缓存，以便下次获取，避免频繁调用findViewById
+     *
+     * @param id View的id
+     * @return View
+     */
     public <V extends View> V getView(@IdRes int id) {
-        if (view_title_bar == null){
+        if (mTitleBarChild == null) {
             return null;
         }
         if (views == null) {
@@ -207,7 +113,7 @@ public class ActionBarEx extends FrameLayout {
         }
         View view = views.get(id);
         if (view == null) {
-            view = view_title_bar.findViewById(id);
+            view = mTitleBarChild.findViewById(id);
             views.put(id, view);
         }
         return (V) view;
@@ -230,7 +136,7 @@ public class ActionBarEx extends FrameLayout {
     }
 
     public void setOnTitleBarClickListener(final OnTitleBarClickListener onTitleBarClickListener) {
-        fl_title_bar.setOnClickListener(new OnClickListener() {
+        mTitleBar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onTitleBarClickListener != null) {
@@ -238,5 +144,133 @@ public class ActionBarEx extends FrameLayout {
                 }
             }
         });
+    }
+
+    /**
+     * 初始化布局文件传入的配置
+     * 子类可重写并初始化自己定义的属性配置，必须保证在第一行调用super方法
+     *
+     * @param attrs AttributeSet
+     */
+    protected void initAttrs(AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
+
+        int statusBarColorDef = Color.TRANSPARENT;
+        int titleBarHeightDef = utils.dp2px(48);
+        int bottomLineHeightDef = 0;
+        int bottomLineColorDef = Color.TRANSPARENT;
+
+        actionBarImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_action_bar_image_res, 0);
+        actionBarBlurRadio = typedArray.getInteger(R.styleable.ActionBarEx_ab_action_bar_blur_radio, 0);
+        statusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_status_bar_mode, 0) == 1;
+        statusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_status_bar_color, statusBarColorDef);
+        titleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_title_bar_layout, 0);
+        titleBarHeight = typedArray.getDimension(R.styleable.ActionBarEx_ab_title_bar_height, titleBarHeightDef);
+        bottomLineHeight = typedArray.getDimension(R.styleable.ActionBarEx_ab_bottom_line_height, bottomLineHeightDef);
+        bottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottom_line_color, bottomLineColorDef);
+
+        typedArray.recycle();
+    }
+
+    /**
+     * 初始化子TitleBar
+     *
+     * @return TitleBarChild
+     */
+    protected View inflateTitleBar() {
+        if (titleBarLayoutRes > 0) {
+            return inflate(getContext(), titleBarLayoutRes, null);
+        }
+        return null;
+    }
+
+    private void initView() {
+        BlurView blurView = null;
+
+        if (context instanceof Activity) {
+            Activity activity = (Activity) context;
+            initWindow(activity);
+            if (actionBarBlurRadio > 0) {
+                View decorView = activity.getWindow().getDecorView();
+                ViewGroup rootView = decorView.findViewById(android.R.id.content);
+                Drawable windowBackground = decorView.getBackground();
+                blurView = new BlurView(context);
+                blurView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+                blurView.setupWith(rootView)
+                        .blurRadius(actionBarBlurRadio)
+                        .setOverlayColor(getDrawingCacheBackgroundColor())
+                        .windowBackground(windowBackground)
+                        .blurAlgorithm(new RenderScriptBlur(context));
+            }
+        }
+
+        mActionBar = (LinearLayout) inflate(getContext(), R.layout.action_bar, null);
+        mStatusBar = mActionBar.findViewById(R.id.status_bar);
+        mTitleBar = mActionBar.findViewById(R.id.title_bar);
+        mBottomLine = mActionBar.findViewById(R.id.bottom_line);
+
+        ViewGroup.LayoutParams statusBarParams = mStatusBar.getLayoutParams();
+        statusBarParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        statusBarParams.height = utils.getStatusBarHeight();
+        mStatusBar.setLayoutParams(statusBarParams);
+        mStatusBar.setBackgroundColor(statusBarColor);
+
+        ViewGroup.LayoutParams titleBarParams = mTitleBar.getLayoutParams();
+        titleBarParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        titleBarParams.height = (int) titleBarHeight;
+        mTitleBar.setLayoutParams(titleBarParams);
+
+        ViewGroup.LayoutParams bottomLineParams = mBottomLine.getLayoutParams();
+        bottomLineParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        bottomLineParams.height = (int) bottomLineHeight;
+        mBottomLine.setLayoutParams(bottomLineParams);
+        mBottomLine.setBackgroundColor(bottomLineColor);
+
+        mTitleBarChild = inflateTitleBar();
+
+        if (mTitleBarChild != null) {
+            mTitleBar.addView(mTitleBarChild);
+        }
+        if (blurView != null) {
+            blurView.addView(mActionBar);
+            addView(blurView);
+        } else {
+            if (actionBarImageRes > 0) {
+                ImageView actionBarImageView = new ImageView(context);
+                actionBarImageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, getActionBarHeight()));
+                actionBarImageView.setImageResource(actionBarImageRes);
+                actionBarImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                addView(actionBarImageView);
+            }
+            addView(mActionBar);
+        }
+    }
+
+    /**
+     * 初始化Activity相关
+     * 透明状态栏，改变状态栏图标颜色模式， 隐藏默认的ActionBar
+     *
+     * @param activity Activity
+     */
+    private void initWindow(Activity activity) {
+        Window window = activity.getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+        if (activity.getActionBar() != null) {
+            activity.getActionBar().hide();
+        }
+        if (activity instanceof AppCompatActivity) {
+            AppCompatActivity compatActivity = (AppCompatActivity) activity;
+            if (compatActivity.getSupportActionBar() != null) {
+                compatActivity.getSupportActionBar().hide();
+            }
+        }
+        StatusBarUtils.transparentStatusBar(activity);
+        StatusBarUtils.setStatusBarIconMode(activity, statusBarDarkMode);
     }
 }

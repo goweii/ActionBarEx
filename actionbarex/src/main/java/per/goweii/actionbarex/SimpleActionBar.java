@@ -81,8 +81,6 @@ public final class SimpleActionBar extends ActionBarEx {
     protected void initAttrs(AttributeSet attrs) {
         super.initAttrs(attrs);
 
-        titleBarLayoutRes = R.layout.title_bar_simple;
-
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SimpleActionBar);
 
         int textSizeDef = 15;
@@ -107,9 +105,9 @@ public final class SimpleActionBar extends ActionBarEx {
     }
 
     @Override
-    protected void initTitleBar() {
+    protected View inflateTitleBar() {
 
-        rl_title_bar = (RelativeLayout) view_title_bar;
+        rl_title_bar = (RelativeLayout) inflate(getContext(), R.layout.title_bar_simple, null);
 
         iv_left = rl_title_bar.findViewById(R.id.iv_left);
         tv_left = rl_title_bar.findViewById(R.id.tv_left);
@@ -153,6 +151,7 @@ public final class SimpleActionBar extends ActionBarEx {
         } else {
             iv_right.setVisibility(GONE);
         }
+        return rl_title_bar;
     }
 
     public void setOnLeftImageClickListener(final OnLeftImageClickListener onLeftImageClickListener) {

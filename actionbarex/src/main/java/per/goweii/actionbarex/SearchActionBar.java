@@ -83,8 +83,6 @@ public final class SearchActionBar extends ActionBarEx {
     protected void initAttrs(AttributeSet attrs) {
         super.initAttrs(attrs);
 
-        titleBarLayoutRes = R.layout.title_bar_search;
-
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SearchActionBar);
 
         int textSizeDef = 15;
@@ -110,9 +108,9 @@ public final class SearchActionBar extends ActionBarEx {
     }
 
     @Override
-    protected void initTitleBar() {
+    protected View inflateTitleBar() {
 
-        rl_title_bar = (RelativeLayout) view_title_bar;
+        rl_title_bar = (RelativeLayout) inflate(getContext(), R.layout.title_bar_search, null);
 
         iv_left = rl_title_bar.findViewById(R.id.iv_left);
         tv_left = rl_title_bar.findViewById(R.id.tv_left);
@@ -157,6 +155,7 @@ public final class SearchActionBar extends ActionBarEx {
         } else {
             iv_right.setVisibility(GONE);
         }
+        return rl_title_bar;
     }
 
     public void setOnLeftImageClickListener(final OnLeftImageClickListener onLeftImageClickListener) {
