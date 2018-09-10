@@ -20,10 +20,14 @@
         <attr name="simple_left_text_size" format="dimension|reference" />
         <attr name="simple_left_text_color" format="color|reference" />
         <attr name="simple_left_image_res" format="reference" />
+        <attr name="simple_left_image_color" format="color|reference" />
+        <attr name="simple_left_image_padding" format="dimension|reference" />
         <attr name="simple_right_text" format="string|dimension" />
         <attr name="simple_right_text_size" format="dimension|reference" />
         <attr name="simple_right_text_color" format="color|reference" />
         <attr name="simple_right_image_res" format="reference" />
+        <attr name="simple_right_image_color" format="color|reference" />
+        <attr name="simple_right_image_padding" format="dimension|reference" />
         <attr name="simple_title_text" format="string|reference" />
         <attr name="simple_title_text_size" format="dimension|reference" />
         <attr name="simple_title_text_color" format="color|reference" />
@@ -34,10 +38,14 @@
         <attr name="search_left_text_size" format="dimension|reference" />
         <attr name="search_left_text_color" format="color|reference" />
         <attr name="search_left_image_res" format="reference" />
+        <attr name="search_left_image_color" format="color|reference" />
+        <attr name="search_left_image_padding" format="dimension|reference" />
         <attr name="search_right_text" format="string|dimension" />
         <attr name="search_right_text_size" format="dimension|reference" />
         <attr name="search_right_text_color" format="color|reference" />
         <attr name="search_right_image_res" format="reference" />
+        <attr name="search_right_image_color" format="color|reference" />
+        <attr name="search_right_image_padding" format="dimension|reference" />
         <attr name="search_title_hint_text" format="string|reference" />
         <attr name="search_title_text_size" format="dimension|reference" />
         <attr name="search_title_text_color" format="color|reference" />

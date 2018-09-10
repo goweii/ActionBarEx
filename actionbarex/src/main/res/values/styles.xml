@@ -8,7 +8,7 @@
     <style name="action_bar_icon">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:padding">13dp</item>
+        <item name="android:padding">15dp</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
 
@@ -18,7 +18,7 @@
         <item name="android:paddingLeft">13dp</item>
         <item name="android:paddingRight">13dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:textSize">15sp</item>
     </style>
 
@@ -29,7 +29,7 @@
         <item name="android:paddingRight">13dp</item>
         <item name="android:gravity">center</item>
         <item name="android:maxWidth">164dp</item>
-        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textColor">#000000</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">17sp</item>
     </style>

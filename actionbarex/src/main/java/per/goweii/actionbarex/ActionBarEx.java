@@ -38,7 +38,7 @@ import per.goweii.actionbarex.statusbar.StatusBarUtils;
 public class ActionBarEx extends FrameLayout {
 
     protected final Context context;
-    private final DisplayInfoUtils utils;
+    protected final DisplayInfoUtils utils;
 
     private int actionBarImageRes;
     private float actionBarBlurRadio = 0;
