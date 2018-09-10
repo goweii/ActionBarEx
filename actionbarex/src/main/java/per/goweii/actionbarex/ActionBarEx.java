@@ -45,8 +45,9 @@ public class ActionBarEx extends FrameLayout {
     private boolean statusBarDarkMode;
     private int statusBarColor;
     private int bottomLineColor;
-    private float bottomLineHeight;
-    private float titleBarHeight;
+    private int statusBarHeight;
+    private int titleBarHeight;
+    private int bottomLineHeight;
 
     private LinearLayout mActionBar;
     private View mStatusBar;
@@ -70,6 +71,7 @@ public class ActionBarEx extends FrameLayout {
         super(context, attrs, defStyleAttr);
         this.context = context;
         utils = DisplayInfoUtils.getInstance(context);
+        statusBarHeight = utils.getStatusBarHeight();
         setClickable(true);
         setFocusable(true);
         setFocusableInTouchMode(true);
@@ -120,19 +122,19 @@ public class ActionBarEx extends FrameLayout {
     }
 
     public int getActionBarHeight() {
-        return (int) (utils.getStatusBarHeight() + titleBarHeight + bottomLineHeight);
+        return statusBarHeight + titleBarHeight + bottomLineHeight;
     }
 
     public int getStatusBarHeight() {
-        return utils.getStatusBarHeight();
+        return statusBarHeight;
     }
 
     public int getTitleBarHeight() {
-        return (int) titleBarHeight;
+        return titleBarHeight;
     }
 
     public int getBottomHeight() {
-        return (int) bottomLineHeight;
+        return bottomLineHeight;
     }
 
     public void setOnTitleBarClickListener(final OnTitleBarClickListener onTitleBarClickListener) {
@@ -155,19 +157,14 @@ public class ActionBarEx extends FrameLayout {
     protected void initAttrs(AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
 
-        int statusBarColorDef = Color.TRANSPARENT;
-        int titleBarHeightDef = utils.dp2px(48);
-        int bottomLineHeightDef = 0;
-        int bottomLineColorDef = Color.TRANSPARENT;
-
         actionBarImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_action_bar_image_res, 0);
         actionBarBlurRadio = typedArray.getInteger(R.styleable.ActionBarEx_ab_action_bar_blur_radio, 0);
         statusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_status_bar_mode, 0) == 1;
-        statusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_status_bar_color, statusBarColorDef);
+        statusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_status_bar_color, Config.STATUS_BAR_COLOR_DEF);
         titleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_title_bar_layout, 0);
-        titleBarHeight = typedArray.getDimension(R.styleable.ActionBarEx_ab_title_bar_height, titleBarHeightDef);
-        bottomLineHeight = typedArray.getDimension(R.styleable.ActionBarEx_ab_bottom_line_height, bottomLineHeightDef);
-        bottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottom_line_color, bottomLineColorDef);
+        titleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_title_bar_height, utils.dp2px(Config.TITLE_BAR_HEIGHT_DEF));
+        bottomLineHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_bottom_line_height, Config.BOTTOM_LINE_HEIGHT_DEF);
+        bottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottom_line_color, Config.BOTTOM_LINE_COLOR_DEF);
 
         typedArray.recycle();
     }
@@ -209,9 +206,14 @@ public class ActionBarEx extends FrameLayout {
         mTitleBar = mActionBar.findViewById(R.id.title_bar);
         mBottomLine = mActionBar.findViewById(R.id.bottom_line);
 
+        ViewGroup.LayoutParams actionBarParams = mActionBar.getLayoutParams();
+        actionBarParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        actionBarParams.height = getActionBarHeight();
+        mActionBar.setLayoutParams(actionBarParams);
+
         ViewGroup.LayoutParams statusBarParams = mStatusBar.getLayoutParams();
         statusBarParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        statusBarParams.height = utils.getStatusBarHeight();
+        statusBarParams.height = statusBarHeight;
         mStatusBar.setLayoutParams(statusBarParams);
         mStatusBar.setBackgroundColor(statusBarColor);
 

@@ -10,6 +10,10 @@ import android.graphics.Color;
  */
 public interface Config {
 
+    int STATUS_BAR_COLOR_DEF = Color.TRANSPARENT;
+    int BOTTOM_LINE_HEIGHT_DEF = 0;
+    int BOTTOM_LINE_COLOR_DEF = Color.TRANSPARENT;
+    int TITLE_BAR_HEIGHT_DEF = 48;
     int IMAGE_RES_DEF = 0;
     float IMAGE_PADDING_DEF = 15;
     int IMAGE_COLOR_DEF = Color.TRANSPARENT;
