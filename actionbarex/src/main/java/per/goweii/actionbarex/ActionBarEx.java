@@ -2,10 +2,9 @@ package per.goweii.actionbarex;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -70,12 +68,14 @@ public class ActionBarEx extends FrameLayout {
     public ActionBarEx(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
+        hintSupportActionBar();
         utils = DisplayInfoUtils.getInstance(context);
         statusBarHeight = utils.getStatusBarHeight();
         setClickable(true);
         setFocusable(true);
         setFocusableInTouchMode(true);
         initAttrs(attrs);
+        makeImmersion();
         initView();
     }
 
@@ -186,7 +186,6 @@ public class ActionBarEx extends FrameLayout {
 
         if (context instanceof Activity) {
             Activity activity = (Activity) context;
-            initWindow(activity);
             if (actionBarBlurRadio > 0) {
                 View decorView = activity.getWindow().getDecorView();
                 ViewGroup rootView = decorView.findViewById(android.R.id.content);
@@ -217,12 +216,12 @@ public class ActionBarEx extends FrameLayout {
 
         ViewGroup.LayoutParams titleBarParams = mTitleBar.getLayoutParams();
         titleBarParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        titleBarParams.height = (int) titleBarHeight;
+        titleBarParams.height = titleBarHeight;
         mTitleBar.setLayoutParams(titleBarParams);
 
         ViewGroup.LayoutParams bottomLineParams = mBottomLine.getLayoutParams();
         bottomLineParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        bottomLineParams.height = (int) bottomLineHeight;
+        bottomLineParams.height = bottomLineHeight;
         mBottomLine.setLayoutParams(bottomLineParams);
         mBottomLine.setBackgroundColor(bottomLineColor);
 
@@ -247,19 +246,24 @@ public class ActionBarEx extends FrameLayout {
     }
 
     /**
-     * 初始化Activity相关
-     * 透明状态栏，改变状态栏图标颜色模式， 隐藏默认的ActionBar
-     *
-     * @param activity Activity
+     * 透明状态栏，改变状态栏图标颜色模式
      */
-    private void initWindow(Activity activity) {
-        Window window = activity.getWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+    private void makeImmersion() {
+        Window window = getWindow();
+        if (window == null) {
+            return;
         }
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(Color.TRANSPARENT);
+        StatusBarUtils.transparentStatusBar(window);
+        StatusBarUtils.setStatusBarIconMode(window, statusBarDarkMode);
+    }
+
+    /**
+     * 隐藏默认的ActionBar
+     */
+    private void hintSupportActionBar() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
         }
         if (activity.getActionBar() != null) {
             activity.getActionBar().hide();
@@ -270,7 +274,27 @@ public class ActionBarEx extends FrameLayout {
                 compatActivity.getSupportActionBar().hide();
             }
         }
-        StatusBarUtils.transparentStatusBar(activity);
-        StatusBarUtils.setStatusBarIconMode(activity, statusBarDarkMode);
+    }
+
+    private Window getWindow() {
+        Activity activity = getActivity();
+        if (activity != null) {
+            return activity.getWindow();
+        }
+        return null;
+    }
+
+    private Activity getActivity() {
+        Context context = getContext();
+        if (context instanceof Activity) {
+            return (Activity) context;
+        }
+        if (context instanceof ContextWrapper){
+            Context baseContext = ((ContextWrapper) context).getBaseContext();
+            if (baseContext instanceof Activity) {
+                return (Activity) baseContext;
+            }
+        }
+        return null;
     }
 }

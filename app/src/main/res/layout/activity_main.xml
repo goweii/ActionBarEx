@@ -86,6 +86,11 @@
             app:ab_status_bar_mode="dark"
             app:ab_title_bar_height="48dp" />
 
+        <TextView
+            android:id="@+id/tv_test_in_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
     </LinearLayout>
 
 </FrameLayout>
