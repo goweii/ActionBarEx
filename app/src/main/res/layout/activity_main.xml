@@ -89,7 +89,9 @@
         <TextView
             android:id="@+id/tv_test_in_fragment"
             android:layout_width="match_parent"
-            android:layout_height="45dp" />
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="跳转Fragment测试界面"/>
 
     </LinearLayout>
 

@@ -6,13 +6,13 @@ import android.content.ContextWrapper;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,6 +45,7 @@ public class ActionBarEx extends FrameLayout {
     private int statusBarColor;
     private int bottomLineColor;
     private int statusBarHeight;
+    private int titleBarLayoutRes;
     private int titleBarHeight;
     private int bottomLineHeight;
 
@@ -52,8 +53,6 @@ public class ActionBarEx extends FrameLayout {
     private View mStatusBar;
     private FrameLayout mTitleBar;
     private View mBottomLine;
-
-    private int titleBarLayoutRes;
     private View mTitleBarChild;
 
     private SparseArray<View> views = null;
@@ -71,12 +70,8 @@ public class ActionBarEx extends FrameLayout {
         this.context = context;
         utils = DisplayInfoUtils.getInstance(context);
         statusBarHeight = utils.getStatusBarHeight();
-        setClickable(true);
-        setFocusable(true);
-        setFocusableInTouchMode(true);
         initAttrs(attrs);
         makeImmersion();
-        hintSupportActionBar();
         initView();
     }
 
@@ -158,7 +153,7 @@ public class ActionBarEx extends FrameLayout {
     protected void initAttrs(AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
 
-        autoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_auto_immersion, false);
+        autoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_auto_immersion, Config.AUTO_IMMERSION);
         actionBarImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_action_bar_image_res, 0);
         actionBarBlurRadio = typedArray.getInteger(R.styleable.ActionBarEx_ab_action_bar_blur_radio, 0);
         statusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_status_bar_mode, 0) == 1;
@@ -186,9 +181,9 @@ public class ActionBarEx extends FrameLayout {
     private void initView() {
         BlurView blurView = null;
 
-        if (context instanceof Activity) {
-            Activity activity = (Activity) context;
-            if (actionBarBlurRadio > 0) {
+        if (actionBarBlurRadio > 0) {
+            Activity activity = getActivity();
+            if (activity != null) {
                 View decorView = activity.getWindow().getDecorView();
                 ViewGroup rootView = decorView.findViewById(android.R.id.content);
                 Drawable windowBackground = decorView.getBackground();
@@ -207,24 +202,18 @@ public class ActionBarEx extends FrameLayout {
         mTitleBar = mActionBar.findViewById(R.id.title_bar);
         mBottomLine = mActionBar.findViewById(R.id.bottom_line);
 
-        ViewGroup.LayoutParams actionBarParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getActionBarHeight());
-        mActionBar.setLayoutParams(actionBarParams);
+        mTitleBar.setClickable(true);
+        mTitleBar.setFocusable(true);
+        mTitleBar.setFocusableInTouchMode(true);
 
-        ViewGroup.LayoutParams statusBarParams = mStatusBar.getLayoutParams();
-        statusBarParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        statusBarParams.height = statusBarHeight;
-        mStatusBar.setLayoutParams(statusBarParams);
+        mActionBar.setLayoutParams(makeLayoutParamsWithHeight(getActionBarHeight()));
+
+        mStatusBar.setLayoutParams(makeLayoutParamsWithHeight(statusBarHeight));
         mStatusBar.setBackgroundColor(statusBarColor);
 
-        ViewGroup.LayoutParams titleBarParams = mTitleBar.getLayoutParams();
-        titleBarParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        titleBarParams.height = titleBarHeight;
-        mTitleBar.setLayoutParams(titleBarParams);
+        mTitleBar.setLayoutParams(makeLayoutParamsWithHeight(titleBarHeight));
 
-        ViewGroup.LayoutParams bottomLineParams = mBottomLine.getLayoutParams();
-        bottomLineParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        bottomLineParams.height = bottomLineHeight;
-        mBottomLine.setLayoutParams(bottomLineParams);
+        mBottomLine.setLayoutParams(makeLayoutParamsWithHeight(bottomLineHeight));
         mBottomLine.setBackgroundColor(bottomLineColor);
 
         mTitleBarChild = inflateTitleBar();
@@ -247,32 +236,37 @@ public class ActionBarEx extends FrameLayout {
         }
     }
 
-    /**
-     * 透明状态栏，改变状态栏图标颜色模式
-     */
-    private void makeImmersion() {
-        if (!autoImmersion){
-            return;
-        }
-        Window window = getWindow();
-        if (window == null) {
-            return;
-        }
-        StatusBarUtils.transparentStatusBar(window);
-        StatusBarUtils.setStatusBarIconMode(window, statusBarDarkMode);
+    private LinearLayout.LayoutParams makeLayoutParamsWithHeight(int height){
+        return new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
     }
 
     /**
-     * 隐藏默认的ActionBar
+     * 设置沉浸模式
      */
-    private void hintSupportActionBar() {
-        if (!autoImmersion){
+    private void makeImmersion() {
+        if (!autoImmersion) {
             return;
         }
         Activity activity = getActivity();
         if (activity == null) {
             return;
         }
+        setSystemStatusBar(activity);
+        hintSystemActionBar(activity);
+    }
+
+    /**
+     * 透明状态栏，改变状态栏图标颜色模式
+     */
+    private void setSystemStatusBar(@NonNull Activity activity){
+        StatusBarUtils.transparentStatusBar(activity);
+        StatusBarUtils.setStatusBarIconMode(activity, statusBarDarkMode);
+    }
+
+    /**
+     * 隐藏默认的ActionBar
+     */
+    private void hintSystemActionBar(@NonNull Activity activity) {
         if (activity.getActionBar() != null) {
             activity.getActionBar().hide();
         }
@@ -284,20 +278,16 @@ public class ActionBarEx extends FrameLayout {
         }
     }
 
-    private Window getWindow() {
-        Activity activity = getActivity();
-        if (activity != null) {
-            return activity.getWindow();
-        }
-        return null;
-    }
-
+    /**
+     * 从当前上下文获取Activity
+     */
+    @Nullable
     private Activity getActivity() {
         Context context = getContext();
         if (context instanceof Activity) {
             return (Activity) context;
         }
-        if (context instanceof ContextWrapper){
+        if (context instanceof ContextWrapper) {
             Context baseContext = ((ContextWrapper) context).getBaseContext();
             if (baseContext instanceof Activity) {
                 return (Activity) baseContext;

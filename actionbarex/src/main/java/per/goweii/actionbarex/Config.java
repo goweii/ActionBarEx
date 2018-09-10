@@ -10,6 +10,8 @@ import android.graphics.Color;
  */
 public interface Config {
 
+    boolean AUTO_IMMERSION = true;
+
     int STATUS_BAR_COLOR_DEF = Color.TRANSPARENT;
     int BOTTOM_LINE_HEIGHT_DEF = 0;
     int BOTTOM_LINE_COLOR_DEF = Color.TRANSPARENT;

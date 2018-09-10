@@ -1,8 +1,10 @@
 package per.goweii.android.actionbarex;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import per.goweii.actionbarex.SimpleActionBar;
@@ -43,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick() {
                 Toast.makeText(context, "onRightImageClick", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        findViewById(R.id.tv_test_in_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TestInFragmentActivity.class);
+                startActivity(intent);
             }
         });
     }
