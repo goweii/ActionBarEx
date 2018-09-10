@@ -38,6 +38,7 @@ public class ActionBarEx extends FrameLayout {
     protected final Context context;
     protected final DisplayInfoUtils utils;
 
+    private boolean autoImmersion;
     private int actionBarImageRes;
     private float actionBarBlurRadio = 0;
     private boolean statusBarDarkMode;
@@ -68,7 +69,6 @@ public class ActionBarEx extends FrameLayout {
     public ActionBarEx(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
-        hintSupportActionBar();
         utils = DisplayInfoUtils.getInstance(context);
         statusBarHeight = utils.getStatusBarHeight();
         setClickable(true);
@@ -76,6 +76,7 @@ public class ActionBarEx extends FrameLayout {
         setFocusableInTouchMode(true);
         initAttrs(attrs);
         makeImmersion();
+        hintSupportActionBar();
         initView();
     }
 
@@ -157,6 +158,7 @@ public class ActionBarEx extends FrameLayout {
     protected void initAttrs(AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
 
+        autoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_auto_immersion, false);
         actionBarImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_action_bar_image_res, 0);
         actionBarBlurRadio = typedArray.getInteger(R.styleable.ActionBarEx_ab_action_bar_blur_radio, 0);
         statusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_status_bar_mode, 0) == 1;
@@ -249,6 +251,9 @@ public class ActionBarEx extends FrameLayout {
      * 透明状态栏，改变状态栏图标颜色模式
      */
     private void makeImmersion() {
+        if (!autoImmersion){
+            return;
+        }
         Window window = getWindow();
         if (window == null) {
             return;
@@ -261,6 +266,9 @@ public class ActionBarEx extends FrameLayout {
      * 隐藏默认的ActionBar
      */
     private void hintSupportActionBar() {
+        if (!autoImmersion){
+            return;
+        }
         Activity activity = getActivity();
         if (activity == null) {
             return;

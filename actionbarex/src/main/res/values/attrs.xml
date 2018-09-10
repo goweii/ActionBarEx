@@ -8,6 +8,7 @@
             <enum name="light" value="0" />
             <enum name="dark" value="1" />
         </attr>
+        <attr name="ab_auto_immersion" format="boolean" />
         <attr name="ab_status_bar_color" format="color|reference" />
         <attr name="ab_title_bar_layout" format="reference" />
         <attr name="ab_title_bar_height" format="dimension|reference" />
