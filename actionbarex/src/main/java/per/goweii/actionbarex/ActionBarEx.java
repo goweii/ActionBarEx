@@ -206,9 +206,7 @@ public class ActionBarEx extends FrameLayout {
         mTitleBar = mActionBar.findViewById(R.id.title_bar);
         mBottomLine = mActionBar.findViewById(R.id.bottom_line);
 
-        ViewGroup.LayoutParams actionBarParams = mActionBar.getLayoutParams();
-        actionBarParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        actionBarParams.height = getActionBarHeight();
+        ViewGroup.LayoutParams actionBarParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getActionBarHeight());
         mActionBar.setLayoutParams(actionBarParams);
 
         ViewGroup.LayoutParams statusBarParams = mStatusBar.getLayoutParams();
