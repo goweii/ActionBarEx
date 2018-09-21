@@ -58,6 +58,7 @@ public final class SearchActionBar extends ActionBarEx {
         super(context, attrs, defStyleAttr);
     }
 
+    @Override
     public RelativeLayout getTitleBarChild() {
         return titleBarChild;
     }

@@ -56,6 +56,7 @@ public final class SimpleActionBar extends ActionBarEx {
         super(context, attrs, defStyleAttr);
     }
 
+    @Override
     public RelativeLayout getTitleBarChild() {
         return titleBarChild;
     }

@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -112,21 +111,18 @@ public class ActionBarEx extends FrameLayout {
     }
 
     /**
-     * 获取一个TitleBar中的View并缓存，以便下次获取，避免频繁调用findViewById
+     * 获取View并缓存，以便下次获取，避免频繁调用findViewById
      *
      * @param id View的id
      * @return View
      */
     public <V extends View> V getView(@IdRes int id) {
-        if (mTitleBarChild == null) {
-            return null;
-        }
         if (views == null) {
             views = new SparseArray<>();
         }
         View view = views.get(id);
         if (view == null) {
-            view = mTitleBarChild.findViewById(id);
+            view = findViewById(id);
             views.put(id, view);
         }
         return (V) view;
