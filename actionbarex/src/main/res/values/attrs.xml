@@ -2,18 +2,27 @@
 <resources>
 
     <declare-styleable name="ActionBarEx">
-        <attr name="ab_action_bar_blur_radio" format="integer" />
-        <attr name="ab_action_bar_image_res" format="reference" />
+        <attr name="ab_auto_immersion" format="boolean" />
+
+        <!--背景层布局-->
+        <attr name="ab_background_layer_layout" format="reference" />
+        <!--背景层为图片-->
+        <attr name="ab_background_layer_image_res" format="reference" />
+
+        <!--主体层-->
+        <attr name="ab_status_bar_visible" format="boolean" />
+        <attr name="ab_status_bar_color" format="color|reference" />
         <attr name="ab_status_bar_mode" format="enum">
             <enum name="light" value="0" />
             <enum name="dark" value="1" />
         </attr>
-        <attr name="ab_auto_immersion" format="boolean" />
-        <attr name="ab_status_bar_color" format="color|reference" />
         <attr name="ab_title_bar_layout" format="reference" />
         <attr name="ab_title_bar_height" format="dimension|reference" />
         <attr name="ab_bottom_line_height" format="dimension|reference" />
         <attr name="ab_bottom_line_color" format="color|reference" />
+
+        <!--前景层布局-->
+        <attr name="ab_foreground_layer_layout" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="SimpleActionBar">

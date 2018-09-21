@@ -18,7 +18,7 @@ import android.util.TypedValue;
  * E-mail: goweii@163.com
  * GitHub: https://github.com/goweii
  */
-final class DisplayInfoUtils {
+public final class DisplayInfoUtils {
 
     private final Context mContext;
     private final DisplayMetrics mDisplayMetrics;

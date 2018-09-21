@@ -21,6 +21,7 @@
             android:id="@+id/tv_left"
             style="@style/action_bar_text"
             android:visibility="gone"
+            tools:padding="0dp"
             tools:text="返回"
             tools:visibility="visible" />
 
@@ -30,8 +31,8 @@
         android:id="@+id/tv_title"
         style="@style/action_bar_title"
         android:layout_centerInParent="true"
-        tools:textColor="#000000"
-        tools:text="标题标题标题标题标题标题标题标题" />
+        tools:text="标题标题标题标题标题标题标题标题"
+        tools:textColor="#000000" />
 
     <LinearLayout
         android:id="@+id/ll_right"
@@ -42,9 +43,10 @@
         <TextView
             android:id="@+id/tv_right"
             style="@style/action_bar_text"
-            tools:textColor="#000000"
             android:visibility="gone"
+            tools:padding="0dp"
             tools:text="搜索"
+            tools:textColor="#000000"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.SquareHeightImageView

@@ -21,6 +21,7 @@
             android:id="@+id/tv_left"
             style="@style/action_bar_text"
             android:visibility="gone"
+            tools:padding="0dp"
             tools:text="返回"
             tools:visibility="visible" />
 
@@ -52,6 +53,7 @@
             style="@style/action_bar_text"
             tools:textColor="#000000"
             android:visibility="gone"
+            tools:padding="0dp"
             tools:text="搜索"
             tools:visibility="visible" />
 

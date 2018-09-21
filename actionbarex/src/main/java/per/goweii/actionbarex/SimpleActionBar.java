@@ -84,21 +84,21 @@ public final class SimpleActionBar extends ActionBarEx {
     protected void initAttrs(AttributeSet attrs) {
         super.initAttrs(attrs);
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SimpleActionBar);
+        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.SimpleActionBar);
 
         leftText = typedArray.getString(R.styleable.SimpleActionBar_simple_left_text);
         leftTextSize = typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_size, Config.TEXT_SIZE_DEF);
         leftTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_text_color, Config.TEXT_COLOR_DEF);
         leftImageRes = typedArray.getResourceId(R.styleable.SimpleActionBar_simple_left_image_res, Config.IMAGE_RES_DEF);
         leftImageColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_image_color, Config.IMAGE_COLOR_DEF);
-        leftImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding, utils.dp2px(Config.IMAGE_PADDING_DEF));
+        leftImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding, mDisplayInfoUtils.dp2px(Config.IMAGE_PADDING_DEF));
 
         rightText = typedArray.getString(R.styleable.SimpleActionBar_simple_right_text);
         rightTextSize = typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_size, Config.TEXT_SIZE_DEF);
         rightTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_text_color, Config.TEXT_COLOR_DEF);
         rightImageRes = typedArray.getResourceId(R.styleable.SimpleActionBar_simple_right_image_res, Config.IMAGE_RES_DEF);
         rightImageColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_image_color, Config.IMAGE_COLOR_DEF);
-        rightImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding, utils.dp2px(Config.IMAGE_PADDING_DEF));
+        rightImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding, mDisplayInfoUtils.dp2px(Config.IMAGE_PADDING_DEF));
 
         titleText = typedArray.getString(R.styleable.SimpleActionBar_simple_title_text);
         titleTextSize = typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_size, Config.TITLE_TEXT_SIZE_DEF);
@@ -132,6 +132,9 @@ public final class SimpleActionBar extends ActionBarEx {
             leftTextView.setText(leftText);
             leftTextView.setTextColor(leftTextColor);
             leftTextView.setTextSize(leftTextSize);
+            if (leftImageRes > 0) {
+                leftTextView.setPadding(0, 0, 0, 0);
+            }
         } else {
             leftTextView.setVisibility(GONE);
         }
@@ -141,15 +144,6 @@ public final class SimpleActionBar extends ActionBarEx {
         titleTextView.setTextColor(titleTextColor);
         titleTextView.setTextSize(titleTextSize);
 
-        if (!TextUtils.isEmpty(rightText)) {
-            rightTextView.setVisibility(VISIBLE);
-            rightTextView.setText(rightText);
-            rightTextView.setTextColor(rightTextColor);
-            rightTextView.setTextSize(rightTextSize);
-        } else {
-            rightTextView.setVisibility(GONE);
-        }
-
         if (rightImageRes > 0) {
             rightImageView.setVisibility(VISIBLE);
             rightImageView.setPadding(rightImagePadding, rightImagePadding, rightImagePadding, rightImagePadding);
@@ -157,6 +151,18 @@ public final class SimpleActionBar extends ActionBarEx {
             rightImageView.setColorFilter(rightImageColor);
         } else {
             rightImageView.setVisibility(GONE);
+        }
+
+        if (!TextUtils.isEmpty(rightText)) {
+            rightTextView.setVisibility(VISIBLE);
+            rightTextView.setText(rightText);
+            rightTextView.setTextColor(rightTextColor);
+            rightTextView.setTextSize(rightTextSize);
+            if (rightImageRes > 0) {
+                rightTextView.setPadding(0, 0, 0, 0);
+            }
+        } else {
+            rightTextView.setVisibility(GONE);
         }
         return titleBarChild;
     }

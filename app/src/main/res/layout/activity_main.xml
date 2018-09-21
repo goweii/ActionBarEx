@@ -29,28 +29,64 @@
         android:orientation="vertical">
 
         <per.goweii.actionbarex.SimpleActionBar
-            android:id="@+id/simple_action_bar"
+            android:id="@+id/simple_action_bar_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#aaffffff"
-            app:ab_action_bar_blur_radio="5"
             app:ab_bottom_line_color="@color/line"
             app:ab_bottom_line_height="1dp"
             app:ab_status_bar_color="@color/transparent"
             app:ab_status_bar_mode="dark"
             app:ab_title_bar_height="48dp"
+            app:ab_foreground_layer_layout="@layout/loading_bar"
             app:simple_left_image_res="@mipmap/ic_launcher_round"
             app:simple_left_text="返回"
             app:simple_right_image_res="@mipmap/ic_launcher"
             app:simple_right_text="确定"
-            app:simple_title_text="标题" />
+            app:simple_title_text="标题标题标题标题标题标题标题标题" />
+
+        <per.goweii.actionbarex.SimpleActionBar
+            android:id="@+id/simple_action_bar_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#aaffffff"
+            app:ab_bottom_line_color="@color/line"
+            app:ab_bottom_line_height="5dp"
+            app:ab_status_bar_color="@color/transparent"
+            app:ab_status_bar_mode="dark"
+            app:ab_title_bar_height="48dp"
+            app:ab_foreground_layer_layout="@layout/loading_bar"
+            app:simple_left_image_res="@mipmap/ic_launcher_round"
+            app:simple_left_text="返回"
+            app:simple_right_image_res="@mipmap/ic_launcher"
+            app:simple_right_text="确定"
+            app:simple_title_text="标题标题标题标题标题标题标题标题" />
+
+        <per.goweii.actionbarex.SimpleActionBar
+            android:id="@+id/simple_action_bar_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#aaffffff"
+            app:ab_bottom_line_color="@color/line"
+            app:ab_bottom_line_height="0dp"
+            app:ab_status_bar_color="@color/transparent"
+            app:ab_status_bar_mode="dark"
+            app:ab_title_bar_height="48dp"
+            app:ab_foreground_layer_layout="@layout/loading_bar"
+            app:simple_left_image_res="@mipmap/ic_launcher_round"
+            app:simple_left_text="返回"
+            app:simple_right_image_res="@mipmap/ic_launcher"
+            app:simple_right_text="确定"
+            app:simple_title_text="标题标题标题标题标题标题标题标题" />
 
         <per.goweii.actionbarex.SearchActionBar
             android:id="@+id/search_action_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="#ffffff"
-            app:ab_action_bar_blur_radio="5"
             app:ab_bottom_line_color="@color/line"
             app:ab_bottom_line_height="1dp"
             app:ab_status_bar_color="@color/transparent"
@@ -65,8 +101,8 @@
             android:id="@+id/action_bar_ex_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="#33ffffff"
-            app:ab_action_bar_blur_radio="5"
             app:ab_bottom_line_color="@color/line"
             app:ab_bottom_line_height="1dp"
             app:ab_status_bar_color="@color/transparent"
@@ -78,8 +114,9 @@
             android:id="@+id/action_bar_ex_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="#33ffffff"
-            app:ab_action_bar_image_res="@mipmap/action_bar_img"
+            app:ab_background_layer_image_res="@mipmap/action_bar_img"
             app:ab_bottom_line_color="@color/line"
             app:ab_bottom_line_height="1dp"
             app:ab_status_bar_color="@color/transparent"
@@ -87,9 +124,20 @@
             app:ab_title_bar_height="48dp" />
 
         <TextView
+            android:id="@+id/tv_show_loading"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="显示loading"/>
+
+        <TextView
             android:id="@+id/tv_test_in_fragment"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
             android:gravity="center"
             android:text="跳转Fragment测试界面"/>
 

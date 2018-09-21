@@ -86,21 +86,21 @@ public final class SearchActionBar extends ActionBarEx {
     protected void initAttrs(AttributeSet attrs) {
         super.initAttrs(attrs);
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SearchActionBar);
+        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.SearchActionBar);
 
         leftText = typedArray.getString(R.styleable.SearchActionBar_search_left_text);
         leftTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_size, Config.TEXT_SIZE_DEF);
         leftTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_left_text_color, Config.TEXT_COLOR_DEF);
         leftImageRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_left_image_res, Config.IMAGE_RES_DEF);
         leftImageColor = typedArray.getColor(R.styleable.SearchActionBar_search_left_image_color, Config.IMAGE_COLOR_DEF);
-        leftImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding, utils.dp2px(Config.IMAGE_PADDING_DEF));
+        leftImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding, mDisplayInfoUtils.dp2px(Config.IMAGE_PADDING_DEF));
 
         rightText = typedArray.getString(R.styleable.SearchActionBar_search_right_text);
         rightTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_size, Config.TEXT_SIZE_DEF);
         rightTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_right_text_color, Config.TEXT_COLOR_DEF);
         rightImageRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_right_image_res, Config.IMAGE_RES_DEF);
         rightImageColor = typedArray.getColor(R.styleable.SearchActionBar_search_right_image_color, Config.IMAGE_COLOR_DEF);
-        rightImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding, utils.dp2px(Config.IMAGE_PADDING_DEF));
+        rightImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding, mDisplayInfoUtils.dp2px(Config.IMAGE_PADDING_DEF));
 
         titleHintText = typedArray.getString(R.styleable.SearchActionBar_search_title_hint_text);
         titleTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_title_text_size, Config.TITLE_TEXT_SIZE_DEF);
@@ -135,6 +135,9 @@ public final class SearchActionBar extends ActionBarEx {
             leftTextView.setText(leftText);
             leftTextView.setTextColor(leftTextColor);
             leftTextView.setTextSize(leftTextSize);
+            if (leftImageRes > 0) {
+                leftTextView.setPadding(0, 0, 0, 0);
+            }
         } else {
             leftTextView.setVisibility(GONE);
         }
@@ -145,15 +148,6 @@ public final class SearchActionBar extends ActionBarEx {
         titleEditText.setTextSize(titleTextSize);
         titleEditText.setHintTextColor(titleHintColor);
 
-        if (!TextUtils.isEmpty(rightText)) {
-            rightTextView.setVisibility(VISIBLE);
-            rightTextView.setText(rightText);
-            rightTextView.setTextColor(rightTextColor);
-            rightTextView.setTextSize(rightTextSize);
-        } else {
-            rightTextView.setVisibility(GONE);
-        }
-
         if (rightImageRes > 0) {
             rightImageView.setVisibility(VISIBLE);
             rightImageView.setPadding(rightImagePadding, rightImagePadding, rightImagePadding, rightImagePadding);
@@ -162,6 +156,19 @@ public final class SearchActionBar extends ActionBarEx {
         } else {
             rightImageView.setVisibility(GONE);
         }
+
+        if (!TextUtils.isEmpty(rightText)) {
+            rightTextView.setVisibility(VISIBLE);
+            rightTextView.setText(rightText);
+            rightTextView.setTextColor(rightTextColor);
+            rightTextView.setTextSize(rightTextSize);
+            if (rightImageRes > 0) {
+                rightTextView.setPadding(0, 0, 0, 0);
+            }
+        } else {
+            rightTextView.setVisibility(GONE);
+        }
+
         return titleBarChild;
     }
 

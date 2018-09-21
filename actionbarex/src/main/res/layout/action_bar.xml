@@ -10,17 +10,20 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        tools:background="#33000000"
         tools:layout_height="20dp" />
 
     <FrameLayout
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:background="#567c9f"
         tools:layout_height="48dp" />
 
     <View
         android:id="@+id/bottom_line"
         android:layout_width="match_parent"
+        tools:background="#666666"
         android:layout_height="0dp" />
 
 </LinearLayout>
