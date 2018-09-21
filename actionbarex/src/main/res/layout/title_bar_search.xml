@@ -37,9 +37,6 @@
         android:singleLine="true"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        tools:textColor="#00000000"
-        tools:textSize="15sp"
-        tools:hint="请输入搜索内容"
         android:layout_centerInParent="true"/>
 
     <LinearLayout
