@@ -25,15 +25,27 @@ public final class SearchActionBar extends ActionBarEx {
     private String leftText;
     private float leftTextSize;
     private int leftTextColor;
+    private int leftTextPaddingLeft;
+    private int leftTextPaddingRight;
     private int leftImageRes;
     private int leftImageColor;
     private int leftImagePadding;
+    private int leftImagePaddingLeft;
+    private int leftImagePaddingRight;
+    private int leftImagePaddingTop;
+    private int leftImagePaddingBottom;
     private String rightText;
     private float rightTextSize;
     private int rightTextColor;
+    private int rightTextPaddingLeft;
+    private int rightTextPaddingRight;
     private int rightImageRes;
     private int rightImageColor;
     private int rightImagePadding;
+    private int rightImagePaddingLeft;
+    private int rightImagePaddingRight;
+    private int rightImagePaddingTop;
+    private int rightImagePaddingBottom;
     private String titleHintText;
     private float titleTextSize;
     private int titleTextColor;
@@ -90,21 +102,33 @@ public final class SearchActionBar extends ActionBarEx {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.SearchActionBar);
 
         leftText = typedArray.getString(R.styleable.SearchActionBar_search_left_text);
-        leftTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_size, Config.TEXT_SIZE_DEF);
+        leftTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_size, mDisplayInfoUtils.sp2px(Config.TEXT_SIZE_DEF)));
         leftTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_left_text_color, Config.TEXT_COLOR_DEF);
+        leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_padding_left, mDisplayInfoUtils.dp2px(Config.TEXT_PADDING_DEF));
+        leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_padding_right, mDisplayInfoUtils.dp2px(Config.TEXT_PADDING_DEF));
         leftImageRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_left_image_res, Config.IMAGE_RES_DEF);
         leftImageColor = typedArray.getColor(R.styleable.SearchActionBar_search_left_image_color, Config.IMAGE_COLOR_DEF);
         leftImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding, mDisplayInfoUtils.dp2px(Config.IMAGE_PADDING_DEF));
+        leftImagePaddingLeft = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding_left, leftImagePadding);
+        leftImagePaddingRight = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding_right, leftImagePadding);
+        leftImagePaddingTop = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding_top, leftImagePadding);
+        leftImagePaddingBottom = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding_bottom, leftImagePadding);
 
         rightText = typedArray.getString(R.styleable.SearchActionBar_search_right_text);
-        rightTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_size, Config.TEXT_SIZE_DEF);
+        rightTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_size, mDisplayInfoUtils.sp2px(Config.TEXT_SIZE_DEF)));
         rightTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_right_text_color, Config.TEXT_COLOR_DEF);
+        rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_padding_left, mDisplayInfoUtils.dp2px(Config.TEXT_PADDING_DEF));
+        rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_padding_right, mDisplayInfoUtils.dp2px(Config.TEXT_PADDING_DEF));
         rightImageRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_right_image_res, Config.IMAGE_RES_DEF);
         rightImageColor = typedArray.getColor(R.styleable.SearchActionBar_search_right_image_color, Config.IMAGE_COLOR_DEF);
         rightImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding, mDisplayInfoUtils.dp2px(Config.IMAGE_PADDING_DEF));
+        rightImagePaddingLeft = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding_left, rightImagePadding);
+        rightImagePaddingRight = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding_right, rightImagePadding);
+        rightImagePaddingTop = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding_top, rightImagePadding);
+        rightImagePaddingBottom = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding_bottom, rightImagePadding);
 
         titleHintText = typedArray.getString(R.styleable.SearchActionBar_search_title_hint_text);
-        titleTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_title_text_size, Config.TITLE_TEXT_SIZE_DEF);
+        titleTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SearchActionBar_search_title_text_size, mDisplayInfoUtils.sp2px(Config.TITLE_TEXT_SIZE_DEF)));
         titleTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_title_text_color, Config.TITLE_TEXT_COLOR_DEF);
         titleHintColor = typedArray.getColor(R.styleable.SearchActionBar_search_title_hint_color, Config.TITLE_TEXT_HINT_COLOR_DEF);
 
@@ -113,7 +137,6 @@ public final class SearchActionBar extends ActionBarEx {
 
     @Override
     protected View inflateTitleBar() {
-
         titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.title_bar_search, null);
 
         leftImageView = titleBarChild.findViewById(R.id.iv_left);
@@ -124,7 +147,7 @@ public final class SearchActionBar extends ActionBarEx {
 
         if (leftImageRes > 0) {
             leftImageView.setVisibility(VISIBLE);
-            leftImageView.setPadding(leftImagePadding, leftImagePadding, leftImagePadding, leftImagePadding);
+            leftImageView.setPadding(leftImagePaddingLeft, leftImagePaddingTop, leftImagePaddingRight, leftImagePaddingBottom);
             leftImageView.setImageResource(leftImageRes);
             leftImageView.setColorFilter(leftImageColor);
         } else {
@@ -136,9 +159,7 @@ public final class SearchActionBar extends ActionBarEx {
             leftTextView.setText(leftText);
             leftTextView.setTextColor(leftTextColor);
             leftTextView.setTextSize(leftTextSize);
-            if (leftImageRes > 0) {
-                leftTextView.setPadding(0, 0, 0, 0);
-            }
+            leftTextView.setPadding(leftTextPaddingLeft, 0, leftTextPaddingRight, 0);
         } else {
             leftTextView.setVisibility(GONE);
         }
@@ -151,7 +172,7 @@ public final class SearchActionBar extends ActionBarEx {
 
         if (rightImageRes > 0) {
             rightImageView.setVisibility(VISIBLE);
-            rightImageView.setPadding(rightImagePadding, rightImagePadding, rightImagePadding, rightImagePadding);
+            leftImageView.setPadding(rightImagePaddingLeft, rightImagePaddingTop, rightImagePaddingRight, rightImagePaddingBottom);
             rightImageView.setImageResource(rightImageRes);
             rightImageView.setColorFilter(rightImageColor);
         } else {
@@ -163,9 +184,7 @@ public final class SearchActionBar extends ActionBarEx {
             rightTextView.setText(rightText);
             rightTextView.setTextColor(rightTextColor);
             rightTextView.setTextSize(rightTextSize);
-            if (rightImageRes > 0) {
-                rightTextView.setPadding(0, 0, 0, 0);
-            }
+            rightTextView.setPadding(rightTextPaddingLeft, 0, rightTextPaddingRight, 0);
         } else {
             rightTextView.setVisibility(GONE);
         }

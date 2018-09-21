@@ -29,33 +29,58 @@
         <attr name="simple_left_text" format="string|dimension" />
         <attr name="simple_left_text_size" format="dimension|reference" />
         <attr name="simple_left_text_color" format="color|reference" />
+        <attr name="simple_left_text_padding_left" format="dimension|reference" />
+        <attr name="simple_left_text_padding_right" format="dimension|reference" />
         <attr name="simple_left_image_res" format="reference" />
         <attr name="simple_left_image_color" format="color|reference" />
         <attr name="simple_left_image_padding" format="dimension|reference" />
+        <attr name="simple_left_image_padding_left" format="dimension|reference" />
+        <attr name="simple_left_image_padding_right" format="dimension|reference" />
+        <attr name="simple_left_image_padding_top" format="dimension|reference" />
+        <attr name="simple_left_image_padding_bottom" format="dimension|reference" />
         <attr name="simple_right_text" format="string|dimension" />
         <attr name="simple_right_text_size" format="dimension|reference" />
         <attr name="simple_right_text_color" format="color|reference" />
+        <attr name="simple_right_text_padding_left" format="dimension|reference" />
+        <attr name="simple_right_text_padding_right" format="dimension|reference" />
         <attr name="simple_right_image_res" format="reference" />
         <attr name="simple_right_image_color" format="color|reference" />
         <attr name="simple_right_image_padding" format="dimension|reference" />
+        <attr name="simple_right_image_padding_left" format="dimension|reference" />
+        <attr name="simple_right_image_padding_right" format="dimension|reference" />
+        <attr name="simple_right_image_padding_top" format="dimension|reference" />
+        <attr name="simple_right_image_padding_bottom" format="dimension|reference" />
         <attr name="simple_title_text" format="string|reference" />
         <attr name="simple_title_text_size" format="dimension|reference" />
         <attr name="simple_title_text_color" format="color|reference" />
+        <attr name="simple_title_text_max_width" format="dimension|reference" />
     </declare-styleable>
 
     <declare-styleable name="SearchActionBar">
         <attr name="search_left_text" format="string|dimension" />
         <attr name="search_left_text_size" format="dimension|reference" />
         <attr name="search_left_text_color" format="color|reference" />
+        <attr name="search_left_text_padding_left" format="dimension|reference" />
+        <attr name="search_left_text_padding_right" format="dimension|reference" />
         <attr name="search_left_image_res" format="reference" />
         <attr name="search_left_image_color" format="color|reference" />
         <attr name="search_left_image_padding" format="dimension|reference" />
+        <attr name="search_left_image_padding_left" format="dimension|reference" />
+        <attr name="search_left_image_padding_right" format="dimension|reference" />
+        <attr name="search_left_image_padding_top" format="dimension|reference" />
+        <attr name="search_left_image_padding_bottom" format="dimension|reference" />
         <attr name="search_right_text" format="string|dimension" />
         <attr name="search_right_text_size" format="dimension|reference" />
         <attr name="search_right_text_color" format="color|reference" />
+        <attr name="search_right_text_padding_left" format="dimension|reference" />
+        <attr name="search_right_text_padding_right" format="dimension|reference" />
         <attr name="search_right_image_res" format="reference" />
         <attr name="search_right_image_color" format="color|reference" />
         <attr name="search_right_image_padding" format="dimension|reference" />
+        <attr name="search_right_image_padding_left" format="dimension|reference" />
+        <attr name="search_right_image_padding_right" format="dimension|reference" />
+        <attr name="search_right_image_padding_top" format="dimension|reference" />
+        <attr name="search_right_image_padding_bottom" format="dimension|reference" />
         <attr name="search_title_hint_text" format="string|reference" />
         <attr name="search_title_text_size" format="dimension|reference" />
         <attr name="search_title_text_color" format="color|reference" />

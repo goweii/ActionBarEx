@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import per.goweii.actionbarex.ActionBarEx;
+import per.goweii.actionbarex.SearchActionBar;
 import per.goweii.actionbarex.SimpleActionBar;
 import per.goweii.actionbarex.listener.OnLeftImageClickListener;
 import per.goweii.actionbarex.listener.OnLeftTextClickListener;
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private SimpleActionBar simple_action_bar_1;
     private SimpleActionBar simple_action_bar_2;
     private SimpleActionBar simple_action_bar_3;
+    private SearchActionBar search_action_bar;
+    private ActionBarEx action_bar_ex_1;
+    private ActionBarEx action_bar_ex_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         simple_action_bar_1 = findViewById(R.id.simple_action_bar_1);
         simple_action_bar_2 = findViewById(R.id.simple_action_bar_2);
         simple_action_bar_3 = findViewById(R.id.simple_action_bar_3);
+        search_action_bar = findViewById(R.id.search_action_bar);
+        action_bar_ex_1 = findViewById(R.id.action_bar_ex_1);
+        action_bar_ex_2 = findViewById(R.id.action_bar_ex_2);
 
         simple_action_bar_1.setOnLeftImageClickListener(new OnLeftImageClickListener() {
             @Override
@@ -70,12 +78,18 @@ public class MainActivity extends AppCompatActivity {
                 simple_action_bar_1.getForegroundLayer().setVisibility(View.VISIBLE);
                 simple_action_bar_2.getForegroundLayer().setVisibility(View.VISIBLE);
                 simple_action_bar_3.getForegroundLayer().setVisibility(View.VISIBLE);
+                search_action_bar.getForegroundLayer().setVisibility(View.VISIBLE);
+                action_bar_ex_1.getForegroundLayer().setVisibility(View.VISIBLE);
+                action_bar_ex_2.getForegroundLayer().setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         simple_action_bar_1.getForegroundLayer().setVisibility(View.GONE);
                         simple_action_bar_2.getForegroundLayer().setVisibility(View.GONE);
                         simple_action_bar_3.getForegroundLayer().setVisibility(View.GONE);
+                        search_action_bar.getForegroundLayer().setVisibility(View.GONE);
+                        action_bar_ex_1.getForegroundLayer().setVisibility(View.GONE);
+                        action_bar_ex_2.getForegroundLayer().setVisibility(View.GONE);
                     }
                 }, 2000);
             }

@@ -116,12 +116,8 @@ public final class DisplayInfoUtils {
      * @param dp dp
      * @return px
      */
-    public int dp2px(int dp) {
-        return (int) (dp * getDensity() + 0.5f);
-    }
-
-    public int dp2px(float dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mDisplayMetrics);
+    public float dp2px(float dp) {
+        return dp * getDensity();
     }
 
     /**
@@ -132,8 +128,8 @@ public final class DisplayInfoUtils {
      * @param px px
      * @return dp
      */
-    public int px2dp(int px) {
-        return (int) (px / getDensity() + 0.5f);
+    public float px2dp(float px) {
+        return px / getDensity();
     }
 
     /**
@@ -144,12 +140,8 @@ public final class DisplayInfoUtils {
      * @param sp sp
      * @return px
      */
-    public int sp2px(int sp) {
-        return (int) (sp * getScaledDensity() + 0.5f);
-    }
-
-    public int sp2px(float sp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, mDisplayMetrics);
+    public float sp2px(float sp) {
+        return sp * getScaledDensity();
     }
 
     /**
@@ -160,8 +152,8 @@ public final class DisplayInfoUtils {
      * @param px px
      * @return sp
      */
-    public int px2sp(int px) {
-        return (int) (px / getScaledDensity() + 0.5f);
+    public float px2sp(float px) {
+        return px / getScaledDensity();
     }
 
     /**
@@ -172,8 +164,8 @@ public final class DisplayInfoUtils {
      * @param dp dp
      * @return sp
      */
-    public int dp2sp(int dp) {
-        return (int) (dp * getDensity() / getScaledDensity() + 0.5f);
+    public float dp2sp(float dp) {
+        return dp * getDensity() / getScaledDensity();
     }
 
     /**
@@ -184,7 +176,7 @@ public final class DisplayInfoUtils {
      * @param sp sp
      * @return dp
      */
-    public int sp2dp(int sp) {
-        return (int) (sp * getScaledDensity() / getDensity() + 0.5f);
+    public float sp2dp(float sp) {
+        return sp * getScaledDensity() / getDensity();
     }
 }
