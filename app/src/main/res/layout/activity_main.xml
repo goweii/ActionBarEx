@@ -71,6 +71,7 @@
             app:ab_status_bar_color="@color/transparent"
             app:ab_status_bar_mode="dark"
             app:ab_title_bar_height="48dp"
+            app:simple_title_text_max_width="180dp"
             app:simple_left_image_res="@mipmap/ic_launcher_round"
             app:simple_left_text="返回"
             app:simple_left_text_padding_left="0dp"

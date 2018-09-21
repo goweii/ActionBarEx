@@ -34,8 +34,6 @@
         android:layout_toLeftOf="@+id/ll_right"
         android:background="#00000000"
         android:singleLine="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:layout_centerInParent="true"/>
 
     <LinearLayout
@@ -47,7 +45,6 @@
         <TextView
             android:id="@+id/tv_right"
             style="@style/action_bar_text"
-            tools:textColor="#000000"
             android:visibility="gone"
             tools:text="搜索"
             tools:visibility="visible" />

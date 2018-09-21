@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -32,6 +33,9 @@ import per.goweii.actionbarex.statusbar.StatusBarUtils;
  * @date 2018/8/30-上午11:10
  */
 public class ActionBarEx extends FrameLayout {
+
+    private static final int STATUS_BAR_MODE_LIGHT = 0;
+    private static final int STATUS_BAR_MODE_DARK = 1;
 
     protected final Context mContext;
     protected final DisplayInfoUtils mDisplayInfoUtils;
@@ -153,16 +157,21 @@ public class ActionBarEx extends FrameLayout {
     protected void initAttrs(AttributeSet attrs) {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
 
-        mAutoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_auto_immersion, Config.AUTO_IMMERSION);
+        float titleBarHeightDef = mContext.getResources().getDimension(R.dimen.title_bar_height_def);
+        float bottomLineHeightDef = mContext.getResources().getDimension(R.dimen.bottom_line_height_def);
+        int bottomLineColorDef = ContextCompat.getColor(mContext, R.color.bottom_line_color_def);
+        int statusBarColorDef = ContextCompat.getColor(mContext, R.color.status_bar_color_def);
+
+        mAutoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_auto_immersion, true);
         mBackgroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_background_layer_layout, 0);
         mBackgroundLayerImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_background_layer_image_res, 0);
         mStatusBarVisible = typedArray.getBoolean(R.styleable.ActionBarEx_ab_status_bar_visible, true);
-        mStatusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_status_bar_mode, 0) == 1;
-        mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_status_bar_color, Config.STATUS_BAR_COLOR_DEF);
+        mStatusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_status_bar_mode, STATUS_BAR_MODE_LIGHT) == STATUS_BAR_MODE_DARK;
+        mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_status_bar_color, statusBarColorDef);
         mTitleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_title_bar_layout, 0);
-        mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_title_bar_height, mDisplayInfoUtils.dp2px(Config.TITLE_BAR_HEIGHT_DEF));
-        mBottomLineHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_bottom_line_height, Config.BOTTOM_LINE_HEIGHT_DEF);
-        mBottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottom_line_color, Config.BOTTOM_LINE_COLOR_DEF);
+        mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_title_bar_height, titleBarHeightDef);
+        mBottomLineHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_bottom_line_height, bottomLineHeightDef);
+        mBottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottom_line_color, bottomLineColorDef);
         mForegroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_foreground_layer_layout, 0);
 
         typedArray.recycle();

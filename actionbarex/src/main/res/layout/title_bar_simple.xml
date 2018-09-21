@@ -30,8 +30,7 @@
         android:id="@+id/tv_title"
         style="@style/action_bar_title"
         android:layout_centerInParent="true"
-        tools:text="标题标题标题标题标题标题标题标题"
-        tools:textColor="#000000" />
+        tools:text="标题标题标题标题标题标题标题标题" />
 
     <LinearLayout
         android:id="@+id/ll_right"
@@ -43,8 +42,7 @@
             android:id="@+id/tv_right"
             style="@style/action_bar_text"
             android:visibility="gone"
-            tools:text="搜索"
-            tools:textColor="#000000"
+            tools:text="确定"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.SquareHeightImageView

@@ -3,6 +3,7 @@ package per.goweii.actionbarex;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -28,10 +29,7 @@ public final class SimpleActionBar extends ActionBarEx {
     private int leftTextPaddingRight;
     private int leftImageRes;
     private int leftImageColor;
-    private int leftImagePaddingLeft;
-    private int leftImagePaddingRight;
-    private int leftImagePaddingTop;
-    private int leftImagePaddingBottom;
+    private int leftImagePadding;
     private String rightText;
     private float rightTextSize;
     private int rightTextColor;
@@ -39,10 +37,7 @@ public final class SimpleActionBar extends ActionBarEx {
     private int rightTextPaddingRight;
     private int rightImageRes;
     private int rightImageColor;
-    private int rightImagePaddingLeft;
-    private int rightImagePaddingRight;
-    private int rightImagePaddingTop;
-    private int rightImagePaddingBottom;
+    private int rightImagePadding;
     private String titleText;
     private float titleTextSize;
     private int titleTextColor;
@@ -98,36 +93,38 @@ public final class SimpleActionBar extends ActionBarEx {
 
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.SimpleActionBar);
 
+        float titleTextMaxWidthDef = mContext.getResources().getDimension(R.dimen.title_bar_title_text_max_width_def);
+        float iconPaddingDef = mContext.getResources().getDimension(R.dimen.title_bar_icon_padding_def);
+        float textSizeDef = mContext.getResources().getDimension(R.dimen.title_bar_text_size_def);
+        float textPaddingLeftDef = mContext.getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
+        float textPaddingRightDef = mContext.getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
+        float titleTextSizeDef = mContext.getResources().getDimension(R.dimen.title_bar_title_text_size_def);
+        int iconColorDef = ContextCompat.getColor(mContext, R.color.icon_color_def);
+        int textColorDef = ContextCompat.getColor(mContext, R.color.text_color_def);
+        int titleTextColorDef = ContextCompat.getColor(mContext, R.color.title_text_color_def);
+
         leftText = typedArray.getString(R.styleable.SimpleActionBar_simple_left_text);
-        leftTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_size, mDisplayInfoUtils.sp2px(Config.TEXT_SIZE_DEF)));
-        leftTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_text_color, Config.TEXT_COLOR_DEF);
-        leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_padding_left, mDisplayInfoUtils.dp2px(Config.TEXT_PADDING_DEF));
-        leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_padding_right, mDisplayInfoUtils.dp2px(Config.TEXT_PADDING_DEF));
-        leftImageRes = typedArray.getResourceId(R.styleable.SimpleActionBar_simple_left_image_res, Config.IMAGE_RES_DEF);
-        leftImageColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_image_color, Config.IMAGE_COLOR_DEF);
-        int leftImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding, mDisplayInfoUtils.dp2px(Config.IMAGE_PADDING_DEF));
-        leftImagePaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding_left, leftImagePadding);
-        leftImagePaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding_right, leftImagePadding);
-        leftImagePaddingTop = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding_top, leftImagePadding);
-        leftImagePaddingBottom = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding_bottom, leftImagePadding);
+        leftTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_size, textSizeDef));
+        leftTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_text_color, textColorDef);
+        leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_padding_left, textPaddingLeftDef);
+        leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_padding_right, textPaddingRightDef);
+        leftImageRes = typedArray.getResourceId(R.styleable.SimpleActionBar_simple_left_image_res, 0);
+        leftImageColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_image_color, iconColorDef);
+        leftImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding, iconPaddingDef);
 
         rightText = typedArray.getString(R.styleable.SimpleActionBar_simple_right_text);
-        rightTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_size, mDisplayInfoUtils.sp2px(Config.TEXT_SIZE_DEF)));
-        rightTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_text_color, Config.TEXT_COLOR_DEF);
-        rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_padding_left, mDisplayInfoUtils.dp2px(Config.TEXT_PADDING_DEF));
-        rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_padding_right, mDisplayInfoUtils.dp2px(Config.TEXT_PADDING_DEF));
-        rightImageRes = typedArray.getResourceId(R.styleable.SimpleActionBar_simple_right_image_res, Config.IMAGE_RES_DEF);
-        rightImageColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_image_color, Config.IMAGE_COLOR_DEF);
-        int rightImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding, mDisplayInfoUtils.dp2px(Config.IMAGE_PADDING_DEF));
-        rightImagePaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding_left, rightImagePadding);
-        rightImagePaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding_right, rightImagePadding);
-        rightImagePaddingTop = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding_top, rightImagePadding);
-        rightImagePaddingBottom = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding_bottom, rightImagePadding);
+        rightTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_size, textSizeDef));
+        rightTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_text_color, textColorDef);
+        rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_padding_left, textPaddingLeftDef);
+        rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_padding_right, textPaddingRightDef);
+        rightImageRes = typedArray.getResourceId(R.styleable.SimpleActionBar_simple_right_image_res, 0);
+        rightImageColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_image_color, iconColorDef);
+        rightImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding, iconPaddingDef);
 
         titleText = typedArray.getString(R.styleable.SimpleActionBar_simple_title_text);
-        titleTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_size, mDisplayInfoUtils.sp2px(Config.TITLE_TEXT_SIZE_DEF)));
-        titleTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_title_text_color, Config.TITLE_TEXT_COLOR_DEF);
-        titleTextMaxWidth = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_max_width, mDisplayInfoUtils.dp2px(Config.TITLE_TEXT_MAX_WIDTH_DEF));
+        titleTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_size, titleTextSizeDef));
+        titleTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_title_text_color, titleTextColorDef);
+        titleTextMaxWidth = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_max_width, titleTextMaxWidthDef);
 
         typedArray.recycle();
     }
@@ -145,7 +142,7 @@ public final class SimpleActionBar extends ActionBarEx {
 
         if (leftImageRes > 0) {
             leftImageView.setVisibility(VISIBLE);
-            leftImageView.setPadding(leftImagePaddingLeft, leftImagePaddingTop, leftImagePaddingRight, leftImagePaddingBottom);
+            leftImageView.setPadding(leftImagePadding, leftImagePadding, leftImagePadding, leftImagePadding);
             leftImageView.setImageResource(leftImageRes);
             leftImageView.setColorFilter(leftImageColor);
         } else {
@@ -170,7 +167,7 @@ public final class SimpleActionBar extends ActionBarEx {
 
         if (rightImageRes > 0) {
             rightImageView.setVisibility(VISIBLE);
-            leftImageView.setPadding(rightImagePaddingLeft, rightImagePaddingTop, rightImagePaddingRight, rightImagePaddingBottom);
+            leftImageView.setPadding(rightImagePadding, rightImagePadding, rightImagePadding, rightImagePadding);
             rightImageView.setImageResource(rightImageRes);
             rightImageView.setColorFilter(rightImageColor);
         } else {
