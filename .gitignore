@@ -10,7 +10,6 @@
 .externalNativeBuild
 ### Android template
 # Built application files
-*.apk
 *.ap_
 
 # Files for the ART/Dalvik VM
@@ -74,4 +73,3 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
-

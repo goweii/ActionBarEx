@@ -8,6 +8,7 @@ import android.view.View;
 
 import per.goweii.actionbarex.SimpleActionBar;
 import per.goweii.actionbarex.listener.OnLeftImageClickListener;
+import per.goweii.actionbarex.listener.OnRightTextClickListener;
 
 public class TestInTwoFragment extends LazyFragment {
 
@@ -31,6 +32,12 @@ public class TestInTwoFragment extends LazyFragment {
         super.onViewCreated(view, savedInstanceState);
         SimpleActionBar simple_action_bar = view.findViewById(R.id.simple_action_bar);
         simple_action_bar.setOnLeftImageClickListener(new OnLeftImageClickListener() {
+            @Override
+            public void onClick() {
+                mActivity.finish();
+            }
+        });
+        simple_action_bar.setOnRightTextClickListener(new OnRightTextClickListener() {
             @Override
             public void onClick() {
                 mActivity.switchFragment();

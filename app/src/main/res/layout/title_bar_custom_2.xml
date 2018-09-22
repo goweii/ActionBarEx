@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="自定义布局"
+            android:text="带有背景图的自定义布局"
             android:textColor="@color/white"
             android:textSize="17sp" />
 
@@ -30,20 +30,6 @@
         android:layout_height="match_parent"
         android:gravity="right"
         android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="15dp"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/download" />
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="15dp"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/delete" />
 
         <ImageView
             android:layout_width="48dp"

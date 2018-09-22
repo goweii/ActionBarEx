@@ -2,6 +2,8 @@
 
 **高拓展高自定义性ActionBar，完美替代Android系统默认**
 
+
+
 ## 项目简介
 
 整个ActionBar分为3层：**BackgroundLayer** / **ActionBarLayer** / **ForegroundLayer**
@@ -16,6 +18,7 @@
 **ForegroundLayer** |  | 前景层 | 可自定义布局
 
 
+
 ## 集成方式
 
 Step 1. Add the JitPack repository to your build file
@@ -28,14 +31,15 @@ Add it in your root build.gradle at the end of repositories:
 			maven { url 'https://www.jitpack.io' }
 		}
 	}
-	
+
 Step 2. Add the dependency
 
 	dependencies {
 	        implementation 'com.github.goweii:ActionBarEx:v2.2.0'
 	}
-	
-	
+
+
+
 ## 详细介绍
 
 ### ActionBarEx属性介绍
@@ -65,7 +69,7 @@ Step 2. Add the dependency
     <attr name="ab_bottom_line_color" format="color|reference" />
     <!--前景层布局-->
     <attr name="ab_foreground_layer_layout" format="reference" />
-    
+
 ### SimpleActionBar属性介绍
 
     <attr name="simple_left_text" format="string|dimension" />
@@ -88,7 +92,7 @@ Step 2. Add the dependency
     <attr name="simple_title_text_size" format="dimension|reference" />
     <attr name="simple_title_text_color" format="color|reference" />
     <attr name="simple_title_text_max_width" format="dimension|reference" />
-  
+
 ### SearchActionBar属性介绍
 
     <attr name="search_left_text" format="string|dimension" />
