@@ -2,7 +2,7 @@
 
 **高拓展高自定义性ActionBar，完美替代Android系统默认**
 
-
+[Demo下载](https://github.com/goweii/ActionBarEx/raw/master/app/release/app-release.apk)
 
 ## 项目简介
 
@@ -19,7 +19,21 @@
 
 
 
+## 截图
+
+![](https://github.com/goweii/ActionBarEx/blob/master/picture/action_bar_demo.gif?raw=true)
+
+![](https://github.com/goweii/ActionBarEx/blob/master/picture/action_bar_1.png?raw=true)
+
+![](https://github.com/goweii/ActionBarEx/blob/master/picture/action_bar_2.png?raw=true)
+
+![](https://github.com/goweii/ActionBarEx/blob/master/picture/action_bar_3.png?raw=true)
+
+
+
 ## 集成方式
+
+### 添加依赖
 
 Step 1. Add the JitPack repository to your build file
 
@@ -38,9 +52,36 @@ Step 2. Add the dependency
 	        implementation 'com.github.goweii:ActionBarEx:v2.2.0'
 	}
 
+### 布局文件引用
 
+```xml
+<per.goweii.actionbarex.SimpleActionBar
+    android:id="@+id/simple_action_bar_3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="#ccffffff"
+    app:ab_bottom_line_color="@color/line"
+    app:ab_bottom_line_height="0dp"
+    app:ab_foreground_layer_layout="@layout/loading_bar"
+    app:ab_status_bar_color="@color/transparent"
+    app:ab_status_bar_mode="dark"
+    app:ab_title_bar_height="48dp"
+    app:simple_left_text="返回"
+    app:simple_left_text_padding_left="0dp"
+    app:simple_left_text_padding_right="0dp"
+    app:simple_left_image_color="@color/black"
+    app:simple_left_image_res="@mipmap/back"
+    app:simple_right_image_color="@color/black"
+    app:simple_right_image_res="@mipmap/search"
+    app:simple_right_text="确定"
+    app:simple_right_text_padding_left="0dp"
+    app:simple_right_text_padding_right="0dp"
+    app:simple_title_text="这个标题有点长我试试长标题什么样子"
+    app:simple_title_text_max_width="180dp" />
+```
 
-## 详细介绍
+## 属性介绍
 
 ### ActionBarEx属性介绍
 
