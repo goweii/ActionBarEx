@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private SimpleActionBar simple_action_bar_1;
     private SimpleActionBar simple_action_bar_2;
     private SimpleActionBar simple_action_bar_3;
-    private SearchActionBar search_action_bar;
+    private SearchActionBar search_action_bar_1;
+    private SearchActionBar search_action_bar_2;
     private ActionBarEx action_bar_ex_1;
     private ActionBarEx action_bar_ex_2;
 
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         simple_action_bar_1 = findViewById(R.id.simple_action_bar_1);
         simple_action_bar_2 = findViewById(R.id.simple_action_bar_2);
         simple_action_bar_3 = findViewById(R.id.simple_action_bar_3);
-        search_action_bar = findViewById(R.id.search_action_bar);
+        search_action_bar_1 = findViewById(R.id.search_action_bar_1);
+        search_action_bar_2 = findViewById(R.id.search_action_bar_2);
         action_bar_ex_1 = findViewById(R.id.action_bar_ex_1);
         action_bar_ex_2 = findViewById(R.id.action_bar_ex_2);
 
@@ -78,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 simple_action_bar_1.getForegroundLayer().setVisibility(View.VISIBLE);
                 simple_action_bar_2.getForegroundLayer().setVisibility(View.VISIBLE);
                 simple_action_bar_3.getForegroundLayer().setVisibility(View.VISIBLE);
-                search_action_bar.getForegroundLayer().setVisibility(View.VISIBLE);
+                search_action_bar_1.getForegroundLayer().setVisibility(View.VISIBLE);
+                search_action_bar_2.getForegroundLayer().setVisibility(View.VISIBLE);
                 action_bar_ex_1.getForegroundLayer().setVisibility(View.VISIBLE);
                 action_bar_ex_2.getForegroundLayer().setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
@@ -87,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                         simple_action_bar_1.getForegroundLayer().setVisibility(View.GONE);
                         simple_action_bar_2.getForegroundLayer().setVisibility(View.GONE);
                         simple_action_bar_3.getForegroundLayer().setVisibility(View.GONE);
-                        search_action_bar.getForegroundLayer().setVisibility(View.GONE);
+                        search_action_bar_1.getForegroundLayer().setVisibility(View.GONE);
+                        search_action_bar_2.getForegroundLayer().setVisibility(View.GONE);
                         action_bar_ex_1.getForegroundLayer().setVisibility(View.GONE);
                         action_bar_ex_2.getForegroundLayer().setVisibility(View.GONE);
                     }

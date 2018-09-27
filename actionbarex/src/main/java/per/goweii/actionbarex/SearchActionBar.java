@@ -43,6 +43,9 @@ public final class SearchActionBar extends ActionBarEx {
     private float titleTextSize;
     private int titleTextColor;
     private int titleHintColor;
+    private int titleBgRes;
+    private int titlePaddingHorizontal;
+    private int titleMarginVertical;
 
     private RelativeLayout titleBarChild;
     private ImageView leftImageView;
@@ -122,10 +125,13 @@ public final class SearchActionBar extends ActionBarEx {
         rightImageColor = typedArray.getColor(R.styleable.SearchActionBar_search_right_image_color, iconColorDef);
         rightImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding, iconPaddingDef);
 
+        titleBgRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_title_bg_res, 0);
         titleHintText = typedArray.getString(R.styleable.SearchActionBar_search_title_hint_text);
         titleTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SearchActionBar_search_title_text_size, titleTextSizeDef));
         titleTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_title_text_color, titleTextColorDef);
         titleHintColor = typedArray.getColor(R.styleable.SearchActionBar_search_title_hint_color, titleTextHintColorDef);
+        titlePaddingHorizontal = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_title_padding_horizontal, 0);
+        titleMarginVertical = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_title_margin_vertical, 0);
 
         typedArray.recycle();
     }
@@ -164,6 +170,14 @@ public final class SearchActionBar extends ActionBarEx {
         titleEditText.setTextColor(titleTextColor);
         titleEditText.setTextSize(titleTextSize);
         titleEditText.setHintTextColor(titleHintColor);
+        if (titleBgRes > 0) {
+            titleEditText.setBackgroundResource(titleBgRes);
+        }
+        titleEditText.setPadding(titlePaddingHorizontal, 0, titlePaddingHorizontal, 0);
+        RelativeLayout.LayoutParams titleParams = (RelativeLayout.LayoutParams) titleEditText.getLayoutParams();
+        titleParams.topMargin = titleMarginVertical;
+        titleParams.bottomMargin = titleMarginVertical;
+        titleEditText.setLayoutParams(titleParams);
 
         if (rightImageRes > 0) {
             rightImageView.setVisibility(VISIBLE);

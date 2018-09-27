@@ -65,10 +65,13 @@
         <attr name="search_right_image_res" format="reference" />
         <attr name="search_right_image_color" format="color|reference" />
         <attr name="search_right_image_padding" format="dimension|reference" />
+        <attr name="search_title_bg_res" format="reference" />
         <attr name="search_title_hint_text" format="string|reference" />
         <attr name="search_title_text_size" format="dimension|reference" />
         <attr name="search_title_text_color" format="color|reference" />
         <attr name="search_title_hint_color" format="color|reference" />
+        <attr name="search_title_padding_horizontal" format="dimension|reference" />
+        <attr name="search_title_margin_vertical" format="dimension|reference" />
     </declare-styleable>
 
 </resources>

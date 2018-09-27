@@ -77,7 +77,7 @@
                 app:simple_title_text_max_width="180dp" />
 
             <per.goweii.actionbarex.SearchActionBar
-                android:id="@+id/search_action_bar"
+                android:id="@+id/search_action_bar_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -96,6 +96,31 @@
                 app:search_title_hint_text="这是一个搜索框..."
                 app:search_title_text_color="#232323"
                 app:search_title_text_size="15sp" />
+
+            <per.goweii.actionbarex.SearchActionBar
+                android:id="@+id/search_action_bar_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                app:ab_bottom_line_color="@color/line"
+                app:ab_bottom_line_height="1dp"
+                app:ab_foreground_layer_layout="@layout/loading_bar"
+                app:ab_status_bar_color="@color/transparent"
+                app:ab_status_bar_mode="dark"
+                app:ab_title_bar_height="48dp"
+                app:search_left_image_color="@color/black"
+                app:search_left_image_res="@mipmap/back"
+                app:search_right_image_color="@color/black"
+                app:search_right_image_res="@mipmap/search"
+                app:search_title_hint_color="#aaaaaa"
+                app:search_title_hint_text="这是一个搜索框..."
+                app:search_title_text_color="#232323"
+                app:search_title_text_size="15sp"
+                app:search_title_bg_res="@drawable/search_bar_title_et_bg"
+                app:search_title_margin_vertical="8dp"
+                app:search_title_padding_horizontal="16dp"
+                />
 
             <per.goweii.actionbarex.ActionBarEx
                 android:id="@+id/action_bar_ex_1"
