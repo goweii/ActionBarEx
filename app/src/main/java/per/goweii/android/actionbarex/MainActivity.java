@@ -98,5 +98,12 @@ public class MainActivity extends AppCompatActivity {
                 }, 2000);
             }
         });
+
+        action_bar_ex_1.getView(R.id.iv_left).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }

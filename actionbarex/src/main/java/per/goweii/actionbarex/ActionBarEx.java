@@ -191,7 +191,6 @@ public class ActionBarEx extends FrameLayout {
 
     private void initView() {
         // 1 初始化BackgroundLayer
-        // 1 初始化背景图
         if (mBackgroundLayerLayoutRes > 0){
             mBackgroundLayer = inflate(getContext(), mBackgroundLayerLayoutRes, null);
             mBackgroundLayer.setLayoutParams(makeLayerLayoutParams());
@@ -206,7 +205,7 @@ public class ActionBarEx extends FrameLayout {
             }
         }
 
-        // 2 初始ContentLayer（ActionBar）
+        // 2 初始ActionBarLayer
         mActionBar = (LinearLayout) inflate(getContext(), R.layout.action_bar, null);
         mActionBar.setLayoutParams(makeLayoutParamsWithHeight(getActionBarHeight()));
         // 2.1 初始StatusBar
