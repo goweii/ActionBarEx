@@ -139,18 +139,16 @@ public class StatusBarUtils {
     }
 
     private static void setMIUIStatusBarDarkMode(Window window, boolean darkMode) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            Class<? extends Window> clazz = window.getClass();
-            try {
-                Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
-                Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
-                int darkModeFlag = field.getInt(layoutParams);
-                Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
-                extraFlagField.invoke(window, darkMode ? darkModeFlag : 0, darkModeFlag);
-            } catch (Exception e) {
-            }
+        Class<? extends Window> clazz = window.getClass();
+        try {
+            Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
+            Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
+            int darkModeFlag = field.getInt(layoutParams);
+            Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
+            extraFlagField.invoke(window, darkMode ? darkModeFlag : 0, darkModeFlag);
+        } catch (Exception e) {
+            setStatusBarDarkMode(window, darkMode);
         }
-        setStatusBarDarkMode(window, darkMode);
     }
 
     private static void setFlymeStatusBarDarkMode(Window window, boolean darkMode) {

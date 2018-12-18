@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/title_bar_custom_bg"
+        app:ab_status_bar_mode="light"
         app:ab_auto_immersion="true"
         app:ab_title_bar_height="48dp"
         app:simple_left_image_res="@mipmap/back"
