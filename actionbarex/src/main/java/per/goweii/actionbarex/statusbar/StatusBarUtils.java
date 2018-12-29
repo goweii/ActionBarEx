@@ -44,16 +44,10 @@ public class StatusBarUtils {
      * 设置状态栏透明
      */
     public static void transparentStatusBar(Window window) {
-        if (OSUtils.isMiui() || OSUtils.isFlyme()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                transparentStatusBarAbove21(window);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            }
-        } else if ((OSUtils.isOppo() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             transparentStatusBarAbove21(window);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            transparentStatusBarAbove21(window);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            transparentStatusBarAbove19(window);
         }
     }
 
@@ -119,13 +113,17 @@ public class StatusBarUtils {
         }
     }
 
-    @TargetApi(21)
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static void transparentStatusBarAbove21(Window window) {
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private static void transparentStatusBarAbove19(Window window) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
     private static void setStatusBarDarkMode(Window window, boolean darkMode) {
@@ -147,8 +145,9 @@ public class StatusBarUtils {
             Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
             extraFlagField.invoke(window, darkMode ? darkModeFlag : 0, darkModeFlag);
         } catch (Exception e) {
-            setStatusBarDarkMode(window, darkMode);
+            e.printStackTrace();
         }
+        setStatusBarDarkMode(window, darkMode);
     }
 
     private static void setFlymeStatusBarDarkMode(Window window, boolean darkMode) {

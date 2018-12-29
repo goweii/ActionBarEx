@@ -71,7 +71,6 @@ public class OSUtils {
         if (sName != null) {
             return sName.equals(rom);
         }
-
         if (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_MIUI))) {
             sName = ROM_MIUI;
         } else if (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_EMUI))) {
