@@ -17,7 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import per.goweii.actionbarex.statusbar.StatusBarUtils;
+import per.goweii.statusbarcompat.StatusBarCompat;
 
 /**
  * 高拓展性和定制性的ActionBar
@@ -38,7 +38,6 @@ public class ActionBarEx extends FrameLayout {
     private static final int STATUS_BAR_MODE_DARK = 1;
 
     protected final Context mContext;
-    protected final DisplayInfoUtils mDisplayInfoUtils;
 
     private boolean mAutoImmersion;
     private int mBackgroundLayerLayoutRes;
@@ -74,8 +73,7 @@ public class ActionBarEx extends FrameLayout {
     public ActionBarEx(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
-        mDisplayInfoUtils = DisplayInfoUtils.getInstance(context);
-        mStatusBarHeight = mDisplayInfoUtils.getStatusBarHeight();
+        mStatusBarHeight = StatusBarCompat.getHeight(context);
         initAttrs(attrs);
         makeImmersion();
         initView();
@@ -264,8 +262,8 @@ public class ActionBarEx extends FrameLayout {
      * 透明状态栏，改变状态栏图标颜色模式
      */
     private void setSystemStatusBar(@NonNull Activity activity) {
-        StatusBarUtils.transparentStatusBar(activity);
-        StatusBarUtils.setStatusBarIconMode(activity, mStatusBarDarkMode);
+        StatusBarCompat.transparent(activity);
+        StatusBarCompat.setIconMode(activity, mStatusBarDarkMode);
     }
 
     /**
