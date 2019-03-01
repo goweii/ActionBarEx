@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -104,7 +105,7 @@ public final class SimpleActionBar extends ActionBarEx {
         int titleTextColorDef = ContextCompat.getColor(mContext, R.color.title_text_color_def);
 
         leftText = typedArray.getString(R.styleable.SimpleActionBar_simple_left_text);
-        leftTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_size, textSizeDef));
+        leftTextSize = typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_size, textSizeDef);
         leftTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_text_color, textColorDef);
         leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_padding_left, textPaddingLeftDef);
         leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_padding_right, textPaddingRightDef);
@@ -113,7 +114,7 @@ public final class SimpleActionBar extends ActionBarEx {
         leftImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding, iconPaddingDef);
 
         rightText = typedArray.getString(R.styleable.SimpleActionBar_simple_right_text);
-        rightTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_size, textSizeDef));
+        rightTextSize = typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_size, textSizeDef);
         rightTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_text_color, textColorDef);
         rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_padding_left, textPaddingLeftDef);
         rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_padding_right, textPaddingRightDef);
@@ -122,7 +123,7 @@ public final class SimpleActionBar extends ActionBarEx {
         rightImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding, iconPaddingDef);
 
         titleText = typedArray.getString(R.styleable.SimpleActionBar_simple_title_text);
-        titleTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_size, titleTextSizeDef));
+        titleTextSize = typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_size, titleTextSizeDef);
         titleTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_title_text_color, titleTextColorDef);
         titleTextMaxWidth = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_max_width, titleTextMaxWidthDef);
 
@@ -153,7 +154,7 @@ public final class SimpleActionBar extends ActionBarEx {
             leftTextView.setVisibility(VISIBLE);
             leftTextView.setText(leftText);
             leftTextView.setTextColor(leftTextColor);
-            leftTextView.setTextSize(leftTextSize);
+            leftTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
             leftTextView.setPadding(leftTextPaddingLeft, 0, leftTextPaddingRight, 0);
         } else {
             leftTextView.setVisibility(GONE);
@@ -162,7 +163,7 @@ public final class SimpleActionBar extends ActionBarEx {
         titleTextView.setVisibility(VISIBLE);
         titleTextView.setText(titleText);
         titleTextView.setTextColor(titleTextColor);
-        titleTextView.setTextSize(titleTextSize);
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
         titleTextView.setMaxWidth(titleTextMaxWidth);
 
         if (rightImageRes > 0) {
@@ -178,7 +179,7 @@ public final class SimpleActionBar extends ActionBarEx {
             rightTextView.setVisibility(VISIBLE);
             rightTextView.setText(rightText);
             rightTextView.setTextColor(rightTextColor);
-            rightTextView.setTextSize(rightTextSize);
+            rightTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightTextSize);
             rightTextView.setPadding(rightTextPaddingLeft, 0, rightTextPaddingRight, 0);
         } else {
             rightTextView.setVisibility(GONE);

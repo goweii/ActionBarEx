@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -108,7 +109,7 @@ public final class SearchActionBar extends ActionBarEx {
         int titleTextHintColorDef = ContextCompat.getColor(mContext, R.color.title_text_hint_color_def);
 
         leftText = typedArray.getString(R.styleable.SearchActionBar_search_left_text);
-        leftTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_size, textSizeDef));
+        leftTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_size, textSizeDef);
         leftTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_left_text_color, textColorDef);
         leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_padding_left, textPaddingLeftDef);
         leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_padding_right, textPaddingRightDef);
@@ -117,7 +118,7 @@ public final class SearchActionBar extends ActionBarEx {
         leftImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding, iconPaddingDef);
 
         rightText = typedArray.getString(R.styleable.SearchActionBar_search_right_text);
-        rightTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_size, textSizeDef));
+        rightTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_size, textSizeDef);
         rightTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_right_text_color, textColorDef);
         rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_padding_left, textPaddingLeftDef);
         rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_padding_right, textPaddingRightDef);
@@ -127,7 +128,7 @@ public final class SearchActionBar extends ActionBarEx {
 
         titleBgRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_title_bg_res, 0);
         titleHintText = typedArray.getString(R.styleable.SearchActionBar_search_title_hint_text);
-        titleTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SearchActionBar_search_title_text_size, titleTextSizeDef));
+        titleTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_title_text_size, titleTextSizeDef);
         titleTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_title_text_color, titleTextColorDef);
         titleHintColor = typedArray.getColor(R.styleable.SearchActionBar_search_title_hint_color, titleTextHintColorDef);
         titlePaddingHorizontal = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_title_padding_horizontal, 0);
@@ -159,7 +160,7 @@ public final class SearchActionBar extends ActionBarEx {
             leftTextView.setVisibility(VISIBLE);
             leftTextView.setText(leftText);
             leftTextView.setTextColor(leftTextColor);
-            leftTextView.setTextSize(leftTextSize);
+            leftTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
             leftTextView.setPadding(leftTextPaddingLeft, 0, leftTextPaddingRight, 0);
         } else {
             leftTextView.setVisibility(GONE);
@@ -168,7 +169,7 @@ public final class SearchActionBar extends ActionBarEx {
         titleEditText.setVisibility(VISIBLE);
         titleEditText.setHint(titleHintText);
         titleEditText.setTextColor(titleTextColor);
-        titleEditText.setTextSize(titleTextSize);
+        titleEditText.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
         titleEditText.setHintTextColor(titleHintColor);
         if (titleBgRes > 0) {
             titleEditText.setBackgroundResource(titleBgRes);
@@ -192,7 +193,7 @@ public final class SearchActionBar extends ActionBarEx {
             rightTextView.setVisibility(VISIBLE);
             rightTextView.setText(rightText);
             rightTextView.setTextColor(rightTextColor);
-            rightTextView.setTextSize(rightTextSize);
+            rightTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightTextSize);
             rightTextView.setPadding(rightTextPaddingLeft, 0, rightTextPaddingRight, 0);
         } else {
             rightTextView.setVisibility(GONE);

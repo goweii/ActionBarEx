@@ -189,7 +189,7 @@ public class ActionBarEx extends FrameLayout {
 
     private void initView() {
         // 1 初始化BackgroundLayer
-        if (mBackgroundLayerLayoutRes > 0){
+        if (mBackgroundLayerLayoutRes > 0) {
             mBackgroundLayer = inflate(getContext(), mBackgroundLayerLayoutRes, null);
             mBackgroundLayer.setLayoutParams(makeLayerLayoutParams());
             addView(mBackgroundLayer);
@@ -235,7 +235,7 @@ public class ActionBarEx extends FrameLayout {
         }
     }
 
-    private LayoutParams makeLayerLayoutParams(){
+    private LayoutParams makeLayerLayoutParams() {
         return new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getActionBarHeight());
     }
 
