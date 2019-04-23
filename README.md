@@ -90,10 +90,11 @@ allprojects {
 2. 在Model:app的**build.gradle**添加框架依赖
 
 最新版本是多少，看下[Releases](https://github.com/goweii/ActionBarEx/releases)
+从2.2.9以后版本去除版本号前的v，引用时需要注意下。
 
 ```
 dependencies {
-	implementation 'com.github.goweii:ActionBarEx:v2.2.0'
+	implementation 'com.github.goweii:ActionBarEx:2.2.9'
 }
 ```
 
