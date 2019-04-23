@@ -79,11 +79,6 @@ public class ActionBarEx extends FrameLayout {
         initView();
     }
 
-    @Override
-    public boolean isInEditMode() {
-        return true;
-    }
-
     public View getBackgroundLayer() {
         return mBackgroundLayer;
     }
@@ -131,11 +126,11 @@ public class ActionBarEx extends FrameLayout {
     }
 
     public int getActionBarHeight() {
-        return mStatusBarHeight + mTitleBarHeight + mBottomLineHeight;
+        return getStatusBarHeight() + getTitleBarHeight() + getBottomHeight();
     }
 
     public int getStatusBarHeight() {
-        return mStatusBarHeight;
+        return mStatusBarVisible ? mStatusBarHeight : 0;
     }
 
     public int getTitleBarHeight() {
@@ -192,14 +187,13 @@ public class ActionBarEx extends FrameLayout {
         if (mBackgroundLayerLayoutRes > 0) {
             mBackgroundLayer = inflate(getContext(), mBackgroundLayerLayoutRes, null);
             mBackgroundLayer.setLayoutParams(makeLayerLayoutParams());
-            addView(mBackgroundLayer);
+            addViewInLayout(mBackgroundLayer, getChildCount(), makeLayerLayoutParams(), true);
         } else {
             if (mBackgroundLayerImageRes > 0) {
                 ImageView actionBarImageView = new ImageView(mContext);
-                actionBarImageView.setLayoutParams(makeLayerLayoutParams());
                 actionBarImageView.setImageResource(mBackgroundLayerImageRes);
                 actionBarImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                addView(actionBarImageView);
+                addViewInLayout(actionBarImageView, getChildCount(), makeLayerLayoutParams(), true);
             }
         }
 
@@ -223,15 +217,13 @@ public class ActionBarEx extends FrameLayout {
         }
         // 2.3 初始BottomLine
         mBottomLine = mActionBar.findViewById(R.id.bottom_line);
-        mBottomLine.setLayoutParams(makeLayoutParamsWithHeight(mBottomLineHeight));
         mBottomLine.setBackgroundColor(mBottomLineColor);
-        addView(mActionBar);
+        addViewInLayout(mActionBar, getChildCount(), makeLayoutParamsWithHeight(getActionBarHeight()), true);
 
         // 3 初始ForegroundLayer
         if (mForegroundLayerLayoutRes > 0) {
             mForegroundLayer = inflate(getContext(), mForegroundLayerLayoutRes, null);
-            mForegroundLayer.setLayoutParams(makeLayerLayoutParams());
-            addView(mForegroundLayer);
+            addViewInLayout(mForegroundLayer, getChildCount(), makeLayerLayoutParams(), true);
         }
     }
 
@@ -297,5 +289,15 @@ public class ActionBarEx extends FrameLayout {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean isInEditMode() {
+        return false;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
