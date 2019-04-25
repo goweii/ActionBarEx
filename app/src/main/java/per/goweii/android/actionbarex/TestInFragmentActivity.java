@@ -21,8 +21,7 @@ public class TestInFragmentActivity extends AppCompatActivity {
         mTestInOneFragment = new TestInOneFragment();
         mTestInTwoFragment = new TestInTwoFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fl_fragment, mTestInOneFragment, mTestInOneFragment.getClass().getName());
-        transaction.commit();
+        transactionTo(transaction, mTestInOneFragment);
     }
 
     public void switchFragment() {
@@ -36,7 +35,6 @@ public class TestInFragmentActivity extends AppCompatActivity {
             transaction.setCustomAnimations(R.anim.left_in, R.anim.right_out);
             transactionTo(transaction, mTestInOneFragment);
         }
-        transaction.commit();
     }
 
     private void transactionTo(FragmentTransaction transaction, Fragment fragment){
@@ -49,5 +47,6 @@ public class TestInFragmentActivity extends AppCompatActivity {
             transaction.show(fragment);
         }
         mCurrentFragment = fragment;
+        transaction.commit();
     }
 }

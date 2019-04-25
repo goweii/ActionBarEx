@@ -2,76 +2,78 @@
 <resources>
 
     <declare-styleable name="ActionBarEx">
-        <attr name="ab_auto_immersion" format="boolean" />
-
+        <attr name="ab_autoImmersion" format="boolean" />
         <!--背景层布局-->
-        <attr name="ab_background_layer_layout" format="reference" />
+        <attr name="ab_backgroundLayerLayout" format="reference" />
         <!--背景层为图片-->
-        <attr name="ab_background_layer_image_res" format="reference" />
-
+        <attr name="ab_backgroundLayerImageRes" format="reference" />
         <!--主体层-->
-        <attr name="ab_status_bar_visible" format="boolean" />
-        <attr name="ab_status_bar_color" format="color|reference" />
-        <attr name="ab_status_bar_mode" format="enum">
+        <attr name="ab_statusBarVisible" format="boolean|reference" />
+        <attr name="ab_statusBarColor" format="color|reference" />
+        <attr name="ab_statusBarMode" format="enum">
             <enum name="light" value="0" />
             <enum name="dark" value="1" />
         </attr>
-        <attr name="ab_title_bar_layout" format="reference" />
-        <attr name="ab_title_bar_height" format="dimension|reference" />
-        <attr name="ab_bottom_line_height" format="dimension|reference" />
-        <attr name="ab_bottom_line_color" format="color|reference" />
-
+        <attr name="ab_clickToFinish" format="reference" />
+        <attr name="ab_titleBarLayout" format="reference" />
+        <attr name="ab_titleBarHeight" format="dimension|reference" />
+        <attr name="ab_bottomLineHeight" format="dimension|reference" />
+        <attr name="ab_bottomLineColor" format="color|reference" />
         <!--前景层布局-->
-        <attr name="ab_foreground_layer_layout" format="reference" />
+        <attr name="ab_foregroundLayerLayout" format="reference" />
     </declare-styleable>
 
-    <declare-styleable name="SimpleActionBar">
-        <attr name="simple_left_text" format="string|dimension" />
-        <attr name="simple_left_text_size" format="dimension|reference" />
-        <attr name="simple_left_text_color" format="color|reference" />
-        <attr name="simple_left_text_padding_left" format="dimension|reference" />
-        <attr name="simple_left_text_padding_right" format="dimension|reference" />
-        <attr name="simple_left_image_res" format="reference" />
-        <attr name="simple_left_image_color" format="color|reference" />
-        <attr name="simple_left_image_padding" format="dimension|reference" />
-        <attr name="simple_right_text" format="string|dimension" />
-        <attr name="simple_right_text_size" format="dimension|reference" />
-        <attr name="simple_right_text_color" format="color|reference" />
-        <attr name="simple_right_text_padding_left" format="dimension|reference" />
-        <attr name="simple_right_text_padding_right" format="dimension|reference" />
-        <attr name="simple_right_image_res" format="reference" />
-        <attr name="simple_right_image_color" format="color|reference" />
-        <attr name="simple_right_image_padding" format="dimension|reference" />
-        <attr name="simple_title_text" format="string|reference" />
-        <attr name="simple_title_text_size" format="dimension|reference" />
-        <attr name="simple_title_text_color" format="color|reference" />
-        <attr name="simple_title_text_max_width" format="dimension|reference" />
+    <declare-styleable name="ActionBarCommon">
+        <attr name="abc_leftTextClickToFinish" format="boolean|reference" />
+        <attr name="abc_leftIconClickToFinish" format="boolean|reference" />
+        <attr name="abc_leftText" format="string|dimension" />
+        <attr name="abc_leftTextSize" format="dimension|reference" />
+        <attr name="abc_leftTextColor" format="color|reference" />
+        <attr name="abc_leftTextPaddingLeft" format="dimension|reference" />
+        <attr name="abc_leftTextPaddingRight" format="dimension|reference" />
+        <attr name="abc_leftIconRes" format="reference" />
+        <attr name="abc_leftIconColor" format="color|reference" />
+        <attr name="abc_leftIconPadding" format="dimension|reference" />
+        <attr name="abc_rightText" format="string|dimension" />
+        <attr name="abc_rightTextSize" format="dimension|reference" />
+        <attr name="abc_rightTextColor" format="color|reference" />
+        <attr name="abc_rightTextPaddingLeft" format="dimension|reference" />
+        <attr name="abc_rightTextPaddingRight" format="dimension|reference" />
+        <attr name="abc_rightIconRes" format="reference" />
+        <attr name="abc_rightIconColor" format="color|reference" />
+        <attr name="abc_rightIconPadding" format="dimension|reference" />
+        <attr name="abc_titleText" format="string|reference" />
+        <attr name="abc_titleTextSize" format="dimension|reference" />
+        <attr name="abc_titleTextColor" format="color|reference" />
+        <attr name="abc_titleTextMaxWidth" format="dimension|reference" />
     </declare-styleable>
 
-    <declare-styleable name="SearchActionBar">
-        <attr name="search_left_text" format="string|dimension" />
-        <attr name="search_left_text_size" format="dimension|reference" />
-        <attr name="search_left_text_color" format="color|reference" />
-        <attr name="search_left_text_padding_left" format="dimension|reference" />
-        <attr name="search_left_text_padding_right" format="dimension|reference" />
-        <attr name="search_left_image_res" format="reference" />
-        <attr name="search_left_image_color" format="color|reference" />
-        <attr name="search_left_image_padding" format="dimension|reference" />
-        <attr name="search_right_text" format="string|dimension" />
-        <attr name="search_right_text_size" format="dimension|reference" />
-        <attr name="search_right_text_color" format="color|reference" />
-        <attr name="search_right_text_padding_left" format="dimension|reference" />
-        <attr name="search_right_text_padding_right" format="dimension|reference" />
-        <attr name="search_right_image_res" format="reference" />
-        <attr name="search_right_image_color" format="color|reference" />
-        <attr name="search_right_image_padding" format="dimension|reference" />
-        <attr name="search_title_bg_res" format="reference" />
-        <attr name="search_title_hint_text" format="string|reference" />
-        <attr name="search_title_text_size" format="dimension|reference" />
-        <attr name="search_title_text_color" format="color|reference" />
-        <attr name="search_title_hint_color" format="color|reference" />
-        <attr name="search_title_padding_horizontal" format="dimension|reference" />
-        <attr name="search_title_margin_vertical" format="dimension|reference" />
+    <declare-styleable name="ActionBarSearch">
+        <attr name="abs_leftTextClickToFinish" format="boolean|reference" />
+        <attr name="abs_leftIconClickToFinish" format="boolean|reference" />
+        <attr name="abs_leftText" format="string|dimension" />
+        <attr name="abs_leftTextSize" format="dimension|reference" />
+        <attr name="abs_leftTextColor" format="color|reference" />
+        <attr name="abs_leftTextPaddingLeft" format="dimension|reference" />
+        <attr name="abs_leftTextPaddingRight" format="dimension|reference" />
+        <attr name="abs_leftIconRes" format="reference" />
+        <attr name="abs_leftIconColor" format="color|reference" />
+        <attr name="abs_leftIconPadding" format="dimension|reference" />
+        <attr name="abs_rightText" format="string|dimension" />
+        <attr name="abs_rightTextSize" format="dimension|reference" />
+        <attr name="abs_rightTextColor" format="color|reference" />
+        <attr name="abs_rightTextPaddingLeft" format="dimension|reference" />
+        <attr name="abs_rightTextPaddingRight" format="dimension|reference" />
+        <attr name="abs_rightIconRes" format="reference" />
+        <attr name="abs_rightIconColor" format="color|reference" />
+        <attr name="abs_rightIconPadding" format="dimension|reference" />
+        <attr name="abs_titleBgRes" format="reference" />
+        <attr name="abs_titleHintText" format="string|reference" />
+        <attr name="abs_titleTextSize" format="dimension|reference" />
+        <attr name="abs_titleTextColor" format="color|reference" />
+        <attr name="abs_titleHintColor" format="color|reference" />
+        <attr name="abs_titlePaddingHorizontal" format="dimension|reference" />
+        <attr name="abs_titleMarginVertical" format="dimension|reference" />
     </declare-styleable>
 
 </resources>

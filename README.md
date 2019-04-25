@@ -433,10 +433,10 @@ actionBarEx.getForegroundLayer().setVisibility(View.GONE);
 - **getTitleTextView()**：获取中间标题视图
 - **getRightTextView()**：获取右侧文本视图
 - **getRightImageView()**：获取右侧图标视图
-- **setOnLeftImageClickListener(final OnLeftImageClickListener onLeftImageClickListener)**：左侧图标点击事件
+- **setOnLeftImageClickListener(final OnLeftImageClickListener onLeftIconClickListener)**：左侧图标点击事件
 - **setOnLeftTextClickListener(final OnLeftTextClickListener onLeftTextClickListener)**：左侧文本点击事件
 - **setOnRightTextClickListener(final OnRightTextClickListener onRightTextClickListener)**：右侧文本点击事件
-- **setOnRightImageClickListener(final OnRightImageClickListener onRightImageClickListener)**：右侧图标点击事件
+- **setOnRightImageClickListener(final OnRightImageClickListener onRightIconClickListener)**：右侧图标点击事件
 
 #### SearchActionBar
 
@@ -445,10 +445,10 @@ actionBarEx.getForegroundLayer().setVisibility(View.GONE);
 - **getEditTextView()**：获取中间输入框视图
 - **getRightTextView()**：获取右侧文本视图
 - **getRightImageView()**：获取右侧图标视图
-- **setOnLeftImageClickListener(final OnLeftImageClickListener onLeftImageClickListener)**：左侧图标点击事件
+- **setOnLeftImageClickListener(final OnLeftImageClickListener onLeftIconClickListener)**：左侧图标点击事件
 - **setOnLeftTextClickListener(final OnLeftTextClickListener onLeftTextClickListener)**：左侧文本点击事件
 - **setOnRightTextClickListener(final OnRightTextClickListener onRightTextClickListener)**：右侧文本点击事件
-- **setOnRightImageClickListener(final OnRightImageClickListener onRightImageClickListener)**：右侧图标点击事件
+- **setOnRightImageClickListener(final OnRightImageClickListener onRightIconClickListener)**：右侧图标点击事件
 
 
 

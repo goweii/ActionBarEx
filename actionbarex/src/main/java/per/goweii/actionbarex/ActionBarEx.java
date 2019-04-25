@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.TypedArray;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +50,7 @@ public class ActionBarEx extends FrameLayout {
     private int mBottomLineColor;
     private int mBottomLineHeight;
     private int mForegroundLayerLayoutRes;
+    private int mClickToFinishViewId;
 
     private View mBackgroundLayer;
     private LinearLayout mActionBar;
@@ -155,17 +155,18 @@ public class ActionBarEx extends FrameLayout {
         int bottomLineColorDef = ContextCompat.getColor(mContext, R.color.bottom_line_color_def);
         int statusBarColorDef = ContextCompat.getColor(mContext, R.color.status_bar_color_def);
 
-        mAutoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_auto_immersion, true);
-        mBackgroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_background_layer_layout, 0);
-        mBackgroundLayerImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_background_layer_image_res, 0);
-        mStatusBarVisible = typedArray.getBoolean(R.styleable.ActionBarEx_ab_status_bar_visible, true);
-        mStatusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_status_bar_mode, STATUS_BAR_MODE_LIGHT) == STATUS_BAR_MODE_DARK;
-        mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_status_bar_color, statusBarColorDef);
-        mTitleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_title_bar_layout, 0);
-        mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_title_bar_height, titleBarHeightDef);
-        mBottomLineHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_bottom_line_height, bottomLineHeightDef);
-        mBottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottom_line_color, bottomLineColorDef);
-        mForegroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_foreground_layer_layout, 0);
+        mAutoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_autoImmersion, true);
+        mBackgroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerLayout, 0);
+        mBackgroundLayerImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerImageRes, 0);
+        mStatusBarVisible = typedArray.getBoolean(R.styleable.ActionBarEx_ab_statusBarVisible, true);
+        mStatusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarMode, STATUS_BAR_MODE_LIGHT) == STATUS_BAR_MODE_DARK;
+        mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_statusBarColor, statusBarColorDef);
+        mTitleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_titleBarLayout, 0);
+        mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_titleBarHeight, titleBarHeightDef);
+        mBottomLineHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_bottomLineHeight, bottomLineHeightDef);
+        mBottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottomLineColor, bottomLineColorDef);
+        mForegroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_foregroundLayerLayout, 0);
+        mClickToFinishViewId = typedArray.getResourceId(R.styleable.ActionBarEx_ab_clickToFinish, 0);
 
         typedArray.recycle();
     }
@@ -225,6 +226,23 @@ public class ActionBarEx extends FrameLayout {
             mForegroundLayer = inflate(getContext(), mForegroundLayerLayoutRes, null);
             addViewInLayout(mForegroundLayer, getChildCount(), makeLayerLayoutParams(), true);
         }
+        performClickToFinish();
+    }
+
+    private void performClickToFinish() {
+        if (mTitleBarChild == null) {
+            return;
+        }
+        View clickToFinishView = getView(mClickToFinishViewId);
+        if (clickToFinishView == null) {
+            return;
+        }
+        clickToFinishView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishActivity();
+            }
+        });
     }
 
     private LayoutParams makeLayerLayoutParams() {
@@ -239,6 +257,14 @@ public class ActionBarEx extends FrameLayout {
      * 设置沉浸模式
      */
     private void makeImmersion() {
+        hintSystemActionBar();
+        refreshStatusBar();
+    }
+
+    /**
+     * 透明状态栏，改变状态栏图标颜色模式
+     */
+    public void refreshStatusBar() {
         if (!mAutoImmersion) {
             return;
         }
@@ -246,14 +272,6 @@ public class ActionBarEx extends FrameLayout {
         if (activity == null) {
             return;
         }
-        setSystemStatusBar(activity);
-        hintSystemActionBar(activity);
-    }
-
-    /**
-     * 透明状态栏，改变状态栏图标颜色模式
-     */
-    private void setSystemStatusBar(@NonNull Activity activity) {
         StatusBarCompat.transparent(activity);
         StatusBarCompat.setIconMode(activity, mStatusBarDarkMode);
     }
@@ -261,7 +279,11 @@ public class ActionBarEx extends FrameLayout {
     /**
      * 隐藏默认的ActionBar
      */
-    private void hintSystemActionBar(@NonNull Activity activity) {
+    private void hintSystemActionBar() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
         if (activity.getActionBar() != null) {
             activity.getActionBar().hide();
         }
@@ -289,6 +311,13 @@ public class ActionBarEx extends FrameLayout {
             }
         }
         return null;
+    }
+
+    public void finishActivity(){
+        Activity activity = getActivity();
+        if (activity != null && !activity.isFinishing()) {
+            activity.finish();
+        }
     }
 
     @Override

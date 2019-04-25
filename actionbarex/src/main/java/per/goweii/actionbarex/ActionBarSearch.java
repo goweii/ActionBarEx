@@ -13,33 +13,33 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import per.goweii.actionbarex.listener.OnLeftImageClickListener;
+import per.goweii.actionbarex.listener.OnLeftIconClickListener;
 import per.goweii.actionbarex.listener.OnLeftTextClickListener;
-import per.goweii.actionbarex.listener.OnRightImageClickListener;
+import per.goweii.actionbarex.listener.OnRightIconClickListener;
 import per.goweii.actionbarex.listener.OnRightTextClickListener;
 
 /**
  * @author Cuizhen
  * @date 2018/8/30-上午11:10
  */
-public final class SearchActionBar extends ActionBarEx {
+public final class ActionBarSearch extends ActionBarEx {
 
     private String leftText;
     private float leftTextSize;
     private int leftTextColor;
     private int leftTextPaddingLeft;
     private int leftTextPaddingRight;
-    private int leftImageRes;
-    private int leftImageColor;
-    private int leftImagePadding;
+    private int leftIconRes;
+    private int leftIconColor;
+    private int leftIconPadding;
     private String rightText;
     private float rightTextSize;
     private int rightTextColor;
     private int rightTextPaddingLeft;
     private int rightTextPaddingRight;
-    private int rightImageRes;
-    private int rightImageColor;
-    private int rightImagePadding;
+    private int rightIconRes;
+    private int rightIconColor;
+    private int rightIconPadding;
     private String titleHintText;
     private float titleTextSize;
     private int titleTextColor;
@@ -47,23 +47,25 @@ public final class SearchActionBar extends ActionBarEx {
     private int titleBgRes;
     private int titlePaddingHorizontal;
     private int titleMarginVertical;
+    private boolean leftTextClickToFinish;
+    private boolean leftIconClickToFinish;
 
     private RelativeLayout titleBarChild;
-    private ImageView leftImageView;
+    private ImageView leftIconView;
     private TextView leftTextView;
     private EditText titleEditText;
     private TextView rightTextView;
-    private ImageView rightImageView;
+    private ImageView rightIconView;
 
-    public SearchActionBar(Context context) {
+    public ActionBarSearch(Context context) {
         this(context, null);
     }
 
-    public SearchActionBar(Context context, @Nullable AttributeSet attrs) {
+    public ActionBarSearch(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SearchActionBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ActionBarSearch(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -72,8 +74,8 @@ public final class SearchActionBar extends ActionBarEx {
         return titleBarChild;
     }
 
-    public ImageView getLeftImageView() {
-        return leftImageView;
+    public ImageView getLeftIconView() {
+        return leftIconView;
     }
 
     public TextView getLeftTextView() {
@@ -88,15 +90,15 @@ public final class SearchActionBar extends ActionBarEx {
         return rightTextView;
     }
 
-    public ImageView getRightImageView() {
-        return rightImageView;
+    public ImageView getRightIconView() {
+        return rightIconView;
     }
 
     @Override
     protected void initAttrs(AttributeSet attrs) {
         super.initAttrs(attrs);
 
-        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.SearchActionBar);
+        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.ActionBarSearch);
 
         float iconPaddingDef = mContext.getResources().getDimension(R.dimen.title_bar_icon_padding_def);
         float textSizeDef = mContext.getResources().getDimension(R.dimen.title_bar_text_size_def);
@@ -108,31 +110,33 @@ public final class SearchActionBar extends ActionBarEx {
         int titleTextColorDef = ContextCompat.getColor(mContext, R.color.title_text_color_def);
         int titleTextHintColorDef = ContextCompat.getColor(mContext, R.color.title_text_hint_color_def);
 
-        leftText = typedArray.getString(R.styleable.SearchActionBar_search_left_text);
-        leftTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_size, textSizeDef);
-        leftTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_left_text_color, textColorDef);
-        leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_padding_left, textPaddingLeftDef);
-        leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_text_padding_right, textPaddingRightDef);
-        leftImageRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_left_image_res, 0);
-        leftImageColor = typedArray.getColor(R.styleable.SearchActionBar_search_left_image_color, iconColorDef);
-        leftImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_left_image_padding, iconPaddingDef);
+        leftTextClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftTextClickToFinish, false);
+        leftIconClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftIconClickToFinish, false);
+        leftText = typedArray.getString(R.styleable.ActionBarSearch_abs_leftText);
+        leftTextSize = typedArray.getDimension(R.styleable.ActionBarSearch_abs_leftTextSize, textSizeDef);
+        leftTextColor = typedArray.getColor(R.styleable.ActionBarSearch_abs_leftTextColor, textColorDef);
+        leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_leftTextPaddingLeft, textPaddingLeftDef);
+        leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_leftTextPaddingRight, textPaddingRightDef);
+        leftIconRes = typedArray.getResourceId(R.styleable.ActionBarSearch_abs_leftIconRes, 0);
+        leftIconColor = typedArray.getColor(R.styleable.ActionBarSearch_abs_leftIconColor, iconColorDef);
+        leftIconPadding = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_leftIconPadding, iconPaddingDef);
 
-        rightText = typedArray.getString(R.styleable.SearchActionBar_search_right_text);
-        rightTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_size, textSizeDef);
-        rightTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_right_text_color, textColorDef);
-        rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_padding_left, textPaddingLeftDef);
-        rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_text_padding_right, textPaddingRightDef);
-        rightImageRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_right_image_res, 0);
-        rightImageColor = typedArray.getColor(R.styleable.SearchActionBar_search_right_image_color, iconColorDef);
-        rightImagePadding = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_right_image_padding, iconPaddingDef);
+        rightText = typedArray.getString(R.styleable.ActionBarSearch_abs_rightText);
+        rightTextSize = typedArray.getDimension(R.styleable.ActionBarSearch_abs_rightTextSize, textSizeDef);
+        rightTextColor = typedArray.getColor(R.styleable.ActionBarSearch_abs_rightTextColor, textColorDef);
+        rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_rightTextPaddingLeft, textPaddingLeftDef);
+        rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_rightTextPaddingRight, textPaddingRightDef);
+        rightIconRes = typedArray.getResourceId(R.styleable.ActionBarSearch_abs_rightIconRes, 0);
+        rightIconColor = typedArray.getColor(R.styleable.ActionBarSearch_abs_rightIconColor, iconColorDef);
+        rightIconPadding = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_rightIconPadding, iconPaddingDef);
 
-        titleBgRes = typedArray.getResourceId(R.styleable.SearchActionBar_search_title_bg_res, 0);
-        titleHintText = typedArray.getString(R.styleable.SearchActionBar_search_title_hint_text);
-        titleTextSize = typedArray.getDimension(R.styleable.SearchActionBar_search_title_text_size, titleTextSizeDef);
-        titleTextColor = typedArray.getColor(R.styleable.SearchActionBar_search_title_text_color, titleTextColorDef);
-        titleHintColor = typedArray.getColor(R.styleable.SearchActionBar_search_title_hint_color, titleTextHintColorDef);
-        titlePaddingHorizontal = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_title_padding_horizontal, 0);
-        titleMarginVertical = (int) typedArray.getDimension(R.styleable.SearchActionBar_search_title_margin_vertical, 0);
+        titleBgRes = typedArray.getResourceId(R.styleable.ActionBarSearch_abs_titleBgRes, 0);
+        titleHintText = typedArray.getString(R.styleable.ActionBarSearch_abs_titleHintText);
+        titleTextSize = typedArray.getDimension(R.styleable.ActionBarSearch_abs_titleTextSize, titleTextSizeDef);
+        titleTextColor = typedArray.getColor(R.styleable.ActionBarSearch_abs_titleTextColor, titleTextColorDef);
+        titleHintColor = typedArray.getColor(R.styleable.ActionBarSearch_abs_titleHintColor, titleTextHintColorDef);
+        titlePaddingHorizontal = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_titlePaddingHorizontal, 0);
+        titleMarginVertical = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_titleMarginVertical, 0);
 
         typedArray.recycle();
     }
@@ -141,19 +145,27 @@ public final class SearchActionBar extends ActionBarEx {
     protected View inflateTitleBar() {
         titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.title_bar_search, null);
 
-        leftImageView = titleBarChild.findViewById(R.id.iv_left);
+        leftIconView = titleBarChild.findViewById(R.id.iv_left);
         leftTextView = titleBarChild.findViewById(R.id.tv_left);
         titleEditText = titleBarChild.findViewById(R.id.et_title);
         rightTextView = titleBarChild.findViewById(R.id.tv_right);
-        rightImageView = titleBarChild.findViewById(R.id.iv_right);
+        rightIconView = titleBarChild.findViewById(R.id.iv_right);
 
-        if (leftImageRes > 0) {
-            leftImageView.setVisibility(VISIBLE);
-            leftImageView.setPadding(leftImagePadding, leftImagePadding, leftImagePadding, leftImagePadding);
-            leftImageView.setImageResource(leftImageRes);
-            leftImageView.setColorFilter(leftImageColor);
+        if (leftIconRes > 0) {
+            leftIconView.setVisibility(VISIBLE);
+            leftIconView.setPadding(leftIconPadding, leftIconPadding, leftIconPadding, leftIconPadding);
+            leftIconView.setImageResource(leftIconRes);
+            leftIconView.setColorFilter(leftIconColor);
+            if (leftIconClickToFinish) {
+                leftIconView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finishActivity();
+                    }
+                });
+            }
         } else {
-            leftImageView.setVisibility(GONE);
+            leftIconView.setVisibility(GONE);
         }
 
         if (!TextUtils.isEmpty(leftText)) {
@@ -162,6 +174,14 @@ public final class SearchActionBar extends ActionBarEx {
             leftTextView.setTextColor(leftTextColor);
             leftTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
             leftTextView.setPadding(leftTextPaddingLeft, 0, leftTextPaddingRight, 0);
+            if (leftTextClickToFinish) {
+                leftTextView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finishActivity();
+                    }
+                });
+            }
         } else {
             leftTextView.setVisibility(GONE);
         }
@@ -180,13 +200,13 @@ public final class SearchActionBar extends ActionBarEx {
         titleParams.bottomMargin = titleMarginVertical;
         titleEditText.setLayoutParams(titleParams);
 
-        if (rightImageRes > 0) {
-            rightImageView.setVisibility(VISIBLE);
-            leftImageView.setPadding(rightImagePadding, rightImagePadding, rightImagePadding, rightImagePadding);
-            rightImageView.setImageResource(rightImageRes);
-            rightImageView.setColorFilter(rightImageColor);
+        if (rightIconRes > 0) {
+            rightIconView.setVisibility(VISIBLE);
+            leftIconView.setPadding(rightIconPadding, rightIconPadding, rightIconPadding, rightIconPadding);
+            rightIconView.setImageResource(rightIconRes);
+            rightIconView.setColorFilter(rightIconColor);
         } else {
-            rightImageView.setVisibility(GONE);
+            rightIconView.setVisibility(GONE);
         }
 
         if (!TextUtils.isEmpty(rightText)) {
@@ -202,12 +222,12 @@ public final class SearchActionBar extends ActionBarEx {
         return titleBarChild;
     }
 
-    public void setOnLeftImageClickListener(final OnLeftImageClickListener onLeftImageClickListener) {
-        leftImageView.setOnClickListener(new View.OnClickListener() {
+    public void setOnLeftImageClickListener(final OnLeftIconClickListener onLeftIconClickListener) {
+        leftIconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onLeftImageClickListener != null) {
-                    onLeftImageClickListener.onClick();
+                if (onLeftIconClickListener != null) {
+                    onLeftIconClickListener.onClick();
                 }
             }
         });
@@ -235,12 +255,12 @@ public final class SearchActionBar extends ActionBarEx {
         });
     }
 
-    public void setOnRightImageClickListener(final OnRightImageClickListener onRightImageClickListener) {
-        rightImageView.setOnClickListener(new View.OnClickListener() {
+    public void setOnRightImageClickListener(final OnRightIconClickListener onRightIconClickListener) {
+        rightIconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onRightImageClickListener != null) {
-                    onRightImageClickListener.onClick();
+                if (onRightIconClickListener != null) {
+                    onRightIconClickListener.onClick();
                 }
             }
         });

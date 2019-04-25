@@ -4,13 +4,13 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-public final class SquareHeightImageView extends AppCompatImageView {
+public final class IconView extends AppCompatImageView {
 
-    public SquareHeightImageView(Context context) {
+    public IconView(Context context) {
         this(context, null);
     }
 
-    public SquareHeightImageView(Context context, AttributeSet attrs) {
+    public IconView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

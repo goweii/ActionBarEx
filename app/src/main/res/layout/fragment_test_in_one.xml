@@ -8,19 +8,19 @@
     android:orientation="vertical"
     tools:context=".TestInOneFragment">
 
-    <per.goweii.actionbarex.SimpleActionBar
+    <per.goweii.actionbarex.ActionBarCommon
         android:id="@+id/simple_action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/title_bar_custom_bg"
-        app:ab_status_bar_mode="dark"
-        app:ab_auto_immersion="true"
-        app:ab_title_bar_height="48dp"
-        app:simple_left_image_res="@mipmap/back"
-        app:simple_right_text="切换"
-        app:simple_right_text_color="@color/white"
-        app:simple_title_text="第一个Fragment"
-        app:simple_title_text_color="@color/white" />
+        app:ab_autoImmersion="true"
+        app:abc_leftImageRes="@mipmap/back"
+        app:abc_rightText="切换"
+        app:abc_rightTextColor="@color/white"
+        app:abc_titleText="第一个Fragment"
+        app:abc_titleTextColor="@color/white"
+        app:ab_statusBarMode="dark"
+        app:ab_titleBarHeight="48dp" />
 
     <TextView
         android:layout_width="match_parent"
