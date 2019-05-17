@@ -143,7 +143,7 @@ public final class ActionBarSearch extends ActionBarEx {
 
     @Override
     protected View inflateTitleBar() {
-        titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.title_bar_search, null);
+        titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.action_bar_title_bar_search, null);
 
         leftIconView = titleBarChild.findViewById(R.id.iv_left);
         leftTextView = titleBarChild.findViewById(R.id.tv_left);

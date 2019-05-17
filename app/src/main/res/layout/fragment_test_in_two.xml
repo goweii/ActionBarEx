@@ -16,7 +16,7 @@
         app:ab_statusBarMode="light"
         app:ab_autoImmersion="true"
         app:ab_titleBarHeight="48dp"
-        app:abc_leftImageRes="@mipmap/back"
+        app:abc_leftIconRes="@mipmap/back"
         app:abc_titleText="第二个Fragment"
         app:abc_rightText="切换"
         app:abc_rightTextColor="@color/white"

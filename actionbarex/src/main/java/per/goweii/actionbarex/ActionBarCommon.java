@@ -136,7 +136,7 @@ public final class ActionBarCommon extends ActionBarEx {
 
     @Override
     protected View inflateTitleBar() {
-        titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.title_bar_simple, null);
+        titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.action_bar_title_bar_common, null);
 
         leftIconView = titleBarChild.findViewById(R.id.iv_left);
         leftTextView = titleBarChild.findViewById(R.id.tv_left);
@@ -187,7 +187,7 @@ public final class ActionBarCommon extends ActionBarEx {
 
         if (rightIconRes > 0) {
             rightIconView.setVisibility(VISIBLE);
-            leftIconView.setPadding(rightIconPadding, rightIconPadding, rightIconPadding, rightIconPadding);
+            rightIconView.setPadding(rightIconPadding, rightIconPadding, rightIconPadding, rightIconPadding);
             rightIconView.setImageResource(rightIconRes);
             rightIconView.setColorFilter(rightIconColor);
         } else {

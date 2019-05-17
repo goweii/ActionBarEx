@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/title_bar_custom_bg"
         app:ab_autoImmersion="true"
-        app:abc_leftImageRes="@mipmap/back"
+        app:abc_leftIconRes="@mipmap/back"
         app:abc_rightText="切换"
         app:abc_rightTextColor="@color/white"
         app:abc_titleText="第一个Fragment"
