@@ -90,11 +90,21 @@ allprojects {
 2. 在Model:app的**build.gradle**添加框架依赖
 
 最新版本是多少，看下[Releases](https://github.com/goweii/ActionBarEx/releases)
+
 从2.2.9以后版本去除版本号前的v，引用时需要注意下。
+
+从3.0.0版本开始分离了ActionBarEx和ActionBarCommon/Search，
 
 ```
 dependencies {
-	implementation 'com.github.goweii:ActionBarEx:2.2.9'
+	// 完全引入
+	implementation 'com.github.goweii:ActionBarEx:3.0.0'
+	
+	// 只引入ActionBarEx
+	implementation 'com.github.goweii.ActionBarEx:actionbarex:3.0.0'
+	
+	// 引入ActionBarCommon/Search，依赖于ActionBarEx
+	implementation 'com.github.goweii.ActionBarEx:actionbarex-common:3.0.0'
 }
 ```
 
