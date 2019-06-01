@@ -1,16 +1,16 @@
-package per.goweii.actionbarex;
+package per.goweii.actionbarex.common;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-public final class IconView extends AppCompatImageView {
+public final class ActionBarIconView extends AppCompatImageView {
 
-    public IconView(Context context) {
+    public ActionBarIconView(Context context) {
         this(context, null);
     }
 
-    public IconView(Context context, AttributeSet attrs) {
+    public ActionBarIconView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

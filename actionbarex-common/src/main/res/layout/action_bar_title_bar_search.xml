@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl_title_bar_simple"
+    android:id="@+id/rl_title_bar_search"
     style="@style/action_bar">
 
     <LinearLayout
@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true">
 
-        <per.goweii.actionbarex.IconView
+        <per.goweii.actionbarex.common.ActionBarIconView
             android:id="@+id/iv_left"
             style="@style/action_bar_icon"
             android:visibility="gone"
@@ -26,11 +26,15 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/action_bar_title"
-        android:layout_centerInParent="true"
-        tools:text="标题标题标题标题标题标题标题标题" />
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/ll_left"
+        android:layout_toLeftOf="@+id/ll_right"
+        android:background="@null"
+        android:singleLine="true"
+        android:layout_centerInParent="true"/>
 
     <LinearLayout
         android:id="@+id/ll_right"
@@ -42,10 +46,10 @@
             android:id="@+id/tv_right"
             style="@style/action_bar_text"
             android:visibility="gone"
-            tools:text="确定"
+            tools:text="搜索"
             tools:visibility="visible" />
 
-        <per.goweii.actionbarex.IconView
+        <per.goweii.actionbarex.common.ActionBarIconView
             android:id="@+id/iv_right"
             style="@style/action_bar_icon"
             android:visibility="gone"

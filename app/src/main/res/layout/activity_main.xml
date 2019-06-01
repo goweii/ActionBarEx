@@ -1,38 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
-    android:orientation="vertical">
+    android:background="#f3f3f3">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/simple_action_bar_1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <per.goweii.actionbarex.ActionBarCommon
-                android:id="@+id/simple_action_bar_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                app:ab_bottomLineColor="@color/line"
-                app:ab_bottomLineHeight="1dp"
-                app:ab_foregroundLayerLayout="@layout/loading_bar"
-                app:ab_statusBarColor="@color/transparent"
-                app:ab_statusBarMode="dark"
-                app:ab_titleBarHeight="48dp"
-                app:abc_leftIconColor="@color/black"
-                app:abc_leftIconRes="@mipmap/back"
-                app:abc_rightIconColor="@color/black"
-                app:abc_rightIconRes="@mipmap/search"
-                app:abc_titleText="这个标题有点长我试试长标题什么样子" />
-
-            <per.goweii.actionbarex.ActionBarCommon
+            <per.goweii.actionbarex.common.ActionBarCommon
                 android:id="@+id/simple_action_bar_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +35,7 @@
                 app:abc_rightText="确定"
                 app:abc_titleText="感觉这个样子还可以" />
 
-            <per.goweii.actionbarex.ActionBarCommon
+            <per.goweii.actionbarex.common.ActionBarCommon
                 android:id="@+id/simple_action_bar_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,7 +61,7 @@
                 app:abc_titleText="这个标题有点长我试试长标题什么样子"
                 app:abc_titleTextMaxWidth="180dp" />
 
-            <per.goweii.actionbarex.ActionBarSearch
+            <per.goweii.actionbarex.common.ActionBarSearch
                 android:id="@+id/search_action_bar_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +83,7 @@
                 app:abs_titleTextColor="#232323"
                 app:abs_titleTextSize="15sp" />
 
-            <per.goweii.actionbarex.ActionBarSearch
+            <per.goweii.actionbarex.common.ActionBarSearch
                 android:id="@+id/search_action_bar_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,8 +159,30 @@
                 android:gravity="center"
                 android:text="跳转Fragment测试界面" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="800dp" />
+
         </LinearLayout>
 
     </ScrollView>
 
-</FrameLayout>
+    <per.goweii.actionbarex.common.ActionBarCommon
+        android:id="@+id/simple_action_bar_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        app:ab_bottomLineOutside="true"
+        app:ab_bottomLineResId="@drawable/bottom_line_bg"
+        app:ab_bottomLineHeight="10dp"
+        app:ab_foregroundLayerLayout="@layout/loading_bar"
+        app:ab_statusBarColor="@color/transparent"
+        app:ab_statusBarMode="dark"
+        app:ab_titleBarHeight="48dp"
+        app:abc_leftIconColor="@color/black"
+        app:abc_leftIconRes="@mipmap/back"
+        app:abc_rightIconColor="@color/black"
+        app:abc_rightIconRes="@mipmap/search"
+        app:abc_titleText="这个标题有点长我试试长标题什么样子" />
+
+</RelativeLayout>

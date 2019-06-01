@@ -9,12 +9,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import per.goweii.actionbarex.ActionBarEx;
-import per.goweii.actionbarex.ActionBarSearch;
-import per.goweii.actionbarex.ActionBarCommon;
-import per.goweii.actionbarex.listener.OnLeftIconClickListener;
-import per.goweii.actionbarex.listener.OnLeftTextClickListener;
-import per.goweii.actionbarex.listener.OnRightIconClickListener;
-import per.goweii.actionbarex.listener.OnRightTextClickListener;
+import per.goweii.actionbarex.common.OnActionBarChildClickListener;
+import per.goweii.actionbarex.common.ActionBarCommon;
+import per.goweii.actionbarex.common.ActionBarSearch;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,27 +38,27 @@ public class MainActivity extends AppCompatActivity {
         action_bar_ex_1 = findViewById(R.id.action_bar_ex_1);
         action_bar_ex_2 = findViewById(R.id.action_bar_ex_2);
 
-        simple_action_bar_1.setOnLeftImageClickListener(new OnLeftIconClickListener() {
+        simple_action_bar_1.setOnLeftIconClickListener(new OnActionBarChildClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(View v) {
                 Toast.makeText(context, "onLeftImageClick", Toast.LENGTH_SHORT).show();
             }
         });
-        simple_action_bar_1.setOnLeftTextClickListener(new OnLeftTextClickListener() {
+        simple_action_bar_1.setOnLeftTextClickListener(new OnActionBarChildClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(View v) {
                 Toast.makeText(context, "onLeftTextClick", Toast.LENGTH_SHORT).show();
             }
         });
-        simple_action_bar_1.setOnRightTextClickListener(new OnRightTextClickListener() {
+        simple_action_bar_1.setOnRightTextClickListener(new OnActionBarChildClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(View v) {
                 Toast.makeText(context, "onRightTextClick", Toast.LENGTH_SHORT).show();
             }
         });
-        simple_action_bar_1.setOnRightImageClickListener(new OnRightIconClickListener() {
+        simple_action_bar_1.setOnRightIconClickListener(new OnActionBarChildClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(View v) {
                 Toast.makeText(context, "onRightImageClick", Toast.LENGTH_SHORT).show();
             }
         });

@@ -1,4 +1,4 @@
-package per.goweii.actionbarex;
+package per.goweii.actionbarex.common;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,10 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import per.goweii.actionbarex.listener.OnLeftIconClickListener;
-import per.goweii.actionbarex.listener.OnLeftTextClickListener;
-import per.goweii.actionbarex.listener.OnRightIconClickListener;
-import per.goweii.actionbarex.listener.OnRightTextClickListener;
+import per.goweii.actionbarex.ActionBarEx;
 
 /**
  * @author Cuizhen
@@ -94,17 +91,17 @@ public final class ActionBarCommon extends ActionBarEx {
     protected void initAttrs(AttributeSet attrs) {
         super.initAttrs(attrs);
 
-        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.ActionBarCommon);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ActionBarCommon);
 
-        float titleTextMaxWidthDef = mContext.getResources().getDimension(R.dimen.title_bar_title_text_max_width_def);
-        float iconPaddingDef = mContext.getResources().getDimension(R.dimen.title_bar_icon_padding_def);
-        float textSizeDef = mContext.getResources().getDimension(R.dimen.title_bar_text_size_def);
-        float textPaddingLeftDef = mContext.getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
-        float textPaddingRightDef = mContext.getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
-        float titleTextSizeDef = mContext.getResources().getDimension(R.dimen.title_bar_title_text_size_def);
-        int iconColorDef = ContextCompat.getColor(mContext, R.color.icon_color_def);
-        int textColorDef = ContextCompat.getColor(mContext, R.color.text_color_def);
-        int titleTextColorDef = ContextCompat.getColor(mContext, R.color.title_text_color_def);
+        float titleTextMaxWidthDef = getContext().getResources().getDimension(R.dimen.title_bar_title_text_max_width_def);
+        float iconPaddingDef = getContext().getResources().getDimension(R.dimen.title_bar_icon_padding_def);
+        float textSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_text_size_def);
+        float textPaddingLeftDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
+        float textPaddingRightDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
+        float titleTextSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_title_text_size_def);
+        int iconColorDef = ContextCompat.getColor(getContext(), R.color.icon_color_def);
+        int textColorDef = ContextCompat.getColor(getContext(), R.color.text_color_def);
+        int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.title_text_color_def);
 
         leftTextClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftTextClickToFinish, false);
         leftIconClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftIconClickToFinish, false);
@@ -150,7 +147,7 @@ public final class ActionBarCommon extends ActionBarEx {
             leftIconView.setImageResource(leftIconRes);
             leftIconView.setColorFilter(leftIconColor);
             if (leftIconClickToFinish) {
-                leftIconView.setOnClickListener(new OnClickListener() {
+                leftIconView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finishActivity();
@@ -168,7 +165,7 @@ public final class ActionBarCommon extends ActionBarEx {
             leftTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
             leftTextView.setPadding(leftTextPaddingLeft, 0, leftTextPaddingRight, 0);
             if (leftTextClickToFinish) {
-                leftTextView.setOnClickListener(new OnClickListener() {
+                leftTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finishActivity();
@@ -206,45 +203,45 @@ public final class ActionBarCommon extends ActionBarEx {
         return titleBarChild;
     }
 
-    public void setOnLeftImageClickListener(final OnLeftIconClickListener onLeftIconClickListener) {
-        leftIconView.setOnClickListener(new OnClickListener() {
+    public void setOnLeftIconClickListener(final OnActionBarChildClickListener onLeftIconClickListener) {
+        leftIconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onLeftIconClickListener != null) {
-                    onLeftIconClickListener.onClick();
+                    onLeftIconClickListener.onClick(v);
                 }
             }
         });
     }
 
-    public void setOnLeftTextClickListener(final OnLeftTextClickListener onLeftTextClickListener) {
-        leftTextView.setOnClickListener(new OnClickListener() {
+    public void setOnLeftTextClickListener(final OnActionBarChildClickListener onLeftTextClickListener) {
+        leftTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onLeftTextClickListener != null) {
-                    onLeftTextClickListener.onClick();
+                    onLeftTextClickListener.onClick(v);
                 }
             }
         });
     }
 
-    public void setOnRightTextClickListener(final OnRightTextClickListener onRightTextClickListener) {
-        rightTextView.setOnClickListener(new OnClickListener() {
+    public void setOnRightTextClickListener(final OnActionBarChildClickListener onRightTextClickListener) {
+        rightTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onRightTextClickListener != null) {
-                    onRightTextClickListener.onClick();
+                    onRightTextClickListener.onClick(v);
                 }
             }
         });
     }
 
-    public void setOnRightImageClickListener(final OnRightIconClickListener onRightIconClickListener) {
-        rightIconView.setOnClickListener(new OnClickListener() {
+    public void setOnRightIconClickListener(final OnActionBarChildClickListener onRightIconClickListener) {
+        rightIconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onRightIconClickListener != null) {
-                    onRightIconClickListener.onClick();
+                    onRightIconClickListener.onClick(v);
                 }
             }
         });

@@ -1,0 +1,35 @@
+<resources>
+
+    <style name="action_bar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/title_bar_height_def</item>
+    </style>
+
+    <style name="action_bar_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/title_bar_icon_padding_def</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="action_bar_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">@dimen/title_bar_text_padding_left_def</item>
+        <item name="android:paddingRight">@dimen/title_bar_text_padding_right_def</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_color_def</item>
+        <item name="android:textSize">@dimen/title_bar_text_size_def</item>
+    </style>
+
+    <style name="action_bar_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxWidth">@dimen/title_bar_title_text_max_width_def</item>
+        <item name="android:textColor">@color/title_text_color_def</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/title_bar_title_text_size_def</item>
+    </style>
+
+</resources>

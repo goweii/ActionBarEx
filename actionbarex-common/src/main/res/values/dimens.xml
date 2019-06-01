@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="title_bar_title_text_size_def">17sp</dimen>
+    <dimen name="title_bar_title_text_max_width_def">260dp</dimen>
+
+    <dimen name="title_bar_text_size_def">15sp</dimen>
+    <dimen name="title_bar_text_padding_left_def">13dp</dimen>
+    <dimen name="title_bar_text_padding_right_def">13dp</dimen>
+
+    <dimen name="title_bar_icon_padding_def">15dp</dimen>
+
+</resources>

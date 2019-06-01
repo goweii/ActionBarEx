@@ -1,1 +1,1 @@
-include ':app', ':actionbarex'
+include ':app', ':actionbarex', ':actionbarex-common'

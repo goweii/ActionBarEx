@@ -16,7 +16,7 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_height="48dp" />
+        tools:layout_height="44dp" />
 
     <View
         android:id="@+id/bottom_line"
