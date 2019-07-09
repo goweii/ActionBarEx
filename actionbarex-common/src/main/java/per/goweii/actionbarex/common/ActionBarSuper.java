@@ -576,7 +576,7 @@ public final class ActionBarSuper extends ActionBarEx {
                 });
             }
             if (leftIconClickToFinish[i]) {
-                leftActionViews[i].getTextView().setOnClickListener(new OnClickListener() {
+                leftActionViews[i].getIconView().setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finishActivity();
@@ -619,7 +619,7 @@ public final class ActionBarSuper extends ActionBarEx {
                 });
             }
             if (rightIconClickToFinish[i]) {
-                rightActionViews[i].getTextView().setOnClickListener(new OnClickListener() {
+                rightActionViews[i].getIconView().setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finishActivity();
