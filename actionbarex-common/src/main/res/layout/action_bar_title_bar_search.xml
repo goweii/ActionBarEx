@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true">
 
-        <per.goweii.actionbarex.common.ActionBarIconView
+        <per.goweii.actionbarex.common.ActionIconView
             android:id="@+id/iv_left"
             style="@style/action_bar_icon"
             android:visibility="gone"
@@ -49,7 +49,7 @@
             tools:text="搜索"
             tools:visibility="visible" />
 
-        <per.goweii.actionbarex.common.ActionBarIconView
+        <per.goweii.actionbarex.common.ActionIconView
             android:id="@+id/iv_right"
             style="@style/action_bar_icon"
             android:visibility="gone"

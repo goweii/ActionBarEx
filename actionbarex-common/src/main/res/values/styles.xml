@@ -5,6 +5,11 @@
         <item name="android:layout_height">@dimen/title_bar_height_def</item>
     </style>
 
+    <style name="action_bar_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
     <style name="action_bar_icon">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>

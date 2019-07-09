@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".TestInOneFragment">
 
-    <per.goweii.actionbarex.ActionBarCommon
+    <per.goweii.actionbarex.common.ActionBarCommon
         android:id="@+id/simple_action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

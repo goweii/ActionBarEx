@@ -4,14 +4,18 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-public final class ActionBarIconView extends AppCompatImageView {
+public final class ActionIconView extends AppCompatImageView {
 
-    public ActionBarIconView(Context context) {
+    public ActionIconView(Context context) {
         this(context, null);
     }
 
-    public ActionBarIconView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public ActionIconView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public ActionIconView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
     @Override

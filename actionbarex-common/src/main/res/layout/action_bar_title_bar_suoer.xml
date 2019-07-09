@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_title_bar_super"
+    style="@style/action_bar">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/action_bar_title"
+        android:layout_centerInParent="true"
+        tools:text="标题标题标题标题标题标题" />
+
+    <LinearLayout
+        android:id="@+id/ll_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true">
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_left1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_left2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_left3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:av_icon="@color/text_color_def" />
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_left4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_left5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true">
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_right1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_right2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_right3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_right4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+        <per.goweii.actionbarex.common.ActionView
+            android:id="@+id/av_right5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:av_icon="@color/text_color_def"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</RelativeLayout>

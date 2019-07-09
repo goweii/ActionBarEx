@@ -12,6 +12,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -290,15 +291,17 @@ public class ActionBarEx extends FrameLayout {
      * 透明状态栏，改变状态栏图标颜色模式
      */
     public void refreshStatusBar() {
-        if (!mAutoImmersion) {
-            return;
-        }
         Activity activity = getActivity();
         if (activity == null) {
             return;
         }
-        StatusBarCompat.transparent(activity);
         StatusBarCompat.setIconMode(activity, mStatusBarDarkMode);
+        if (mAutoImmersion) {
+            StatusBarCompat.transparent(activity);
+        } else {
+            Window window = activity.getWindow();
+            StatusBarCompat.setColor(window, mStatusBarColor);
+        }
     }
 
     /**
