@@ -170,7 +170,8 @@
         <attr name="absuper_rightIconMarginTop" format="dimension|reference" />
         <attr name="absuper_rightIconMarginBottom" format="dimension|reference" />
         
-        <attr name="absuper_left1ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left1TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left1IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left1Text" format="string|dimension" />
         <attr name="absuper_left1TextSize" format="dimension|reference" />
         <attr name="absuper_left1TextColor" format="color|reference" />
@@ -197,7 +198,8 @@
         <attr name="absuper_left1IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left1IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_left2ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left2TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left2IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left2Text" format="string|dimension" />
         <attr name="absuper_left2TextSize" format="dimension|reference" />
         <attr name="absuper_left2TextColor" format="color|reference" />
@@ -224,7 +226,8 @@
         <attr name="absuper_left2IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left2IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_left3ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left3TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left3IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left3Text" format="string|dimension" />
         <attr name="absuper_left3TextSize" format="dimension|reference" />
         <attr name="absuper_left3TextColor" format="color|reference" />
@@ -251,7 +254,8 @@
         <attr name="absuper_left3IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left3IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_left4ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left4TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left4IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left4Text" format="string|dimension" />
         <attr name="absuper_left4TextSize" format="dimension|reference" />
         <attr name="absuper_left4TextColor" format="color|reference" />
@@ -278,7 +282,8 @@
         <attr name="absuper_left4IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left4IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_left5ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left5TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_left5IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left5Text" format="string|dimension" />
         <attr name="absuper_left5TextSize" format="dimension|reference" />
         <attr name="absuper_left5TextColor" format="color|reference" />
@@ -305,7 +310,8 @@
         <attr name="absuper_left5IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left5IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_right1ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right1TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right1IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right1Text" format="string|dimension" />
         <attr name="absuper_right1TextSize" format="dimension|reference" />
         <attr name="absuper_right1TextColor" format="color|reference" />
@@ -332,7 +338,8 @@
         <attr name="absuper_right1IconMarginTop" format="dimension|reference" />
         <attr name="absuper_right1IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_right2ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right2TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right2IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right2Text" format="string|dimension" />
         <attr name="absuper_right2TextSize" format="dimension|reference" />
         <attr name="absuper_right2TextColor" format="color|reference" />
@@ -359,7 +366,8 @@
         <attr name="absuper_right2IconMarginTop" format="dimension|reference" />
         <attr name="absuper_right2IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_right3ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right3TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right3IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right3Text" format="string|dimension" />
         <attr name="absuper_right3TextSize" format="dimension|reference" />
         <attr name="absuper_right3TextColor" format="color|reference" />
@@ -386,7 +394,8 @@
         <attr name="absuper_right3IconMarginTop" format="dimension|reference" />
         <attr name="absuper_right3IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_right4ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right4TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right4IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right4Text" format="string|dimension" />
         <attr name="absuper_right4TextSize" format="dimension|reference" />
         <attr name="absuper_right4TextColor" format="color|reference" />
@@ -413,7 +422,8 @@
         <attr name="absuper_right4IconMarginTop" format="dimension|reference" />
         <attr name="absuper_right4IconMarginBottom" format="dimension|reference" />
 
-        <attr name="absuper_right5ClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right5TextClickToFinish" format="boolean|reference" />
+        <attr name="absuper_right5IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right5Text" format="string|dimension" />
         <attr name="absuper_right5TextSize" format="dimension|reference" />
         <attr name="absuper_right5TextColor" format="color|reference" />

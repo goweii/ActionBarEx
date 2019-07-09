@@ -33,6 +33,8 @@ public final class ActionBarSuper extends ActionBarEx {
     private int[] iconPadding;
     private int[] iconMargin;
 
+    private boolean[] leftTextClickToFinish;
+    private boolean[] leftIconClickToFinish;
     private int[] leftPadding;
     private String[] leftTexts;
     private int leftTextColor;
@@ -51,6 +53,8 @@ public final class ActionBarSuper extends ActionBarEx {
     private int[] leftIconMargin;
     private int[][] leftIconMargins;
 
+    private boolean[] rightTextClickToFinish;
+    private boolean[] rightIconClickToFinish;
     private int[] rightPadding;
     private String[] rightTexts;
     private int rightTextColor;
@@ -117,6 +121,8 @@ public final class ActionBarSuper extends ActionBarEx {
         leftIconPadding = new int[4];
         leftIconMargin = new int[4];
 
+        leftTextClickToFinish = new boolean[5];
+        leftIconClickToFinish = new boolean[5];
         leftTexts = new String[5];
         leftTextColors = new int[5];
         leftTextSizes = new float[5];
@@ -134,6 +140,8 @@ public final class ActionBarSuper extends ActionBarEx {
         rightIconPadding = new int[4];
         rightIconMargin = new int[4];
 
+        rightTextClickToFinish = new boolean[5];
+        rightIconClickToFinish = new boolean[5];
         rightTexts = new String[5];
         rightTextColors = new int[5];
         rightTextSizes = new float[5];
@@ -204,6 +212,8 @@ public final class ActionBarSuper extends ActionBarEx {
         leftIconMargin[2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_leftIconMarginRight, leftIconMarginTemp >= 0 ? leftIconMarginTemp : iconMargin[2]);
         leftIconMargin[3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_leftIconMarginBottom, leftIconMarginTemp >= 0 ? leftIconMarginTemp : iconMargin[3]);
 
+        leftTextClickToFinish[0] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left1TextClickToFinish, false);
+        leftIconClickToFinish[0] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left1IconClickToFinish, false);
         leftTexts[0] = typedArray.getString(R.styleable.ActionBarSuper_absuper_left1Text);
         leftTextColors[0] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_left1TextColor, leftTextColor);
         leftTextSizes[0] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left1TextSize, leftTextSize);
@@ -230,6 +240,8 @@ public final class ActionBarSuper extends ActionBarEx {
         leftIconMargins[0][2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left1IconMarginRight, left1IconMarginTemp >= 0 ? left1IconMarginTemp : leftIconMargin[2]);
         leftIconMargins[0][3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left1IconMarginBottom, left1IconMarginTemp >= 0 ? left1IconMarginTemp : leftIconMargin[3]);
 
+        leftTextClickToFinish[1] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left2TextClickToFinish, false);
+        leftIconClickToFinish[1] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left2IconClickToFinish, false);
         leftTexts[1] = typedArray.getString(R.styleable.ActionBarSuper_absuper_left2Text);
         leftTextColors[1] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_left2TextColor, leftTextColor);
         leftTextSizes[1] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left2TextSize, leftTextSize);
@@ -256,6 +268,8 @@ public final class ActionBarSuper extends ActionBarEx {
         leftIconMargins[1][2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left2IconMarginRight, left2IconMarginTemp >= 0 ? left2IconMarginTemp : leftIconMargin[2]);
         leftIconMargins[1][3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left2IconMarginBottom, left2IconMarginTemp >= 0 ? left2IconMarginTemp : leftIconMargin[3]);
 
+        leftTextClickToFinish[2] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left3TextClickToFinish, false);
+        leftIconClickToFinish[2] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left3IconClickToFinish, false);
         leftTexts[2] = typedArray.getString(R.styleable.ActionBarSuper_absuper_left3Text);
         leftTextColors[2] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_left3TextColor, leftTextColor);
         leftTextSizes[2] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left3TextSize, leftTextSize);
@@ -282,6 +296,8 @@ public final class ActionBarSuper extends ActionBarEx {
         leftIconMargins[2][2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left3IconMarginRight, left3IconMarginTemp >= 0 ? left3IconMarginTemp : leftIconMargin[2]);
         leftIconMargins[2][3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left3IconMarginBottom, left3IconMarginTemp >= 0 ? left3IconMarginTemp : leftIconMargin[3]);
 
+        leftTextClickToFinish[3] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left4TextClickToFinish, false);
+        leftIconClickToFinish[3] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left4IconClickToFinish, false);
         leftTexts[3] = typedArray.getString(R.styleable.ActionBarSuper_absuper_left4Text);
         leftTextColors[3] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_left4TextColor, leftTextColor);
         leftTextSizes[3] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left4TextSize, leftTextSize);
@@ -308,6 +324,8 @@ public final class ActionBarSuper extends ActionBarEx {
         leftIconMargins[3][2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left4IconMarginRight, left4IconMarginTemp >= 0 ? left4IconMarginTemp : leftIconMargin[2]);
         leftIconMargins[3][3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left4IconMarginBottom, left4IconMarginTemp >= 0 ? left4IconMarginTemp : leftIconMargin[3]);
 
+        leftTextClickToFinish[4] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left5TextClickToFinish, false);
+        leftIconClickToFinish[4] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_left5IconClickToFinish, false);
         leftTexts[4] = typedArray.getString(R.styleable.ActionBarSuper_absuper_left5Text);
         leftTextColors[4] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_left5TextColor, leftTextColor);
         leftTextSizes[4] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_left5TextSize, leftTextSize);
@@ -364,6 +382,8 @@ public final class ActionBarSuper extends ActionBarEx {
         rightIconMargin[2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_rightIconMarginRight, rightIconMarginTemp >= 0 ? rightIconMarginTemp : iconMargin[2]);
         rightIconMargin[3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_rightIconMarginBottom, rightIconMarginTemp >= 0 ? rightIconMarginTemp : iconMargin[3]);
 
+        rightTextClickToFinish[0] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right1TextClickToFinish, false);
+        rightIconClickToFinish[0] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right1IconClickToFinish, false);
         rightTexts[0] = typedArray.getString(R.styleable.ActionBarSuper_absuper_right1Text);
         rightTextColors[0] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_right1TextColor, rightTextColor);
         rightTextSizes[0] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right1TextSize, rightTextSize);
@@ -390,6 +410,8 @@ public final class ActionBarSuper extends ActionBarEx {
         rightIconMargins[0][2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right1IconMarginRight, right1IconMarginTemp >= 0 ? right1IconMarginTemp : rightIconMargin[2]);
         rightIconMargins[0][3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right1IconMarginBottom, right1IconMarginTemp >= 0 ? right1IconMarginTemp : rightIconMargin[3]);
 
+        rightTextClickToFinish[1] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right2TextClickToFinish, false);
+        rightIconClickToFinish[1] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right2IconClickToFinish, false);
         rightTexts[1] = typedArray.getString(R.styleable.ActionBarSuper_absuper_right2Text);
         rightTextColors[1] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_right2TextColor, rightTextColor);
         rightTextSizes[1] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right2TextSize, rightTextSize);
@@ -416,6 +438,8 @@ public final class ActionBarSuper extends ActionBarEx {
         rightIconMargins[1][2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right2IconMarginRight, right2IconMarginTemp >= 0 ? right2IconMarginTemp : rightIconMargin[2]);
         rightIconMargins[1][3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right2IconMarginBottom, right2IconMarginTemp >= 0 ? right2IconMarginTemp : rightIconMargin[3]);
 
+        rightTextClickToFinish[2] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right3TextClickToFinish, false);
+        rightIconClickToFinish[2] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right3IconClickToFinish, false);
         rightTexts[2] = typedArray.getString(R.styleable.ActionBarSuper_absuper_right3Text);
         rightTextColors[2] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_right3TextColor, rightTextColor);
         rightTextSizes[2] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right3TextSize, rightTextSize);
@@ -442,6 +466,8 @@ public final class ActionBarSuper extends ActionBarEx {
         rightIconMargins[2][2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right3IconMarginRight, right3IconMarginTemp >= 0 ? right3IconMarginTemp : rightIconMargin[2]);
         rightIconMargins[2][3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right3IconMarginBottom, right3IconMarginTemp >= 0 ? right3IconMarginTemp : rightIconMargin[3]);
 
+        rightTextClickToFinish[3] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right4TextClickToFinish, false);
+        rightIconClickToFinish[3] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right4IconClickToFinish, false);
         rightTexts[3] = typedArray.getString(R.styleable.ActionBarSuper_absuper_right4Text);
         rightTextColors[3] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_right4TextColor, rightTextColor);
         rightTextSizes[3] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right4TextSize, rightTextSize);
@@ -468,6 +494,8 @@ public final class ActionBarSuper extends ActionBarEx {
         rightIconMargins[3][2] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right4IconMarginRight, right4IconMarginTemp >= 0 ? right4IconMarginTemp : rightIconMargin[2]);
         rightIconMargins[3][3] = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right4IconMarginBottom, right4IconMarginTemp >= 0 ? right4IconMarginTemp : rightIconMargin[3]);
 
+        rightTextClickToFinish[4] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right5TextClickToFinish, false);
+        rightIconClickToFinish[4] = typedArray.getBoolean(R.styleable.ActionBarSuper_absuper_right5IconClickToFinish, false);
         rightTexts[4] = typedArray.getString(R.styleable.ActionBarSuper_absuper_right5Text);
         rightTextColors[4] = typedArray.getColor(R.styleable.ActionBarSuper_absuper_right5TextColor, rightTextColor);
         rightTextSizes[4] = typedArray.getDimension(R.styleable.ActionBarSuper_absuper_right5TextSize, rightTextSize);
@@ -539,6 +567,22 @@ public final class ActionBarSuper extends ActionBarEx {
             } else {
                 leftActionViews[i].toggleToGone();
             }
+            if (leftTextClickToFinish[i]) {
+                leftActionViews[i].getTextView().setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finishActivity();
+                    }
+                });
+            }
+            if (leftIconClickToFinish[i]) {
+                leftActionViews[i].getTextView().setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finishActivity();
+                    }
+                });
+            }
         }
     }
 
@@ -566,7 +610,48 @@ public final class ActionBarSuper extends ActionBarEx {
             } else {
                 rightActionViews[i].toggleToGone();
             }
+            if (rightTextClickToFinish[i]) {
+                rightActionViews[i].getTextView().setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finishActivity();
+                    }
+                });
+            }
+            if (rightIconClickToFinish[i]) {
+                rightActionViews[i].getTextView().setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finishActivity();
+                    }
+                });
+            }
         }
     }
 
+    public TextView getTitleTextView() {
+        return titleTextView;
+    }
+
+    public ActionView[] getLeftActionViews() {
+        return leftActionViews;
+    }
+
+    public ActionView[] getRightActionViews() {
+        return rightActionViews;
+    }
+
+    public ActionView getLeftActionView(int index) {
+        if (index < 0 || index >= leftActionViews.length) {
+            return null;
+        }
+        return leftActionViews[index];
+    }
+
+    public ActionView getRightActionView(int index) {
+        if (index < 0 || index >= rightActionViews.length) {
+            return null;
+        }
+        return rightActionViews[index];
+    }
 }

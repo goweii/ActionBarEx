@@ -134,6 +134,14 @@ public final class ActionView extends FrameLayout {
         return textView;
     }
 
+    public ActionTextView getTextView() {
+        return textView;
+    }
+
+    public ActionIconView getIconView() {
+        return iconView;
+    }
+
     public void toggleToText() {
         iconView.setVisibility(GONE);
         textView.setVisibility(VISIBLE);
