@@ -169,6 +169,7 @@
                 app:absuper_right1Text="确定"
                 app:absuper_right1TextColor="@color/white"
                 app:absuper_right1TextMargin="0dp"
+                app:absuper_titleTextStyle="bold"
                 app:absuper_titleText="@string/app_name"
                 app:absuper_titleTextColor="@color/white" />
 
@@ -185,10 +186,16 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="dark"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
-                app:absuper_left1Text="侧边大标题"
-                app:absuper_left1TextColor="@color/white"
-                app:absuper_left1TextSize="17sp"
+                app:ab_titleBarHeight="58dp"
+                app:absuper_titleText="侧边大标题"
+                app:absuper_subtitleText="侧边副标题"
+                app:absuper_subtitleTextColor="#aaffffff"
+                app:absuper_subtitleMarginLeft="15dp"
+                app:absuper_titleGravity="left"
+                app:absuper_titleMarginLeft="15dp"
+                app:absuper_titleTextColor="@color/white"
+                app:absuper_right1IconPadding="20dp"
+                app:absuper_right1IconMarginRight="-5dp"
                 app:absuper_right1Icon="@mipmap/search" />
 
             <per.goweii.actionbarex.common.ActionBarSuper

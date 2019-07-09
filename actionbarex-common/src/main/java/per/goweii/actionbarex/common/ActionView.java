@@ -48,10 +48,10 @@ public final class ActionView extends FrameLayout {
 
     private void initAttrs(AttributeSet attrs) {
         final float textSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_text_size_def);
-        final int textColorDef = ContextCompat.getColor(getContext(), R.color.text_color_def);
+        final int textColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_text_color_def);
         final float textPaddingLeftDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
         final float textPaddingRightDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
-        final int iconColorDef = ContextCompat.getColor(getContext(), R.color.icon_color_def);
+        final int iconColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_icon_color_def);
         final float iconPaddingDef = getContext().getResources().getDimension(R.dimen.title_bar_icon_padding_def);
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ActionView);

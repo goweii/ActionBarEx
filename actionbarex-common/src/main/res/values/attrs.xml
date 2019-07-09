@@ -53,7 +53,7 @@
         <attr name="abs_titlePaddingHorizontal" format="dimension|reference" />
         <attr name="abs_titleMarginVertical" format="dimension|reference" />
     </declare-styleable>
-    
+
     <declare-styleable name="ActionView">
         <attr name="av_text" format="string|reference" />
         <attr name="av_textSize" format="dimension|reference" />
@@ -83,11 +83,52 @@
     </declare-styleable>
 
     <declare-styleable name="ActionBarSuper">
+        <attr name="absuper_titleGravity" format="enum">
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="absuper_titleTextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_titleText" format="string|reference" />
         <attr name="absuper_titleTextSize" format="dimension|reference" />
         <attr name="absuper_titleTextColor" format="color|reference" />
         <attr name="absuper_titleTextMaxWidth" format="dimension|reference" />
+        <attr name="absuper_titlePadding" format="dimension|reference" />
+        <attr name="absuper_titlePaddingLeft" format="dimension|reference" />
+        <attr name="absuper_titlePaddingRight" format="dimension|reference" />
+        <attr name="absuper_titlePaddingTop" format="dimension|reference" />
+        <attr name="absuper_titlePaddingBottom" format="dimension|reference" />
+        <attr name="absuper_titleMargin" format="dimension|reference" />
+        <attr name="absuper_titleMarginLeft" format="dimension|reference" />
+        <attr name="absuper_titleMarginRight" format="dimension|reference" />
+        <attr name="absuper_titleMarginTop" format="dimension|reference" />
+        <attr name="absuper_titleMarginBottom" format="dimension|reference" />
+        <attr name="absuper_subtitleTextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
+        <attr name="absuper_subtitleText" format="string|reference" />
+        <attr name="absuper_subtitleTextSize" format="dimension|reference" />
+        <attr name="absuper_subtitleTextColor" format="color|reference" />
+        <attr name="absuper_subtitleTextMaxWidth" format="dimension|reference" />
+        <attr name="absuper_subtitlePadding" format="dimension|reference" />
+        <attr name="absuper_subtitlePaddingLeft" format="dimension|reference" />
+        <attr name="absuper_subtitlePaddingRight" format="dimension|reference" />
+        <attr name="absuper_subtitlePaddingTop" format="dimension|reference" />
+        <attr name="absuper_subtitlePaddingBottom" format="dimension|reference" />
+        <attr name="absuper_subtitleMargin" format="dimension|reference" />
+        <attr name="absuper_subtitleMarginLeft" format="dimension|reference" />
+        <attr name="absuper_subtitleMarginRight" format="dimension|reference" />
+        <attr name="absuper_subtitleMarginTop" format="dimension|reference" />
+        <attr name="absuper_subtitleMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_textStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_textSize" format="dimension|reference" />
         <attr name="absuper_textColor" format="color|reference" />
         <attr name="absuper_textPadding" format="dimension|reference" />
@@ -112,6 +153,10 @@
         <attr name="absuper_iconMarginTop" format="dimension|reference" />
         <attr name="absuper_iconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_leftTextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_leftPadding" format="dimension|reference" />
         <attr name="absuper_leftPaddingLeft" format="dimension|reference" />
         <attr name="absuper_leftPaddingRight" format="dimension|reference" />
@@ -141,6 +186,10 @@
         <attr name="absuper_leftIconMarginTop" format="dimension|reference" />
         <attr name="absuper_leftIconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_rightTextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_rightPadding" format="dimension|reference" />
         <attr name="absuper_rightPaddingLeft" format="dimension|reference" />
         <attr name="absuper_rightPaddingRight" format="dimension|reference" />
@@ -169,7 +218,11 @@
         <attr name="absuper_rightIconMarginRight" format="dimension|reference" />
         <attr name="absuper_rightIconMarginTop" format="dimension|reference" />
         <attr name="absuper_rightIconMarginBottom" format="dimension|reference" />
-        
+
+        <attr name="absuper_left1TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_left1TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_left1IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left1Text" format="string|dimension" />
@@ -198,6 +251,10 @@
         <attr name="absuper_left1IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left1IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_left2TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_left2TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_left2IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left2Text" format="string|dimension" />
@@ -226,6 +283,10 @@
         <attr name="absuper_left2IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left2IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_left3TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_left3TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_left3IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left3Text" format="string|dimension" />
@@ -254,6 +315,10 @@
         <attr name="absuper_left3IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left3IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_left4TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_left4TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_left4IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left4Text" format="string|dimension" />
@@ -282,6 +347,10 @@
         <attr name="absuper_left4IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left4IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_left5TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_left5TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_left5IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_left5Text" format="string|dimension" />
@@ -310,6 +379,10 @@
         <attr name="absuper_left5IconMarginTop" format="dimension|reference" />
         <attr name="absuper_left5IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_right1TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_right1TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_right1IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right1Text" format="string|dimension" />
@@ -338,6 +411,10 @@
         <attr name="absuper_right1IconMarginTop" format="dimension|reference" />
         <attr name="absuper_right1IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_right2TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_right2TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_right2IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right2Text" format="string|dimension" />
@@ -366,6 +443,10 @@
         <attr name="absuper_right2IconMarginTop" format="dimension|reference" />
         <attr name="absuper_right2IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_right3TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_right3TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_right3IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right3Text" format="string|dimension" />
@@ -394,6 +475,10 @@
         <attr name="absuper_right3IconMarginTop" format="dimension|reference" />
         <attr name="absuper_right3IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_right4TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_right4TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_right4IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right4Text" format="string|dimension" />
@@ -422,6 +507,10 @@
         <attr name="absuper_right4IconMarginTop" format="dimension|reference" />
         <attr name="absuper_right4IconMarginBottom" format="dimension|reference" />
 
+        <attr name="absuper_right5TextStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
         <attr name="absuper_right5TextClickToFinish" format="boolean|reference" />
         <attr name="absuper_right5IconClickToFinish" format="boolean|reference" />
         <attr name="absuper_right5Text" format="string|dimension" />

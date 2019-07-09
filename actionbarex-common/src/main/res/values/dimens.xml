@@ -2,7 +2,9 @@
 <resources>
 
     <dimen name="title_bar_title_text_size_def">17sp</dimen>
+    <dimen name="title_bar_subtitle_text_size_def">13sp</dimen>
     <dimen name="title_bar_title_text_max_width_def">200dp</dimen>
+    <dimen name="title_bar_subtitle_text_max_width_def">200dp</dimen>
 
     <dimen name="title_bar_text_size_def">15sp</dimen>
     <dimen name="title_bar_text_padding_left_def">15dp</dimen>

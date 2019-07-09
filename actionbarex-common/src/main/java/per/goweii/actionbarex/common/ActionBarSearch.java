@@ -102,10 +102,10 @@ public final class ActionBarSearch extends ActionBarEx {
         float textPaddingLeftDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
         float textPaddingRightDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
         float titleTextSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_title_text_size_def);
-        int iconColorDef = ContextCompat.getColor(getContext(), R.color.icon_color_def);
-        int textColorDef = ContextCompat.getColor(getContext(), R.color.text_color_def);
-        int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.title_text_color_def);
-        int titleTextHintColorDef = ContextCompat.getColor(getContext(), R.color.title_text_hint_color_def);
+        int iconColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_icon_color_def);
+        int textColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_text_color_def);
+        int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_title_text_color_def);
+        int titleTextHintColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_title_text_hint_color_def);
 
         leftTextClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftTextClickToFinish, false);
         leftIconClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftIconClickToFinish, false);

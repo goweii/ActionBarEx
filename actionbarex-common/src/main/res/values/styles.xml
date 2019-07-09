@@ -23,7 +23,7 @@
         <item name="android:paddingLeft">@dimen/title_bar_text_padding_left_def</item>
         <item name="android:paddingRight">@dimen/title_bar_text_padding_right_def</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/text_color_def</item>
+        <item name="android:textColor">@color/title_bar_text_color_def</item>
         <item name="android:textSize">@dimen/title_bar_text_size_def</item>
     </style>
 
@@ -32,9 +32,22 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:maxWidth">@dimen/title_bar_title_text_max_width_def</item>
-        <item name="android:textColor">@color/title_text_color_def</item>
+        <item name="android:textColor">@color/title_bar_title_text_color_def</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/title_bar_title_text_size_def</item>
+    </style>
+
+    <style name="action_bar_title.title">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="action_bar_title.subtitle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:maxWidth">@dimen/title_bar_subtitle_text_max_width_def</item>
+        <item name="android:textColor">@color/title_bar_subtitle_text_color_def</item>
+        <item name="android:textSize">@dimen/title_bar_subtitle_text_size_def</item>
     </style>
 
 </resources>
