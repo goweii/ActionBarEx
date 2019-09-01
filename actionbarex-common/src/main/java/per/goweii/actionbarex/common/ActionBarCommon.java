@@ -8,7 +8,9 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ public final class ActionBarCommon extends ActionBarEx {
     private int leftIconRes;
     private int leftIconColor;
     private int leftIconPadding;
+    private int leftIconMarginLeft;
     private String rightText;
     private float rightTextSize;
     private int rightTextColor;
@@ -36,6 +39,7 @@ public final class ActionBarCommon extends ActionBarEx {
     private int rightIconRes;
     private int rightIconColor;
     private int rightIconPadding;
+    private int rightIconMarginRight;
     private String titleText;
     private float titleTextSize;
     private int titleTextColor;
@@ -113,6 +117,7 @@ public final class ActionBarCommon extends ActionBarEx {
         leftIconRes = typedArray.getResourceId(R.styleable.ActionBarCommon_abc_leftIconRes, 0);
         leftIconColor = typedArray.getColor(R.styleable.ActionBarCommon_abc_leftIconColor, iconColorDef);
         leftIconPadding = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_leftIconPadding, iconPaddingDef);
+        leftIconMarginLeft = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_leftIconMarginLeft, 0);
 
         rightText = typedArray.getString(R.styleable.ActionBarCommon_abc_rightText);
         rightTextSize = typedArray.getDimension(R.styleable.ActionBarCommon_abc_rightTextSize, textSizeDef);
@@ -122,6 +127,7 @@ public final class ActionBarCommon extends ActionBarEx {
         rightIconRes = typedArray.getResourceId(R.styleable.ActionBarCommon_abc_rightIconRes, 0);
         rightIconColor = typedArray.getColor(R.styleable.ActionBarCommon_abc_rightIconColor, iconColorDef);
         rightIconPadding = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_rightIconPadding, iconPaddingDef);
+        rightIconMarginRight = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_rightIconMarginRight, 0);
 
         titleText = typedArray.getString(R.styleable.ActionBarCommon_abc_titleText);
         titleTextSize = typedArray.getDimension(R.styleable.ActionBarCommon_abc_titleTextSize, titleTextSizeDef);
@@ -141,6 +147,9 @@ public final class ActionBarCommon extends ActionBarEx {
         rightTextView = titleBarChild.findViewById(R.id.tv_right);
         rightIconView = titleBarChild.findViewById(R.id.iv_right);
 
+        LinearLayout.LayoutParams leftIconViewParams = (LinearLayout.LayoutParams) leftIconView.getLayoutParams();
+        leftIconViewParams.leftMargin = leftIconMarginLeft;
+        leftIconView.setLayoutParams(leftIconViewParams);
         if (leftIconRes > 0) {
             leftIconView.setVisibility(VISIBLE);
             leftIconView.setPadding(leftIconPadding, leftIconPadding, leftIconPadding, leftIconPadding);
@@ -182,6 +191,9 @@ public final class ActionBarCommon extends ActionBarEx {
         titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
         titleTextView.setMaxWidth(titleTextMaxWidth);
 
+        LinearLayout.LayoutParams rightIconViewParams = (LinearLayout.LayoutParams) rightIconView.getLayoutParams();
+        rightIconViewParams.rightMargin = rightIconMarginRight;
+        rightIconView.setLayoutParams(rightIconViewParams);
         if (rightIconRes > 0) {
             rightIconView.setVisibility(VISIBLE);
             rightIconView.setPadding(rightIconPadding, rightIconPadding, rightIconPadding, rightIconPadding);

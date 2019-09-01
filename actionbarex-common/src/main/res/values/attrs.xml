@@ -12,6 +12,7 @@
         <attr name="abc_leftIconRes" format="reference" />
         <attr name="abc_leftIconColor" format="color|reference" />
         <attr name="abc_leftIconPadding" format="dimension|reference" />
+        <attr name="abc_leftIconMarginLeft" format="dimension|reference" />
         <attr name="abc_rightText" format="string|dimension" />
         <attr name="abc_rightTextSize" format="dimension|reference" />
         <attr name="abc_rightTextColor" format="color|reference" />
@@ -20,6 +21,7 @@
         <attr name="abc_rightIconRes" format="reference" />
         <attr name="abc_rightIconColor" format="color|reference" />
         <attr name="abc_rightIconPadding" format="dimension|reference" />
+        <attr name="abc_rightIconMarginRight" format="dimension|reference" />
         <attr name="abc_titleText" format="string|reference" />
         <attr name="abc_titleTextSize" format="dimension|reference" />
         <attr name="abc_titleTextColor" format="color|reference" />
