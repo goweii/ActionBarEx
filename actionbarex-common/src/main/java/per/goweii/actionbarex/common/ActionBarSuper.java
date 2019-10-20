@@ -623,7 +623,7 @@ public final class ActionBarSuper extends ActionBarEx {
 
     @Override
     protected View inflateTitleBar() {
-        titleBarChild = (FrameLayout) inflate(getContext(), R.layout.action_bar_title_bar_suoer, null);
+        titleBarChild = (FrameLayout) inflate(getContext(), R.layout.action_bar_title_bar_super, null);
         initTitleTextView();
         initLeftActionViews();
         initRightActionViews();
@@ -778,6 +778,10 @@ public final class ActionBarSuper extends ActionBarEx {
 
     public TextView getTitleTextView() {
         return titleTextView;
+    }
+
+    public TextView getSubtitleTextView() {
+        return subtitleTextView;
     }
 
     public ActionView[] getLeftActionViews() {

@@ -95,7 +95,7 @@ allprojects {
 
 从3.0.0版本开始分离了ActionBarEx和ActionBarCommon/Search，
 
-```
+```groovy
 dependencies {
 	// 完全引入
 	implementation 'com.github.goweii:ActionBarEx:3.0.0'
@@ -103,7 +103,7 @@ dependencies {
 	// 只引入ActionBarEx
 	implementation 'com.github.goweii.ActionBarEx:actionbarex:3.0.0'
 	
-	// 引入ActionBarCommon/Search，依赖于ActionBarEx
+	// 引入ActionBarCommon/Search/Super，依赖于ActionBarEx
 	implementation 'com.github.goweii.ActionBarEx:actionbarex-common:3.0.0'
 }
 ```
@@ -112,44 +112,46 @@ dependencies {
 
 ## 简单需求只需要下面2步就可以了
 
-这里用SimpleActionBar举个例子
+这里用ActionBarCommon举个例子
 
 1. 布局文件引用
 
 ```xml
-<per.goweii.actionbarex.SimpleActionBar
+<per.goweii.actionbarex.common.ActionBarCommon
     android:id="@+id/simple_action_bar_3"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:background="#ccffffff"
-    app:ab_bottom_line_color="@color/line"
-    app:ab_bottom_line_height="0dp"
-    app:ab_foreground_layer_layout="@layout/loading_bar"
-    app:ab_status_bar_color="@color/transparent"
-    app:ab_status_bar_mode="dark"
-    app:ab_title_bar_height="48dp"
-    app:simple_left_text="返回"
-    app:simple_left_text_padding_left="0dp"
-    app:simple_left_text_padding_right="0dp"
-    app:simple_left_image_color="@color/black"
-    app:simple_left_image_res="@mipmap/back"
-    app:simple_right_image_color="@color/black"
-    app:simple_right_image_res="@mipmap/search"
-    app:simple_right_text="确定"
-    app:simple_right_text_padding_left="0dp"
-    app:simple_right_text_padding_right="0dp"
-    app:simple_title_text="这个标题有点长我试试长标题什么样子"
-    app:simple_title_text_max_width="180dp" />
+    app:ab_autoImmersion="false"
+    app:ab_bottomLineColor="@color/line"
+    app:ab_bottomLineHeight="0dp"
+    app:ab_foregroundLayerLayout="@layout/loading_bar"
+    app:ab_statusBarColor="@color/transparent"
+    app:ab_statusBarMode="dark"
+    app:ab_statusBarVisible="false"
+    app:ab_titleBarHeight="48dp"
+    app:abc_leftIconColor="@color/black"
+    app:abc_leftIconRes="@mipmap/back"
+    app:abc_leftText="返回"
+	app:abc_leftTextPaddingLeft="0dp"
+	app:abc_leftTextPaddingRight="0dp"
+	app:abc_rightIconColor="@color/black"
+	app:abc_rightIconRes="@mipmap/search"
+	app:abc_rightText="确定"
+    app:abc_rightTextPaddingLeft="0dp"
+    app:abc_rightTextPaddingRight="0dp"
+    app:abc_titleText="这个标题有点长我试试长标题什么样子"
+	app:abc_titleTextMaxWidth="180dp" />
 ```
 
 2. 代码中绑定事件
 
 ```java
-simpleActionBar.setOnLeftImageClickListener(new OnLeftImageClickListener() {
+actionBarCommon.setOnLeftIconClickListener(new OnActionBarChildClickListener() {
     @Override
     public void onClick() {
-        finish();
+    	Toast.makeText(context, "onLeftIconClick", Toast.LENGTH_SHORT).show()
     }
 });
 ```
@@ -232,13 +234,13 @@ simpleActionBar.setOnLeftImageClickListener(new OnLeftImageClickListener() {
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:background="@drawable/title_bar_custom_bg"
-    app:ab_bottom_line_color="@color/line"
-    app:ab_bottom_line_height="0dp"
-    app:ab_foreground_layer_layout="@layout/loading_bar"
-    app:ab_status_bar_color="@color/transparent"
-    app:ab_status_bar_mode="dark"
-    app:ab_title_bar_height="48dp"
-    app:ab_title_bar_layout="@layout/title_bar_custom" />
+    app:ab_bottomLineColor="@color/line"
+    app:ab_bottomLineHeight="0dp"
+    app:ab_foregroundLayerLayout="@layout/loading_bar"
+    app:ab_statusBarColor="@color/transparent"
+    app:ab_statusBarMode="dark"
+    app:ab_statusBarVisible="48dp"
+    app:ab_titleBarLayout="@layout/title_bar_custom" />
 ```
 
 3. 代码中绑定事件
@@ -270,69 +272,92 @@ actionBarEx.getView(R.id.iv_back).setOnClickListener(new View.OnClickListener() 
 protected void initAttrs(AttributeSet attrs) {
     super.initAttrs(attrs);
 
-    TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.SimpleActionBar);
+    TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ActionBarCommon);
 
-    float titleTextMaxWidthDef = mContext.getResources().getDimension(R.dimen.title_bar_title_text_max_width_def);
-    float iconPaddingDef = mContext.getResources().getDimension(R.dimen.title_bar_icon_padding_def);
-    float textSizeDef = mContext.getResources().getDimension(R.dimen.title_bar_text_size_def);
-    float textPaddingLeftDef = mContext.getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
-    float textPaddingRightDef = mContext.getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
-    float titleTextSizeDef = mContext.getResources().getDimension(R.dimen.title_bar_title_text_size_def);
-    int iconColorDef = ContextCompat.getColor(mContext, R.color.icon_color_def);
-    int textColorDef = ContextCompat.getColor(mContext, R.color.text_color_def);
-    int titleTextColorDef = ContextCompat.getColor(mContext, R.color.title_text_color_def);
+    float titleTextMaxWidthDef = getContext().getResources().getDimension(R.dimen.title_bar_title_text_max_width_def);
+    float iconPaddingDef = getContext().getResources().getDimension(R.dimen.title_bar_icon_padding_def);
+    float textSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_text_size_def);
+    float textPaddingLeftDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
+    float textPaddingRightDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
+    float titleTextSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_title_text_size_def);
+    int iconColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_icon_color_def);
+    int textColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_text_color_def);
+    int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_title_text_color_def);
 
-    leftText = typedArray.getString(R.styleable.SimpleActionBar_simple_left_text);
-    leftTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_size, textSizeDef));
-    leftTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_text_color, textColorDef);
-    leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_padding_left, textPaddingLeftDef);
-    leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_text_padding_right, textPaddingRightDef);
-    leftImageRes = typedArray.getResourceId(R.styleable.SimpleActionBar_simple_left_image_res, 0);
-    leftImageColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_left_image_color, iconColorDef);
-    leftImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_left_image_padding, iconPaddingDef);
+    leftTextClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftTextClickToFinish, false);
+    leftIconClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftIconClickToFinish, false);
+    leftText = typedArray.getString(R.styleable.ActionBarCommon_abc_leftText);
+    leftTextSize = typedArray.getDimension(R.styleable.ActionBarCommon_abc_leftTextSize, textSizeDef);
+    leftTextColor = typedArray.getColor(R.styleable.ActionBarCommon_abc_leftTextColor, textColorDef);
+    leftTextPaddingLeft = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_leftTextPaddingLeft, textPaddingLeftDef);
+    leftTextPaddingRight = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_leftTextPaddingRight, textPaddingRightDef);
+    leftIconRes = typedArray.getResourceId(R.styleable.ActionBarCommon_abc_leftIconRes, 0);
+    leftIconColor = typedArray.getColor(R.styleable.ActionBarCommon_abc_leftIconColor, iconColorDef);
+    leftIconPadding = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_leftIconPadding, iconPaddingDef);
+    leftIconMarginLeft = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_leftIconMarginLeft, 0);
 
-    rightText = typedArray.getString(R.styleable.SimpleActionBar_simple_right_text);
-    rightTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_size, textSizeDef));
-    rightTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_text_color, textColorDef);
-    rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_padding_left, textPaddingLeftDef);
-    rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_text_padding_right, textPaddingRightDef);
-    rightImageRes = typedArray.getResourceId(R.styleable.SimpleActionBar_simple_right_image_res, 0);
-    rightImageColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_right_image_color, iconColorDef);
-    rightImagePadding = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_right_image_padding, iconPaddingDef);
+    rightText = typedArray.getString(R.styleable.ActionBarCommon_abc_rightText);
+    rightTextSize = typedArray.getDimension(R.styleable.ActionBarCommon_abc_rightTextSize, textSizeDef);
+    rightTextColor = typedArray.getColor(R.styleable.ActionBarCommon_abc_rightTextColor, textColorDef);
+    rightTextPaddingLeft = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_rightTextPaddingLeft, textPaddingLeftDef);
+    rightTextPaddingRight = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_rightTextPaddingRight, textPaddingRightDef);
+    rightIconRes = typedArray.getResourceId(R.styleable.ActionBarCommon_abc_rightIconRes, 0);
+    rightIconColor = typedArray.getColor(R.styleable.ActionBarCommon_abc_rightIconColor, iconColorDef);
+    rightIconPadding = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_rightIconPadding, iconPaddingDef);
+    rightIconMarginRight = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_rightIconMarginRight, 0);
 
-    titleText = typedArray.getString(R.styleable.SimpleActionBar_simple_title_text);
-    titleTextSize = mDisplayInfoUtils.px2sp(typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_size, titleTextSizeDef));
-    titleTextColor = typedArray.getColor(R.styleable.SimpleActionBar_simple_title_text_color, titleTextColorDef);
-    titleTextMaxWidth = (int) typedArray.getDimension(R.styleable.SimpleActionBar_simple_title_text_max_width, titleTextMaxWidthDef);
+    titleText = typedArray.getString(R.styleable.ActionBarCommon_abc_titleText);
+    titleTextSize = typedArray.getDimension(R.styleable.ActionBarCommon_abc_titleTextSize, titleTextSizeDef);
+    titleTextColor = typedArray.getColor(R.styleable.ActionBarCommon_abc_titleTextColor, titleTextColorDef);
+    titleTextMaxWidth = (int) typedArray.getDimension(R.styleable.ActionBarCommon_abc_titleTextMaxWidth, titleTextMaxWidthDef);
 
     typedArray.recycle();
 }
 
 @Override
 protected View inflateTitleBar() {
-    titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.title_bar_simple, null);
+    titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.action_bar_title_bar_common, null);
 
-    leftImageView = titleBarChild.findViewById(R.id.iv_left);
+    leftIconView = titleBarChild.findViewById(R.id.iv_left);
     leftTextView = titleBarChild.findViewById(R.id.tv_left);
     titleTextView = titleBarChild.findViewById(R.id.tv_title);
     rightTextView = titleBarChild.findViewById(R.id.tv_right);
-    rightImageView = titleBarChild.findViewById(R.id.iv_right);
+    rightIconView = titleBarChild.findViewById(R.id.iv_right);
 
-    if (leftImageRes > 0) {
-        leftImageView.setVisibility(VISIBLE);
-        leftImageView.setPadding(leftImagePadding, leftImagePadding, leftImagePadding, leftImagePadding);
-        leftImageView.setImageResource(leftImageRes);
-        leftImageView.setColorFilter(leftImageColor);
+    LinearLayout.LayoutParams leftIconViewParams = (LinearLayout.LayoutParams) leftIconView.getLayoutParams();
+    leftIconViewParams.leftMargin = leftIconMarginLeft;
+    leftIconView.setLayoutParams(leftIconViewParams);
+    if (leftIconRes > 0) {
+        leftIconView.setVisibility(VISIBLE);
+        leftIconView.setPadding(leftIconPadding, leftIconPadding, leftIconPadding, leftIconPadding);
+        leftIconView.setImageResource(leftIconRes);
+        leftIconView.setColorFilter(leftIconColor);
+        if (leftIconClickToFinish) {
+            leftIconView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finishActivity();
+                }
+            });
+        }
     } else {
-        leftImageView.setVisibility(GONE);
+        leftIconView.setVisibility(GONE);
     }
 
     if (!TextUtils.isEmpty(leftText)) {
         leftTextView.setVisibility(VISIBLE);
         leftTextView.setText(leftText);
         leftTextView.setTextColor(leftTextColor);
-        leftTextView.setTextSize(leftTextSize);
+        leftTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftTextSize);
         leftTextView.setPadding(leftTextPaddingLeft, 0, leftTextPaddingRight, 0);
+        if (leftTextClickToFinish) {
+            leftTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finishActivity();
+                }
+            });
+        }
     } else {
         leftTextView.setVisibility(GONE);
     }
@@ -340,23 +365,26 @@ protected View inflateTitleBar() {
     titleTextView.setVisibility(VISIBLE);
     titleTextView.setText(titleText);
     titleTextView.setTextColor(titleTextColor);
-    titleTextView.setTextSize(titleTextSize);
+    titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSize);
     titleTextView.setMaxWidth(titleTextMaxWidth);
 
-    if (rightImageRes > 0) {
-        rightImageView.setVisibility(VISIBLE);
-        leftImageView.setPadding(rightImagePadding, rightImagePadding, rightImagePadding, rightImagePadding);
-        rightImageView.setImageResource(rightImageRes);
-        rightImageView.setColorFilter(rightImageColor);
+    LinearLayout.LayoutParams rightIconViewParams = (LinearLayout.LayoutParams) rightIconView.getLayoutParams();
+    rightIconViewParams.rightMargin = rightIconMarginRight;
+    rightIconView.setLayoutParams(rightIconViewParams);
+    if (rightIconRes > 0) {
+        rightIconView.setVisibility(VISIBLE);
+        rightIconView.setPadding(rightIconPadding, rightIconPadding, rightIconPadding, rightIconPadding);
+        rightIconView.setImageResource(rightIconRes);
+        rightIconView.setColorFilter(rightIconColor);
     } else {
-        rightImageView.setVisibility(GONE);
+        rightIconView.setVisibility(GONE);
     }
 
     if (!TextUtils.isEmpty(rightText)) {
         rightTextView.setVisibility(VISIBLE);
         rightTextView.setText(rightText);
         rightTextView.setTextColor(rightTextColor);
-        rightTextView.setTextSize(rightTextSize);
+        rightTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightTextSize);
         rightTextView.setPadding(rightTextPaddingLeft, 0, rightTextPaddingRight, 0);
     } else {
         rightTextView.setVisibility(GONE);
@@ -365,7 +393,7 @@ protected View inflateTitleBar() {
 }
 ```
 
-好吧我承认，我只是复制了下SimpleActionBar的实现代码，不过流程就是这么个流程，还是很简单的。
+好吧我承认，我只是复制了下ActionBarCommon的实现代码，不过流程就是这么个流程，还是很简单的。
 
 
 
@@ -376,7 +404,7 @@ protected View inflateTitleBar() {
 看下前面自定义导航栏布局中是不是有这么一句
 
 ```xml
-app:ab_foreground_layer_layout="@layout/loading_bar"
+app:ab_foregroundLayerLayout="@layout/loading_bar"
 ```
 
 那这个布局长什么样子呢？
@@ -436,29 +464,38 @@ actionBarEx.getForegroundLayer().setVisibility(View.GONE);
 - **initAttrs(AttributeSet attrs)**：获取布局属性
 - **inflateTitleBar()**：初始化标题栏布局
 
-#### SimpleActionBar
+#### ActionBarCommon
 
-- **getLeftImageView()**：获取左侧图标视图
+- **getLeftIconView()**：获取左侧图标视图
 - **getLeftTextView()**：获取左侧文本视图
 - **getTitleTextView()**：获取中间标题视图
 - **getRightTextView()**：获取右侧文本视图
-- **getRightImageView()**：获取右侧图标视图
-- **setOnLeftImageClickListener(final OnLeftImageClickListener onLeftIconClickListener)**：左侧图标点击事件
-- **setOnLeftTextClickListener(final OnLeftTextClickListener onLeftTextClickListener)**：左侧文本点击事件
-- **setOnRightTextClickListener(final OnRightTextClickListener onRightTextClickListener)**：右侧文本点击事件
-- **setOnRightImageClickListener(final OnRightImageClickListener onRightIconClickListener)**：右侧图标点击事件
+- **getRighIconView()**：获取右侧图标视图
+- **setOnLeftIconClickListener(final OnActionBarChildClickListener onLeftIconClickListener)**：左侧图标点击事件
+- **setOnLeftTextClickListener(final OnActionBarChildClickListener onLeftTextClickListener)**：左侧文本点击事件
+- **setOnRightTextClickListener(final OnActionBarChildClickListener onRightTextClickListener)**：右侧文本点击事件
+- **setOnRightIconClickListener(final OnActionBarChildClickListener onRightIconClickListener)**：右侧图标点击事件
 
-#### SearchActionBar
+#### ActionBarSearch
 
-- **getLeftImageView()**：获取左侧图标视图
+- **getLeftIconView()**：获取左侧图标视图
 - **getLeftTextView()**：获取左侧文本视图
 - **getEditTextView()**：获取中间输入框视图
 - **getRightTextView()**：获取右侧文本视图
-- **getRightImageView()**：获取右侧图标视图
-- **setOnLeftImageClickListener(final OnLeftImageClickListener onLeftIconClickListener)**：左侧图标点击事件
-- **setOnLeftTextClickListener(final OnLeftTextClickListener onLeftTextClickListener)**：左侧文本点击事件
-- **setOnRightTextClickListener(final OnRightTextClickListener onRightTextClickListener)**：右侧文本点击事件
-- **setOnRightImageClickListener(final OnRightImageClickListener onRightIconClickListener)**：右侧图标点击事件
+- **getRightIconView()**：获取右侧图标视图
+- **setOnLeftIconClickListener(final OnActionBarChildClickListener onLeftIconClickListener)**：左侧图标点击事件
+- **setOnLeftTextClickListener(final OnActionBarChildClickListener onLeftTextClickListener)**：左侧文本点击事件
+- **setOnRightTextClickListener(final OnActionBarChildClickListener onRightTextClickListener)**：右侧文本点击事件
+- **setOnRightIconClickListener(final OnActionBarChildClickListener onRightIconClickListener)**：右侧图标点击事件
+
+#### ActionBarSuper
+
+- **getTitleTextView()**：获取主标题
+- **getSubtitleTextView()**：获取副标题
+- **getLeftActionViews()**：获取左侧按钮集合
+- **getRightActionViews()**：获取右侧按钮集合
+- **getLeftActionView(int index)**：获取指定位置的左侧按钮(由0开始，0为XML中序号为1的)
+- **getRightActionView(int index)**：获取指定位置的右侧按钮(由0开始，0为XML中序号为1的)
 
 
 
@@ -468,82 +505,373 @@ actionBarEx.getForegroundLayer().setVisibility(View.GONE);
 
 ```xml
 <!--是否开启自动沉浸状态栏，默认为true-->
-<attr name="ab_auto_immersion" format="boolean" />
+<attr name="ab_autoImmersion" format="boolean" />
 <!--背景层布局，优先级高于背景层为图片-->
-<attr name="ab_background_layer_layout" format="reference" />
+<attr name="ab_backgroundLayerLayout" format="reference" />
 <!--背景层为图片-->
-<attr name="ab_background_layer_image_res" format="reference" />
+<attr name="ab_backgroundLayerImageRes" format="reference" />
 <!--是否显示状态栏，默认为true-->
-<attr name="ab_status_bar_visible" format="boolean" />
+<attr name="ab_statusBarVisible" format="boolean" />
 <!--状态栏颜色，默认透明-->
-<attr name="ab_status_bar_color" format="color|reference" />
+<attr name="ab_statusBarColor" format="color|reference" />
 <!--状态栏图标颜色模式，默认light-->
-<attr name="ab_status_bar_mode" format="enum">
+<attr name="ab_statusBarMode" format="enum">
     <enum name="light" value="0" />
     <enum name="dark" value="1" />
 </attr>
+<!--点击关闭Activity控件ID-->
+<attr name="ab_clickToFinish" format="reference" />
 <!--主体层布局-->
-<attr name="ab_title_bar_layout" format="reference" />
+<attr name="ab_titleBarLayout" format="reference" />
 <!--主体层高度，默认为48dp-->
-<attr name="ab_title_bar_height" format="dimension|reference" />
+<attr name="ab_titleBarHeight" format="dimension|reference" />
 <!--底部分割线高度，默认为0dp-->
-<attr name="ab_bottom_line_height" format="dimension|reference" />
+<attr name="ab_bottomLineHeight" format="dimension|reference" />
 <!--底部分割线颜色，默认透明-->
-<attr name="ab_bottom_line_color" format="color|reference" />
+<attr name="ab_bottomLineColor" format="color|reference" />
+<!--底部分割线资源引用，默认透明-->
+<attr name="ab_bottomLineResId" format="reference" />
+<!--底部分割线位于ActionBar外部，可实现投影效果-->
+<attr name="ab_bottomLineOutside" format="boolean|reference" />
 <!--前景层布局-->
-<attr name="ab_foreground_layer_layout" format="reference" />
+<attr name="ab_foregroundLayerLayout" format="reference" />
 ```
 
-#### SimpleActionBar
+#### ActionBarCommon
 
 ```xml
 <!--这些属性大家应该看名字就能理解是什么意思了，好吧是因为我懒-->
-<attr name="simple_left_text" format="string|dimension" />
-<attr name="simple_left_text_size" format="dimension|reference" />
-<attr name="simple_left_text_color" format="color|reference" />
-<attr name="simple_left_text_padding_left" format="dimension|reference" />
-<attr name="simple_left_text_padding_right" format="dimension|reference" />
-<attr name="simple_left_image_res" format="reference" />
-<attr name="simple_left_image_color" format="color|reference" />
-<attr name="simple_left_image_padding" format="dimension|reference" />
-<attr name="simple_right_text" format="string|dimension" />
-<attr name="simple_right_text_size" format="dimension|reference" />
-<attr name="simple_right_text_color" format="color|reference" />
-<attr name="simple_right_text_padding_left" format="dimension|reference" />
-<attr name="simple_right_text_padding_right" format="dimension|reference" />
-<attr name="simple_right_image_res" format="reference" />
-<attr name="simple_right_image_color" format="color|reference" />
-<attr name="simple_right_image_padding" format="dimension|reference" />
-<attr name="simple_title_text" format="string|reference" />
-<attr name="simple_title_text_size" format="dimension|reference" />
-<attr name="simple_title_text_color" format="color|reference" />
-<attr name="simple_title_text_max_width" format="dimension|reference" />
+<attr name="abc_leftTextClickToFinish" format="boolean|reference" />
+<attr name="abc_leftIconClickToFinish" format="boolean|reference" />
+<attr name="abc_leftText" format="string|dimension" />
+<attr name="abc_leftTextSize" format="dimension|reference" />
+<attr name="abc_leftTextColor" format="color|reference" />
+<attr name="abc_leftTextPaddingLeft" format="dimension|reference" />
+<attr name="abc_leftTextPaddingRight" format="dimension|reference" />
+<attr name="abc_leftIconRes" format="reference" />
+<attr name="abc_leftIconColor" format="color|reference" />
+<attr name="abc_leftIconPadding" format="dimension|reference" />
+<attr name="abc_leftIconMarginLeft" format="dimension|reference" />
+<attr name="abc_rightText" format="string|dimension" />
+<attr name="abc_rightTextSize" format="dimension|reference" />
+<attr name="abc_rightTextColor" format="color|reference" />
+<attr name="abc_rightTextPaddingLeft" format="dimension|reference" />
+<attr name="abc_rightTextPaddingRight" format="dimension|reference" />
+<attr name="abc_rightIconRes" format="reference" />
+<attr name="abc_rightIconColor" format="color|reference" />
+<attr name="abc_rightIconPadding" format="dimension|reference" />
+<attr name="abc_rightIconMarginRight" format="dimension|reference" />
+<attr name="abc_titleText" format="string|reference" />
+<attr name="abc_titleTextSize" format="dimension|reference" />
+<attr name="abc_titleTextColor" format="color|reference" />
+<attr name="abc_titleTextMaxWidth" format="dimension|reference" />
 ```
 
-#### SearchActionBar
+#### ActionBarSearch
 
 ```xml
 <!--这些属性大家应该看名字就能理解是什么意思了，好吧是因为我懒-->
-<attr name="search_left_text" format="string|dimension" />
-<attr name="search_left_text_size" format="dimension|reference" />
-<attr name="search_left_text_color" format="color|reference" />
-<attr name="search_left_text_padding_left" format="dimension|reference" />
-<attr name="search_left_text_padding_right" format="dimension|reference" />
-<attr name="search_left_image_res" format="reference" />
-<attr name="search_left_image_color" format="color|reference" />
-<attr name="search_left_image_padding" format="dimension|reference" />
-<attr name="search_right_text" format="string|dimension" />
-<attr name="search_right_text_size" format="dimension|reference" />
-<attr name="search_right_text_color" format="color|reference" />
-<attr name="search_right_text_padding_left" format="dimension|reference" />
-<attr name="search_right_text_padding_right" format="dimension|reference" />
-<attr name="search_right_image_res" format="reference" />
-<attr name="search_right_image_color" format="color|reference" />
-<attr name="search_right_image_padding" format="dimension|reference" />
-<attr name="search_title_hint_text" format="string|reference" />
-<attr name="search_title_text_size" format="dimension|reference" />
-<attr name="search_title_text_color" format="color|reference" />
-<attr name="search_title_hint_color" format="color|reference" />
+<attr name="abs_leftTextClickToFinish" format="boolean|reference" />
+<attr name="abs_leftIconClickToFinish" format="boolean|reference" />
+<attr name="abs_leftText" format="string|dimension" />
+<attr name="abs_leftTextSize" format="dimension|reference" />
+<attr name="abs_leftTextColor" format="color|reference" />
+<attr name="abs_leftTextPaddingLeft" format="dimension|reference" />
+<attr name="abs_leftTextPaddingRight" format="dimension|reference" />
+<attr name="abs_leftIconRes" format="reference" />
+<attr name="abs_leftIconColor" format="color|reference" />
+<attr name="abs_leftIconPadding" format="dimension|reference" />
+<attr name="abs_rightText" format="string|dimension" />
+<attr name="abs_rightTextSize" format="dimension|reference" />
+<attr name="abs_rightTextColor" format="color|reference" />
+<attr name="abs_rightTextPaddingLeft" format="dimension|reference" />
+<attr name="abs_rightTextPaddingRight" format="dimension|reference" />
+<attr name="abs_rightIconRes" format="reference" />
+<attr name="abs_rightIconColor" format="color|reference" />
+<attr name="abs_rightIconPadding" format="dimension|reference" />
+<attr name="abs_titleBgRes" format="reference" />
+<attr name="abs_titleHintText" format="string|reference" />
+<attr name="abs_titleTextSize" format="dimension|reference" />
+<attr name="abs_titleTextColor" format="color|reference" />
+<attr name="abs_titleHintColor" format="color|reference" />
+<attr name="abs_titlePaddingHorizontal" format="dimension|reference" />
+<attr name="abs_titleMarginVertical" format="dimension|reference" />
+```
+
+#### ActionBarSuper
+
+针对下面的属性有几点要强调下
+
+- 不带有left/right的属性会同时应用到左右两侧
+- 带有left/right的属性会覆盖不带有left/right的属性
+- 不带有数字序号的属性会同时应用到该侧的全部序号
+- 带有数字序号的属性会覆盖不不带有数字序号的属性
+
+```xml
+<!--这些属性大家应该看名字就能理解是什么意思了，好吧是因为我懒-->
+<attr name="absuper_titleGravity" format="enum">
+    <enum name="center" value="0" />
+    <enum name="left" value="1" />
+    <enum name="right" value="2" />
+</attr>
+<attr name="absuper_titleTextStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_titleText" format="string|reference" />
+<attr name="absuper_titleTextSize" format="dimension|reference" />
+<attr name="absuper_titleTextColor" format="color|reference" />
+<attr name="absuper_titleTextMaxWidth" format="dimension|reference" />
+<attr name="absuper_titlePadding" format="dimension|reference" />
+<attr name="absuper_titlePaddingLeft" format="dimension|reference" />
+<attr name="absuper_titlePaddingRight" format="dimension|reference" />
+<attr name="absuper_titlePaddingTop" format="dimension|reference" />
+<attr name="absuper_titlePaddingBottom" format="dimension|reference" />
+<attr name="absuper_titleMargin" format="dimension|reference" />
+<attr name="absuper_titleMarginLeft" format="dimension|reference" />
+<attr name="absuper_titleMarginRight" format="dimension|reference" />
+<attr name="absuper_titleMarginTop" format="dimension|reference" />
+<attr name="absuper_titleMarginBottom" format="dimension|reference" />
+<attr name="absuper_subtitleTextStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_subtitleText" format="string|reference" />
+<attr name="absuper_subtitleTextSize" format="dimension|reference" />
+<attr name="absuper_subtitleTextColor" format="color|reference" />
+<attr name="absuper_subtitleTextMaxWidth" format="dimension|reference" />
+<attr name="absuper_subtitlePadding" format="dimension|reference" />
+<attr name="absuper_subtitlePaddingLeft" format="dimension|reference" />
+<attr name="absuper_subtitlePaddingRight" format="dimension|reference" />
+<attr name="absuper_subtitlePaddingTop" format="dimension|reference" />
+<attr name="absuper_subtitlePaddingBottom" format="dimension|reference" />
+<attr name="absuper_subtitleMargin" format="dimension|reference" />
+<attr name="absuper_subtitleMarginLeft" format="dimension|reference" />
+<attr name="absuper_subtitleMarginRight" format="dimension|reference" />
+<attr name="absuper_subtitleMarginTop" format="dimension|reference" />
+<attr name="absuper_subtitleMarginBottom" format="dimension|reference" />
+
+<attr name="absuper_textStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_textSize" format="dimension|reference" />
+<attr name="absuper_textColor" format="color|reference" />
+<attr name="absuper_textPadding" format="dimension|reference" />
+<attr name="absuper_textPaddingLeft" format="dimension|reference" />
+<attr name="absuper_textPaddingRight" format="dimension|reference" />
+<attr name="absuper_textPaddingTop" format="dimension|reference" />
+<attr name="absuper_textPaddingBottom" format="dimension|reference" />
+<attr name="absuper_textMargin" format="dimension|reference" />
+<attr name="absuper_textMarginLeft" format="dimension|reference" />
+<attr name="absuper_textMarginRight" format="dimension|reference" />
+<attr name="absuper_textMarginTop" format="dimension|reference" />
+<attr name="absuper_textMarginBottom" format="dimension|reference" />
+<attr name="absuper_iconColor" format="color|reference" />
+<attr name="absuper_iconPadding" format="dimension|reference" />
+<attr name="absuper_iconPaddingLeft" format="dimension|reference" />
+<attr name="absuper_iconPaddingRight" format="dimension|reference" />
+<attr name="absuper_iconPaddingTop" format="dimension|reference" />
+<attr name="absuper_iconPaddingBottom" format="dimension|reference" />
+<attr name="absuper_iconMargin" format="dimension|reference" />
+<attr name="absuper_iconMarginLeft" format="dimension|reference" />
+<attr name="absuper_iconMarginRight" format="dimension|reference" />
+<attr name="absuper_iconMarginTop" format="dimension|reference" />
+<attr name="absuper_iconMarginBottom" format="dimension|reference" />
+
+<attr name="absuper_leftTextStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_leftPadding" format="dimension|reference" />
+<attr name="absuper_leftPaddingLeft" format="dimension|reference" />
+<attr name="absuper_leftPaddingRight" format="dimension|reference" />
+<attr name="absuper_leftPaddingTop" format="dimension|reference" />
+<attr name="absuper_leftPaddingBottom" format="dimension|reference" />
+<attr name="absuper_leftTextSize" format="dimension|reference" />
+<attr name="absuper_leftTextColor" format="color|reference" />
+<attr name="absuper_leftTextPadding" format="dimension|reference" />
+<attr name="absuper_leftTextPaddingLeft" format="dimension|reference" />
+<attr name="absuper_leftTextPaddingRight" format="dimension|reference" />
+<attr name="absuper_leftTextPaddingTop" format="dimension|reference" />
+<attr name="absuper_leftTextPaddingBottom" format="dimension|reference" />
+<attr name="absuper_leftTextMargin" format="dimension|reference" />
+<attr name="absuper_leftTextMarginLeft" format="dimension|reference" />
+<attr name="absuper_leftTextMarginRight" format="dimension|reference" />
+<attr name="absuper_leftTextMarginTop" format="dimension|reference" />
+<attr name="absuper_leftTextMarginBottom" format="dimension|reference" />
+<attr name="absuper_leftIconColor" format="color|reference" />
+<attr name="absuper_leftIconPadding" format="dimension|reference" />
+<attr name="absuper_leftIconPaddingLeft" format="dimension|reference" />
+<attr name="absuper_leftIconPaddingRight" format="dimension|reference" />
+<attr name="absuper_leftIconPaddingTop" format="dimension|reference" />
+<attr name="absuper_leftIconPaddingBottom" format="dimension|reference" />
+<attr name="absuper_leftIconMargin" format="dimension|reference" />
+<attr name="absuper_leftIconMarginLeft" format="dimension|reference" />
+<attr name="absuper_leftIconMarginRight" format="dimension|reference" />
+<attr name="absuper_leftIconMarginTop" format="dimension|reference" />
+<attr name="absuper_leftIconMarginBottom" format="dimension|reference" />
+
+<attr name="absuper_rightTextStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_rightPadding" format="dimension|reference" />
+<attr name="absuper_rightPaddingLeft" format="dimension|reference" />
+<attr name="absuper_rightPaddingRight" format="dimension|reference" />
+<attr name="absuper_rightPaddingTop" format="dimension|reference" />
+<attr name="absuper_rightPaddingBottom" format="dimension|reference" />
+<attr name="absuper_rightTextSize" format="dimension|reference" />
+<attr name="absuper_rightTextColor" format="color|reference" />
+<attr name="absuper_rightTextPadding" format="dimension|reference" />
+<attr name="absuper_rightTextPaddingLeft" format="dimension|reference" />
+<attr name="absuper_rightTextPaddingRight" format="dimension|reference" />
+<attr name="absuper_rightTextPaddingTop" format="dimension|reference" />
+<attr name="absuper_rightTextPaddingBottom" format="dimension|reference" />
+<attr name="absuper_rightTextMargin" format="dimension|reference" />
+<attr name="absuper_rightTextMarginLeft" format="dimension|reference" />
+<attr name="absuper_rightTextMarginRight" format="dimension|reference" />
+<attr name="absuper_rightTextMarginTop" format="dimension|reference" />
+<attr name="absuper_rightTextMarginBottom" format="dimension|reference" />
+<attr name="absuper_rightIconColor" format="color|reference" />
+<attr name="absuper_rightIconPadding" format="dimension|reference" />
+<attr name="absuper_rightIconPaddingLeft" format="dimension|reference" />
+<attr name="absuper_rightIconPaddingRight" format="dimension|reference" />
+<attr name="absuper_rightIconPaddingTop" format="dimension|reference" />
+<attr name="absuper_rightIconPaddingBottom" format="dimension|reference" />
+<attr name="absuper_rightIconMargin" format="dimension|reference" />
+<attr name="absuper_rightIconMarginLeft" format="dimension|reference" />
+<attr name="absuper_rightIconMarginRight" format="dimension|reference" />
+<attr name="absuper_rightIconMarginTop" format="dimension|reference" />
+<attr name="absuper_rightIconMarginBottom" format="dimension|reference" />
+
+<attr name="absuper_left1TextStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_left1TextClickToFinish" format="boolean|reference" />
+<attr name="absuper_left1IconClickToFinish" format="boolean|reference" />
+<attr name="absuper_left1Text" format="string|dimension" />
+<attr name="absuper_left1TextSize" format="dimension|reference" />
+<attr name="absuper_left1TextColor" format="color|reference" />
+<attr name="absuper_left1TextPadding" format="dimension|reference" />
+<attr name="absuper_left1TextPaddingLeft" format="dimension|reference" />
+<attr name="absuper_left1TextPaddingRight" format="dimension|reference" />
+<attr name="absuper_left1TextPaddingTop" format="dimension|reference" />
+<attr name="absuper_left1TextPaddingBottom" format="dimension|reference" />
+<attr name="absuper_left1TextMargin" format="dimension|reference" />
+<attr name="absuper_left1TextMarginLeft" format="dimension|reference" />
+<attr name="absuper_left1TextMarginRight" format="dimension|reference" />
+<attr name="absuper_left1TextMarginTop" format="dimension|reference" />
+<attr name="absuper_left1TextMarginBottom" format="dimension|reference" />
+<attr name="absuper_left1Icon" format="reference" />
+<attr name="absuper_left1IconColor" format="color|reference" />
+<attr name="absuper_left1IconPadding" format="dimension|reference" />
+<attr name="absuper_left1IconPaddingLeft" format="dimension|reference" />
+<attr name="absuper_left1IconPaddingRight" format="dimension|reference" />
+<attr name="absuper_left1IconPaddingTop" format="dimension|reference" />
+<attr name="absuper_left1IconPaddingBottom" format="dimension|reference" />
+<attr name="absuper_left1IconMargin" format="dimension|reference" />
+<attr name="absuper_left1IconMarginLeft" format="dimension|reference" />
+<attr name="absuper_left1IconMarginRight" format="dimension|reference" />
+<attr name="absuper_left1IconMarginTop" format="dimension|reference" />
+<attr name="absuper_left1IconMarginBottom" format="dimension|reference" />
+<!--省略左侧2~4的配置-->
+<attr name="absuper_left5TextStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_left5TextClickToFinish" format="boolean|reference" />
+<attr name="absuper_left5IconClickToFinish" format="boolean|reference" />
+<attr name="absuper_left5Text" format="string|dimension" />
+<attr name="absuper_left5TextSize" format="dimension|reference" />
+<attr name="absuper_left5TextColor" format="color|reference" />
+<attr name="absuper_left5TextPadding" format="dimension|reference" />
+<attr name="absuper_left5TextPaddingLeft" format="dimension|reference" />
+<attr name="absuper_left5TextPaddingRight" format="dimension|reference" />
+<attr name="absuper_left5TextPaddingTop" format="dimension|reference" />
+<attr name="absuper_left5TextPaddingBottom" format="dimension|reference" />
+<attr name="absuper_left5TextMargin" format="dimension|reference" />
+<attr name="absuper_left5TextMarginLeft" format="dimension|reference" />
+<attr name="absuper_left5TextMarginRight" format="dimension|reference" />
+<attr name="absuper_left5TextMarginTop" format="dimension|reference" />
+<attr name="absuper_left5TextMarginBottom" format="dimension|reference" />
+<attr name="absuper_left5Icon" format="reference" />
+<attr name="absuper_left5IconColor" format="color|reference" />
+<attr name="absuper_left5IconPadding" format="dimension|reference" />
+<attr name="absuper_left5IconPaddingLeft" format="dimension|reference" />
+<attr name="absuper_left5IconPaddingRight" format="dimension|reference" />
+<attr name="absuper_left5IconPaddingTop" format="dimension|reference" />
+<attr name="absuper_left5IconPaddingBottom" format="dimension|reference" />
+<attr name="absuper_left5IconMargin" format="dimension|reference" />
+<attr name="absuper_left5IconMarginLeft" format="dimension|reference" />
+<attr name="absuper_left5IconMarginRight" format="dimension|reference" />
+<attr name="absuper_left5IconMarginTop" format="dimension|reference" />
+<attr name="absuper_left5IconMarginBottom" format="dimension|reference" />
+
+<attr name="absuper_right1TextStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_right1TextClickToFinish" format="boolean|reference" />
+<attr name="absuper_right1IconClickToFinish" format="boolean|reference" />
+<attr name="absuper_right1Text" format="string|dimension" />
+<attr name="absuper_right1TextSize" format="dimension|reference" />
+<attr name="absuper_right1TextColor" format="color|reference" />
+<attr name="absuper_right1TextPadding" format="dimension|reference" />
+<attr name="absuper_right1TextPaddingLeft" format="dimension|reference" />
+<attr name="absuper_right1TextPaddingRight" format="dimension|reference" />
+<attr name="absuper_right1TextPaddingTop" format="dimension|reference" />
+<attr name="absuper_right1TextPaddingBottom" format="dimension|reference" />
+<attr name="absuper_right1TextMargin" format="dimension|reference" />
+<attr name="absuper_right1TextMarginLeft" format="dimension|reference" />
+<attr name="absuper_right1TextMarginRight" format="dimension|reference" />
+<attr name="absuper_right1TextMarginTop" format="dimension|reference" />
+<attr name="absuper_right1TextMarginBottom" format="dimension|reference" />
+<attr name="absuper_right1Icon" format="reference" />
+<attr name="absuper_right1IconColor" format="color|reference" />
+<attr name="absuper_right1IconPadding" format="dimension|reference" />
+<attr name="absuper_right1IconPaddingLeft" format="dimension|reference" />
+<attr name="absuper_right1IconPaddingRight" format="dimension|reference" />
+<attr name="absuper_right1IconPaddingTop" format="dimension|reference" />
+<attr name="absuper_right1IconPaddingBottom" format="dimension|reference" />
+<attr name="absuper_right1IconMargin" format="dimension|reference" />
+<attr name="absuper_right1IconMarginLeft" format="dimension|reference" />
+<attr name="absuper_right1IconMarginRight" format="dimension|reference" />
+<attr name="absuper_right1IconMarginTop" format="dimension|reference" />
+<attr name="absuper_right1IconMarginBottom" format="dimension|reference" />
+<!--省略右侧2~4的配置-->
+<attr name="absuper_right5TextStyle" format="enum">
+    <enum name="normal" value="0" />
+    <enum name="bold" value="1" />
+</attr>
+<attr name="absuper_right5TextClickToFinish" format="boolean|reference" />
+<attr name="absuper_right5IconClickToFinish" format="boolean|reference" />
+<attr name="absuper_right5Text" format="string|dimension" />
+<attr name="absuper_right5TextSize" format="dimension|reference" />
+<attr name="absuper_right5TextColor" format="color|reference" />
+<attr name="absuper_right5TextPadding" format="dimension|reference" />
+<attr name="absuper_right5TextPaddingLeft" format="dimension|reference" />
+<attr name="absuper_right5TextPaddingRight" format="dimension|reference" />
+<attr name="absuper_right5TextPaddingTop" format="dimension|reference" />
+<attr name="absuper_right5TextPaddingBottom" format="dimension|reference" />
+<attr name="absuper_right5TextMargin" format="dimension|reference" />
+<attr name="absuper_right5TextMarginLeft" format="dimension|reference" />
+<attr name="absuper_right5TextMarginRight" format="dimension|reference" />
+<attr name="absuper_right5TextMarginTop" format="dimension|reference" />
+<attr name="absuper_right5TextMarginBottom" format="dimension|reference" />
+<attr name="absuper_right5Icon" format="reference" />
+<attr name="absuper_right5IconColor" format="color|reference" />
+<attr name="absuper_right5IconPadding" format="dimension|reference" />
+<attr name="absuper_right5IconPaddingLeft" format="dimension|reference" />
+<attr name="absuper_right5IconPaddingRight" format="dimension|reference" />
+<attr name="absuper_right5IconPaddingTop" format="dimension|reference" />
+<attr name="absuper_right5IconPaddingBottom" format="dimension|reference" />
+<attr name="absuper_right5IconMargin" format="dimension|reference" />
+<attr name="absuper_right5IconMarginLeft" format="dimension|reference" />
+<attr name="absuper_right5IconMarginRight" format="dimension|reference" />
+<attr name="absuper_right5IconMarginTop" format="dimension|reference" />
+<attr name="absuper_right5IconMarginBottom" format="dimension|reference" />
 ```
 
 
