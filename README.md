@@ -67,8 +67,13 @@
 要说使用方式，还得再明确几个类
 
 - ActionBarEx 这个就是上面说的封装好的分3个层级的基类
-- SimpleActionBar 这个继承自ActionBarEx，可在导航栏显示【图标-文字-标题文字-文字-图标】这样一个布局
-- SearchActionBar 这个也继承自ActionBarEx，可在导航栏显示【图标-文字-搜索框-文字-图标】这样一个布局
+- ActionBarCommon 继承自ActionBarEx，标题栏布局为【图标-文字-标题文字-文字-图标】
+- ActionBarSearch 继承自ActionBarEx，标题栏布局为【图标-文字-搜索框-文字-图标】
+- ActionBarSuper 继承自ActionBarEx
+  - 支持自定义主标题和副标题显示
+  - 支持自定义标题位置居中或居左
+  - 左右分别支持最多5个按钮
+  - 支持精确自定义每个按钮的边距
 
 
 
@@ -93,18 +98,19 @@ allprojects {
 
 从2.2.9以后版本去除版本号前的v，引用时需要注意下。
 
-从3.0.0版本开始分离了ActionBarEx和ActionBarCommon/Search，
+从3.0.0版本开始分离了ActionBarEx和ActionBarCommon/Search。
+
+从3.1.0版本新增ActionBarSuper
 
 ```groovy
 dependencies {
 	// 完全引入
-	implementation 'com.github.goweii:ActionBarEx:3.0.0'
+	implementation 'com.github.goweii:ActionBarEx:3.2.2'
 	
 	// 只引入ActionBarEx
-	implementation 'com.github.goweii.ActionBarEx:actionbarex:3.0.0'
-	
+	implementation 'com.github.goweii.ActionBarEx:actionbarex:3.2.2'
 	// 引入ActionBarCommon/Search/Super，依赖于ActionBarEx
-	implementation 'com.github.goweii.ActionBarEx:actionbarex-common:3.0.0'
+	implementation 'com.github.goweii.ActionBarEx:actionbarex-common:3.2.2'
 }
 ```
 
