@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="status_bar_color_def">#00000000</color>
-    <color name="bottom_line_color_def">#00000000</color>
+    <color name="actionbarex_common_status_bar_color_def">#00000000</color>
+    <color name="actionbarex_common_bottom_line_color_def">#00000000</color>
 
 </resources>

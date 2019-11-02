@@ -97,15 +97,15 @@ public final class ActionBarSearch extends ActionBarEx {
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ActionBarSearch);
 
-        float iconPaddingDef = getContext().getResources().getDimension(R.dimen.title_bar_icon_padding_def);
-        float textSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_text_size_def);
-        float textPaddingLeftDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
-        float textPaddingRightDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
-        float titleTextSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_title_text_size_def);
-        int iconColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_icon_color_def);
-        int textColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_text_color_def);
-        int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_title_text_color_def);
-        int titleTextHintColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_title_text_hint_color_def);
+        float iconPaddingDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_icon_padding_def);
+        float textSizeDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_text_size_def);
+        float textPaddingLeftDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_text_padding_left_def);
+        float textPaddingRightDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_text_padding_right_def);
+        float titleTextSizeDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_title_text_size_def);
+        int iconColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_icon_color_def);
+        int textColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_text_color_def);
+        int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_title_text_color_def);
+        int titleTextHintColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_title_text_hint_color_def);
 
         leftTextClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftTextClickToFinish, false);
         leftIconClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftIconClickToFinish, false);
@@ -140,13 +140,13 @@ public final class ActionBarSearch extends ActionBarEx {
 
     @Override
     protected View inflateTitleBar() {
-        titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.action_bar_title_bar_search, null);
+        titleBarChild = (RelativeLayout) inflate(getContext(), R.layout.actionbarex_common_action_bar_title_bar_search, null);
 
-        leftIconView = titleBarChild.findViewById(R.id.iv_left);
-        leftTextView = titleBarChild.findViewById(R.id.tv_left);
-        titleEditText = titleBarChild.findViewById(R.id.et_title);
-        rightTextView = titleBarChild.findViewById(R.id.tv_right);
-        rightIconView = titleBarChild.findViewById(R.id.iv_right);
+        leftIconView = titleBarChild.findViewById(R.id.actionbarex_common_iv_left);
+        leftTextView = titleBarChild.findViewById(R.id.actionbarex_common_tv_left);
+        titleEditText = titleBarChild.findViewById(R.id.actionbarex_common_et_title);
+        rightTextView = titleBarChild.findViewById(R.id.actionbarex_common_tv_right);
+        rightIconView = titleBarChild.findViewById(R.id.actionbarex_common_iv_right);
 
         if (leftIconRes > 0) {
             leftIconView.setVisibility(VISIBLE);

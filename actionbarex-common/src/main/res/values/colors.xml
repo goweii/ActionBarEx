@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="title_bar_icon_color_def">#00000000</color>
+    <color name="actionbarex_common_title_bar_icon_color_def">#00000000</color>
 
-    <color name="title_bar_text_color_def">#232323</color>
+    <color name="actionbarex_common_title_bar_text_color_def">#232323</color>
 
-    <color name="title_bar_subtitle_text_color_def">#999999</color>
-    <color name="title_bar_title_text_color_def">#232323</color>
-    <color name="title_bar_title_text_hint_color_def">#999999</color>
+    <color name="actionbarex_common_title_bar_subtitle_text_color_def">#999999</color>
+    <color name="actionbarex_common_title_bar_title_text_color_def">#232323</color>
+    <color name="actionbarex_common_title_bar_title_text_hint_color_def">#999999</color>
 
 </resources>

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl_title_bar_simple"
-    style="@style/action_bar">
+    android:id="@+id/actionbarex_common_rl_title_bar_simple"
+    style="@style/actionbarex_common_action_bar">
 
     <LinearLayout
-        android:id="@+id/ll_left"
+        android:id="@+id/actionbarex_common_ll_left"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true">
 
         <per.goweii.actionbarex.common.ActionIconView
-            android:id="@+id/iv_left"
-            style="@style/action_bar_icon"
+            android:id="@+id/actionbarex_common_iv_left"
+            style="@style/actionbarex_common_action_bar_icon"
             android:visibility="gone"
             tools:src="#000000"
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/tv_left"
-            style="@style/action_bar_text"
+            android:id="@+id/actionbarex_common_tv_left"
+            style="@style/actionbarex_common_action_bar_text"
             android:visibility="gone"
             tools:text="返回"
             tools:visibility="visible" />
@@ -27,27 +27,27 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_title"
-        style="@style/action_bar_title"
+        android:id="@+id/actionbarex_common_tv_title"
+        style="@style/actionbarex_common_action_bar_title"
         android:layout_centerInParent="true"
         tools:text="标题标题标题标题标题标题标题标题" />
 
     <LinearLayout
-        android:id="@+id/ll_right"
+        android:id="@+id/actionbarex_common_ll_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true">
 
         <TextView
-            android:id="@+id/tv_right"
-            style="@style/action_bar_text"
+            android:id="@+id/actionbarex_common_tv_right"
+            style="@style/actionbarex_common_action_bar_text"
             android:visibility="gone"
             tools:text="确定"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionIconView
-            android:id="@+id/iv_right"
-            style="@style/action_bar_icon"
+            android:id="@+id/actionbarex_common_iv_right"
+            style="@style/actionbarex_common_action_bar_icon"
             android:visibility="gone"
             tools:src="#000000"
             tools:visibility="visible" />

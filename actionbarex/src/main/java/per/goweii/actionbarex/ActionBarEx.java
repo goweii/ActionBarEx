@@ -154,10 +154,10 @@ public class ActionBarEx extends FrameLayout {
     protected void initAttrs(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
 
-        float titleBarHeightDef = getContext().getResources().getDimension(R.dimen.title_bar_height_def);
-        float bottomLineHeightDef = getContext().getResources().getDimension(R.dimen.bottom_line_height_def);
-        int bottomLineColorDef = ContextCompat.getColor(getContext(), R.color.bottom_line_color_def);
-        int statusBarColorDef = ContextCompat.getColor(getContext(), R.color.status_bar_color_def);
+        float titleBarHeightDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_height_def);
+        float bottomLineHeightDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_bottom_line_height_def);
+        int bottomLineColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_bottom_line_color_def);
+        int statusBarColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_status_bar_color_def);
 
         mAutoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_autoImmersion, true);
         mBackgroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerLayout, 0);
@@ -204,7 +204,7 @@ public class ActionBarEx extends FrameLayout {
         }
 
         // 2 初始ActionBarLayer
-        mActionBar = (LinearLayout) inflate(getContext(), R.layout.action_bar, null);
+        mActionBar = (LinearLayout) inflate(getContext(), R.layout.actionbarex_action_bar, null);
         mActionBar.setLayoutParams(makeLayoutParamsWithHeight(getActionBarHeight()));
         // 2.1 初始StatusBar
         mStatusBar = mActionBar.findViewById(R.id.status_bar);

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fl_title_bar_super"
-    style="@style/action_bar">
+    android:id="@+id/actionbarex_common_fl_title_bar_super"
+    style="@style/actionbarex_common_action_bar">
 
     <LinearLayout
-        android:id="@+id/ll_title"
+        android:id="@+id/actionbarex_common_ll_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -13,26 +13,26 @@
         android:layout_gravity="center">
 
         <TextView
-            android:id="@+id/tv_title"
-            style="@style/action_bar_title.title"
+            android:id="@+id/actionbarex_common_tv_title"
+            style="@style/actionbarex_common_action_bar_title.title"
             tools:text="标题标题标题标题标题标题" />
 
         <TextView
-            android:id="@+id/tv_subtitle"
+            android:id="@+id/actionbarex_common_tv_subtitle"
             android:visibility="gone"
-            style="@style/action_bar_title.subtitle"
+            style="@style/actionbarex_common_action_bar_title.subtitle"
             tools:text="标题标题标题标题标题标题" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_left"
+        android:id="@+id/actionbarex_common_ll_left"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|left">
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_left1"
+            android:id="@+id/actionbarex_common_av_left1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -40,7 +40,7 @@
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_left2"
+            android:id="@+id/actionbarex_common_av_left2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -48,13 +48,13 @@
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_left3"
+            android:id="@+id/actionbarex_common_av_left3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             tools:av_icon="@color/text_color_def" />
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_left4"
+            android:id="@+id/actionbarex_common_av_left4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -62,7 +62,7 @@
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_left5"
+            android:id="@+id/actionbarex_common_av_left5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -72,13 +72,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_right"
+        android:id="@+id/actionbarex_common_ll_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|right">
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_right1"
+            android:id="@+id/actionbarex_common_av_right1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -86,7 +86,7 @@
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_right2"
+            android:id="@+id/actionbarex_common_av_right2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -94,7 +94,7 @@
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_right3"
+            android:id="@+id/actionbarex_common_av_right3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -102,7 +102,7 @@
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_right4"
+            android:id="@+id/actionbarex_common_av_right4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -110,7 +110,7 @@
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
-            android:id="@+id/av_right5"
+            android:id="@+id/actionbarex_common_av_right5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"

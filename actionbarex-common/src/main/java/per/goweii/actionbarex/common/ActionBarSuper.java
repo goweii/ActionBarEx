@@ -145,18 +145,18 @@ public final class ActionBarSuper extends ActionBarEx {
     protected void initAttrs(AttributeSet attrs) {
         super.initAttrs(attrs);
 
-        float titleTextSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_title_text_size_def);
-        float subtitleTextSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_subtitle_text_size_def);
-        int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_title_text_color_def);
-        int subtitleTextColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_subtitle_text_color_def);
-        float titleTextMaxWidthDef = getContext().getResources().getDimension(R.dimen.title_bar_title_text_max_width_def);
-        float subtitleTextMaxWidthDef = getContext().getResources().getDimension(R.dimen.title_bar_subtitle_text_max_width_def);
-        int textColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_text_color_def);
-        float textSizeDef = getContext().getResources().getDimension(R.dimen.title_bar_text_size_def);
-        float textPaddingLeftDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_left_def);
-        float textPaddingRightDef = getContext().getResources().getDimension(R.dimen.title_bar_text_padding_right_def);
-        int iconColorDef = ContextCompat.getColor(getContext(), R.color.title_bar_icon_color_def);
-        float iconPaddingDef = getContext().getResources().getDimension(R.dimen.title_bar_icon_padding_def);
+        float titleTextSizeDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_title_text_size_def);
+        float subtitleTextSizeDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_subtitle_text_size_def);
+        int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_title_text_color_def);
+        int subtitleTextColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_subtitle_text_color_def);
+        float titleTextMaxWidthDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_title_text_max_width_def);
+        float subtitleTextMaxWidthDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_subtitle_text_max_width_def);
+        int textColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_text_color_def);
+        float textSizeDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_text_size_def);
+        float textPaddingLeftDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_text_padding_left_def);
+        float textPaddingRightDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_text_padding_right_def);
+        int iconColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_icon_color_def);
+        float iconPaddingDef = getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_icon_padding_def);
 
         titlePadding = new int[4];
         titleMargin = new int[4];
@@ -623,7 +623,7 @@ public final class ActionBarSuper extends ActionBarEx {
 
     @Override
     protected View inflateTitleBar() {
-        titleBarChild = (FrameLayout) inflate(getContext(), R.layout.action_bar_title_bar_super, null);
+        titleBarChild = (FrameLayout) inflate(getContext(), R.layout.actionbarex_common_action_bar_title_bar_super, null);
         initTitleTextView();
         initLeftActionViews();
         initRightActionViews();
@@ -631,7 +631,7 @@ public final class ActionBarSuper extends ActionBarEx {
     }
 
     public void initTitleTextView() {
-        titleTextView = titleBarChild.findViewById(R.id.tv_title);
+        titleTextView = titleBarChild.findViewById(R.id.actionbarex_common_tv_title);
         titleTextView.setVisibility(VISIBLE);
         setTextStyle(titleTextView, titleTextStyle);
         titleTextView.setText(titleText);
@@ -644,7 +644,7 @@ public final class ActionBarSuper extends ActionBarEx {
         titleParams.topMargin = titleMargin[1];
         titleParams.rightMargin = titleMargin[2];
         titleParams.bottomMargin = titleMargin[3];
-        subtitleTextView = titleBarChild.findViewById(R.id.tv_subtitle);
+        subtitleTextView = titleBarChild.findViewById(R.id.actionbarex_common_tv_subtitle);
         if (TextUtils.isEmpty(subtitleText)) {
             subtitleTextView.setVisibility(GONE);
         } else {
@@ -661,7 +661,7 @@ public final class ActionBarSuper extends ActionBarEx {
         subtitleParams.topMargin = subtitleMargin[1];
         subtitleParams.rightMargin = subtitleMargin[2];
         subtitleParams.bottomMargin = subtitleMargin[3];
-        LinearLayout titleLayout = titleBarChild.findViewById(R.id.ll_title);
+        LinearLayout titleLayout = titleBarChild.findViewById(R.id.actionbarex_common_ll_title);
         LayoutParams titleLayoutParams = (LayoutParams) titleLayout.getLayoutParams();
         if (titleGravity == TitleGravity.CENTER) {
             titleLayout.setGravity(Gravity.CENTER);
@@ -679,14 +679,14 @@ public final class ActionBarSuper extends ActionBarEx {
     }
 
     private void initLeftActionViews() {
-        LinearLayout leftActionLayout = titleBarChild.findViewById(R.id.ll_left);
+        LinearLayout leftActionLayout = titleBarChild.findViewById(R.id.actionbarex_common_ll_left);
         leftActionLayout.setPadding(leftPadding[0], leftPadding[1], leftPadding[2], leftPadding[3]);
         leftActionViews = new ActionView[5];
-        leftActionViews[0] = titleBarChild.findViewById(R.id.av_left1);
-        leftActionViews[1] = titleBarChild.findViewById(R.id.av_left2);
-        leftActionViews[2] = titleBarChild.findViewById(R.id.av_left3);
-        leftActionViews[3] = titleBarChild.findViewById(R.id.av_left4);
-        leftActionViews[4] = titleBarChild.findViewById(R.id.av_left5);
+        leftActionViews[0] = titleBarChild.findViewById(R.id.actionbarex_common_av_left1);
+        leftActionViews[1] = titleBarChild.findViewById(R.id.actionbarex_common_av_left2);
+        leftActionViews[2] = titleBarChild.findViewById(R.id.actionbarex_common_av_left3);
+        leftActionViews[3] = titleBarChild.findViewById(R.id.actionbarex_common_av_left4);
+        leftActionViews[4] = titleBarChild.findViewById(R.id.actionbarex_common_av_left5);
         for (int i = 0; i < leftActionViews.length; i++) {
             setTextStyle(leftActionViews[i].getTextView(), leftTextStyles[i]);
             leftActionViews[i].setTextPadding(leftTextPaddings[i][0], leftTextPaddings[i][1], leftTextPaddings[i][2], leftTextPaddings[i][3]);
@@ -723,14 +723,14 @@ public final class ActionBarSuper extends ActionBarEx {
     }
 
     private void initRightActionViews() {
-        LinearLayout rightActionLayout = titleBarChild.findViewById(R.id.ll_right);
+        LinearLayout rightActionLayout = titleBarChild.findViewById(R.id.actionbarex_common_ll_right);
         rightActionLayout.setPadding(rightPadding[0], rightPadding[1], rightPadding[2], rightPadding[3]);
         rightActionViews = new ActionView[5];
-        rightActionViews[0] = titleBarChild.findViewById(R.id.av_right1);
-        rightActionViews[1] = titleBarChild.findViewById(R.id.av_right2);
-        rightActionViews[2] = titleBarChild.findViewById(R.id.av_right3);
-        rightActionViews[3] = titleBarChild.findViewById(R.id.av_right4);
-        rightActionViews[4] = titleBarChild.findViewById(R.id.av_right5);
+        rightActionViews[0] = titleBarChild.findViewById(R.id.actionbarex_common_av_right1);
+        rightActionViews[1] = titleBarChild.findViewById(R.id.actionbarex_common_av_right2);
+        rightActionViews[2] = titleBarChild.findViewById(R.id.actionbarex_common_av_right3);
+        rightActionViews[3] = titleBarChild.findViewById(R.id.actionbarex_common_av_right4);
+        rightActionViews[4] = titleBarChild.findViewById(R.id.actionbarex_common_av_right5);
         for (int i = 0; i < rightActionViews.length; i++) {
             setTextStyle(rightActionViews[i].getTextView(), rightTextStyles[i]);
             rightActionViews[i].setTextPadding(rightTextPaddings[i][0], rightTextPaddings[i][1], rightTextPaddings[i][2], rightTextPaddings[i][3]);
