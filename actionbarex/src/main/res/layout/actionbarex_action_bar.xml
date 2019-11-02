@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/action_bar"
+    android:id="@+id/actionbarex_action_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
-        android:id="@+id/status_bar"
+        android:id="@+id/actionbarex_status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         tools:layout_height="20dp" />
 
     <FrameLayout
-        android:id="@+id/title_bar"
+        android:id="@+id/actionbarex_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_height="44dp" />
 
     <View
-        android:id="@+id/bottom_line"
+        android:id="@+id/actionbarex_bottom_line"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 

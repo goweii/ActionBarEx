@@ -207,12 +207,12 @@ public class ActionBarEx extends FrameLayout {
         mActionBar = (LinearLayout) inflate(getContext(), R.layout.actionbarex_action_bar, null);
         mActionBar.setLayoutParams(makeLayoutParamsWithHeight(getActionBarHeight()));
         // 2.1 初始StatusBar
-        mStatusBar = mActionBar.findViewById(R.id.status_bar);
+        mStatusBar = mActionBar.findViewById(R.id.actionbarex_status_bar);
         mStatusBar.setLayoutParams(makeLayoutParamsWithHeight(mStatusBarHeight));
         mStatusBar.setBackgroundColor(mStatusBarColor);
         mStatusBar.setVisibility(mStatusBarVisible ? VISIBLE : GONE);
         // 2.2 初始TitleBar
-        mTitleBar = mActionBar.findViewById(R.id.title_bar);
+        mTitleBar = mActionBar.findViewById(R.id.actionbarex_title_bar);
         mTitleBar.setClickable(true);
         mTitleBar.setFocusable(true);
         mTitleBar.setFocusableInTouchMode(true);
@@ -222,7 +222,7 @@ public class ActionBarEx extends FrameLayout {
             mTitleBar.addView(mTitleBarChild);
         }
         // 2.3 初始BottomLine
-        mBottomLine = mActionBar.findViewById(R.id.bottom_line);
+        mBottomLine = mActionBar.findViewById(R.id.actionbarex_bottom_line);
         mBottomLine.setLayoutParams(makeLayoutParamsWithHeight(mBottomLineHeight));
         if (mBottomLineResId > 0) {
             mBottomLine.setBackgroundResource(mBottomLineResId);
