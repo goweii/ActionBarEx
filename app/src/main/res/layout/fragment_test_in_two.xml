@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/title_bar_custom_bg"
         app:ab_statusBarMode="light"
+        app:ab_statusBarVisible="auto"
         app:ab_immersion="ordinary"
         app:ab_titleBarHeight="48dp"
         app:ab_statusBarColor="#33ff0000"

@@ -12,7 +12,11 @@
         <!--背景层为图片-->
         <attr name="ab_backgroundLayerImageRes" format="reference" />
         <!--主体层-->
-        <attr name="ab_statusBarVisible" format="boolean|reference" />
+        <attr name="ab_statusBarVisible" format="enum">
+            <enum name="auto" value="0" />
+            <enum name="visible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
         <attr name="ab_statusBarColor" format="color|reference" />
         <attr name="ab_statusBarMode" format="enum">
             <enum name="unchanged" value="0" />

@@ -25,7 +25,7 @@ import per.goweii.statusbarcompat.StatusBarCompat;
  * 高拓展性和定制性的ActionBar
  * 整个ActionBar分为3层：
  * ----BackgroundLayer 背景层：可自定义布局
- * ----ActionBarLayer 主体层：改层为垂直线性布局，包含下面三个部分：
+ * ----ActionBar 主体层：改层为垂直线性布局，包含下面三个部分：
  * --------StatusBar：系统状态栏
  * --------TitleBar：位于StatusBar和BottomLine之间，可自定义布局
  * --------BottomLine：分割线
@@ -40,16 +40,18 @@ public class ActionBarEx extends FrameLayout {
     private static final int STATUS_BAR_MODE_LIGHT = 1;
     private static final int STATUS_BAR_MODE_DARK = 2;
 
+    private static final int STATUS_BAR_VISIBLE_AUTO = 0;
+    private static final int STATUS_BAR_VISIBLE_SHOW = 1;
+    private static final int STATUS_BAR_VISIBLE_GONE = 2;
+
     private static final int IMMERSION_UNCHANGED = 0;
     private static final int IMMERSION_ORDINARY = 1;
     private static final int IMMERSION_IMMERSED = 2;
 
-    private Activity mActivity = null;
-
     private int mImmersion = IMMERSION_UNCHANGED;
     private int mBackgroundLayerLayoutRes = 0;
     private int mBackgroundLayerImageRes = 0;
-    private boolean mStatusBarVisible = false;
+    private int mStatusBarVisible = STATUS_BAR_VISIBLE_AUTO;
     private int mStatusBarMode = STATUS_BAR_MODE_UNCHANGED;
     private int mStatusBarColor = Color.TRANSPARENT;
     private int mTitleBarHeight = -1;
@@ -61,9 +63,11 @@ public class ActionBarEx extends FrameLayout {
     private int mClickToFinishViewId = 0;
     private boolean mBottomLineOutside = false;
 
+    private Activity mActivity = null;
+
     private View mBackgroundLayer;
     private LinearLayout mActionBar;
-    private View mStatusBar;
+    private StatusBarView mStatusBar;
     private FrameLayout mTitleBar;
     private View mBottomLine;
     private View mForegroundLayer;
@@ -102,7 +106,12 @@ public class ActionBarEx extends FrameLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         mActionBar.measure(widthMeasureSpec, heightMeasureSpec);
         int width = mActionBar.getMeasuredWidth();
-        int height = getActionBarHeight();
+        int height;
+        if (mBottomLineOutside) {
+            height = mStatusBar.getMeasuredHeight() + mTitleBar.getMeasuredHeight();
+        } else {
+            height = mActionBar.getMeasuredHeight();
+        }
         int widthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
         int heightSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
         super.onMeasure(widthSpec, heightSpec);
@@ -135,7 +144,7 @@ public class ActionBarEx extends FrameLayout {
         return mActionBar;
     }
 
-    public View getStatusBar() {
+    public StatusBarView getStatusBar() {
         return mStatusBar;
     }
 
@@ -169,38 +178,13 @@ public class ActionBarEx extends FrameLayout {
         return (V) view;
     }
 
-    public int getActionBarHeight() {
-        if (mBottomLineOutside) {
-            return getStatusBarHeight() + getTitleBarHeight();
-        } else {
-            return getStatusBarHeight() + getTitleBarHeight() + getBottomHeight();
-        }
-    }
-
-    public int getStatusBarHeight() {
-        return mStatusBarVisible ? StatusBarCompat.getHeight(getContext()) : 0;
-    }
-
-    public int getTitleBarHeight() {
-        return mTitleBar.getMeasuredHeight();
-    }
-
-    public int getBottomHeight() {
-        return mBottomLineHeight;
-    }
-
-    /**
-     * 设置沉浸模式
-     */
     public void refresh() {
         refreshImmersion();
+        refreshStatusBarVisible();
         refreshStatusBarMode();
         refreshStatusBarColor();
     }
 
-    /**
-     * 透明状态栏
-     */
     public void refreshImmersion() {
         Activity activity = getActivity();
         if (activity == null) {
@@ -218,9 +202,23 @@ public class ActionBarEx extends FrameLayout {
         }
     }
 
-    /**
-     * 改变状态栏图标颜色模式
-     */
+    public void refreshStatusBarVisible() {
+        switch (mStatusBarVisible) {
+            case STATUS_BAR_VISIBLE_GONE:
+                mStatusBar.setVisibility(false);
+                break;
+            case STATUS_BAR_VISIBLE_SHOW:
+                mStatusBar.setVisibility(true);
+                break;
+            default:
+                Activity activity = getActivity();
+                if (activity != null) {
+                    mStatusBar.setVisibility(StatusBarCompat.isTransparent(activity));
+                }
+                break;
+        }
+    }
+
     public void refreshStatusBarMode() {
         Activity activity = getActivity();
         if (activity == null) {
@@ -239,18 +237,15 @@ public class ActionBarEx extends FrameLayout {
     }
 
     public void refreshStatusBarColor() {
-        switch (mImmersion) {
-            case IMMERSION_ORDINARY:
-                Activity activity = getActivity();
-                if (activity != null) {
-                    StatusBarCompat.setColor(activity.getWindow(), mStatusBarColor);
-                }
-                break;
-            case IMMERSION_IMMERSED:
-                mStatusBar.setBackgroundColor(mStatusBarColor);
-                break;
-            default:
-                break;
+        mStatusBar.setBackgroundColor(mStatusBarColor);
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        if (StatusBarCompat.isTransparent(activity) && mStatusBar.isVisibility()) {
+            StatusBarCompat.setColor(activity.getWindow(), Color.TRANSPARENT);
+        } else {
+            StatusBarCompat.setColor(activity.getWindow(), mStatusBarColor);
         }
     }
 
@@ -266,7 +261,7 @@ public class ActionBarEx extends FrameLayout {
         mImmersion = typedArray.getInt(R.styleable.ActionBarEx_ab_immersion, mImmersion);
         mBackgroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerLayout, mBackgroundLayerLayoutRes);
         mBackgroundLayerImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerImageRes, mBackgroundLayerLayoutRes);
-        mStatusBarVisible = typedArray.getBoolean(R.styleable.ActionBarEx_ab_statusBarVisible, mStatusBarVisible);
+        mStatusBarVisible = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarVisible, mStatusBarVisible);
         mStatusBarMode = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarMode, mStatusBarMode);
         mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_statusBarColor, mStatusBarColor);
         mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_titleBarHeight, mTitleBarHeight);
@@ -278,22 +273,6 @@ public class ActionBarEx extends FrameLayout {
         mForegroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_foregroundLayerLayout, mForegroundLayerLayoutRes);
         mClickToFinishViewId = typedArray.getResourceId(R.styleable.ActionBarEx_ab_clickToFinish, mClickToFinishViewId);
         typedArray.recycle();
-    }
-
-    /**
-     * 初始化子TitleBar
-     *
-     * @return TitleBarChild
-     */
-    protected View inflateTitleBar() {
-        if (getTitleBarRes() > 0) {
-            return LayoutInflater.from(getContext()).inflate(getTitleBarRes(), mTitleBar, false);
-        }
-        return null;
-    }
-
-    protected int getTitleBarRes() {
-        return mTitleBarLayoutRes;
     }
 
     @CallSuper
@@ -315,42 +294,28 @@ public class ActionBarEx extends FrameLayout {
         mActionBar = (LinearLayout) inflate(getContext(), R.layout.actionbarex_action_bar, null);
         // 2.1 初始StatusBar
         mStatusBar = mActionBar.findViewById(R.id.actionbarex_status_bar);
-        mStatusBar.setLayoutParams(makeLayoutParamsWithHeight(StatusBarCompat.getHeight(getContext())));
-        mStatusBar.setVisibility(mStatusBarVisible ? VISIBLE : GONE);
         // 2.2 初始TitleBar
         mTitleBar = mActionBar.findViewById(R.id.actionbarex_title_bar);
         mTitleBar.setClickable(true);
         mTitleBar.setFocusable(true);
         mTitleBar.setFocusableInTouchMode(true);
-        LinearLayout.LayoutParams titleBarParams;
+        if (mTitleBarHeight >= 0) {
+            mTitleBar.getLayoutParams().height = mTitleBarHeight;
+        }
         View titleBarChild = inflateTitleBar();
         if (titleBarChild != null) {
             mTitleBar.addView(titleBarChild);
-            if (titleBarChild.getLayoutParams() != null) {
-                if (mTitleBarHeight < 0) {
-                    titleBarParams = makeLayoutParamsWithHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-                } else {
-                    titleBarParams = makeLayoutParamsWithHeight(mTitleBarHeight);
-                    titleBarChild.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
-                }
-            } else {
-                if (mTitleBarHeight < 0) {
-                    titleBarParams = makeLayoutParamsWithHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-                } else {
-                    titleBarParams = makeLayoutParamsWithHeight(mTitleBarHeight);
-                }
+            ViewGroup.LayoutParams titleBarChildParams = titleBarChild.getLayoutParams();
+            if (titleBarChildParams == null) {
+                titleBarChildParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             }
-        } else {
-            if (mTitleBarHeight < 0) {
-                titleBarParams = makeLayoutParamsWithHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-            } else {
-                titleBarParams = makeLayoutParamsWithHeight(mTitleBarHeight);
+            if (mTitleBarHeight >= 0) {
+                titleBarChildParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
             }
         }
-        mTitleBar.setLayoutParams(titleBarParams);
         // 2.3 初始BottomLine
         mBottomLine = mActionBar.findViewById(R.id.actionbarex_bottom_line);
-        mBottomLine.setLayoutParams(makeLayoutParamsWithHeight(mBottomLineHeight));
+        mBottomLine.getLayoutParams().height = mBottomLineHeight;
         if (mBottomLineResId > 0) {
             mBottomLine.setBackgroundResource(mBottomLineResId);
         } else {
@@ -367,6 +332,22 @@ public class ActionBarEx extends FrameLayout {
             addViewInLayout(mForegroundLayer, getChildCount(), makeLayerLayoutParamsMatch(), true);
         }
         performClickToFinish();
+    }
+
+    /**
+     * 初始化子TitleBar
+     *
+     * @return TitleBarChild
+     */
+    protected View inflateTitleBar() {
+        if (getTitleBarRes() > 0) {
+            return LayoutInflater.from(getContext()).inflate(getTitleBarRes(), mTitleBar, false);
+        }
+        return null;
+    }
+
+    protected int getTitleBarRes() {
+        return mTitleBarLayoutRes;
     }
 
     private void performClickToFinish() {
@@ -388,10 +369,6 @@ public class ActionBarEx extends FrameLayout {
 
     private LayoutParams makeLayerLayoutParamsMatch() {
         return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-    }
-
-    private LinearLayout.LayoutParams makeLayoutParamsWithHeight(int height) {
-        return new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
     }
 
     /**

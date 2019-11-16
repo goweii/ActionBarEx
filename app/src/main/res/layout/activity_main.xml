@@ -30,7 +30,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarLayout="@layout/title_bar_custom_2" />
 
             <per.goweii.actionbarex.common.ActionBarCommon
@@ -43,7 +43,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="dark"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:abc_leftIconColor="@color/black"
                 app:abc_leftIconRes="@mipmap/back"
@@ -63,7 +63,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:abc_leftText="返回"
                 app:abc_leftTextColor="@color/white"
@@ -84,7 +84,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:abc_leftIconColor="@color/black"
                 app:abc_leftIconRes="@mipmap/back"
@@ -111,7 +111,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:abs_leftIconColor="@color/black"
                 app:abs_leftIconRes="@mipmap/back"
@@ -134,7 +134,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:abs_leftIconColor="@color/black"
                 app:abs_leftIconRes="@mipmap/back"
@@ -160,7 +160,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarLayout="@layout/title_bar_custom" />
 
             <per.goweii.actionbarex.common.ActionBarSuper
@@ -175,7 +175,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:absuper_left1Icon="@mipmap/back"
                 app:absuper_left1IconClickToFinish="true"
@@ -202,7 +202,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="58dp"
                 app:absuper_titleText="侧边大标题"
                 app:absuper_subtitleText="侧边副标题"
@@ -227,7 +227,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:absuper_left1Icon="@mipmap/back"
                 app:absuper_left1IconClickToFinish="true"
@@ -251,7 +251,7 @@
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
+                app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:absuper_left1Icon="@mipmap/back"
                 app:absuper_left1IconClickToFinish="true"
@@ -298,7 +298,7 @@
         app:ab_foregroundLayerLayout="@layout/loading_bar"
         app:ab_statusBarColor="@color/transparent"
         app:ab_statusBarMode="dark"
-        app:ab_statusBarVisible="true">
+        app:ab_statusBarVisible="visible">
 
         <RelativeLayout
             android:layout_width="match_parent"
