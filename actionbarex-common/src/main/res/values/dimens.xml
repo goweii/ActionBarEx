@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="actionbarex_common_title_bar_height_def">48dp</dimen>
+
     <dimen name="actionbarex_common_title_bar_title_text_size_def">17sp</dimen>
     <dimen name="actionbarex_common_title_bar_subtitle_text_size_def">13sp</dimen>
     <dimen name="actionbarex_common_title_bar_title_text_max_width_def">200dp</dimen>

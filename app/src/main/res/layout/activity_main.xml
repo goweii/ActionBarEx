@@ -7,7 +7,7 @@
     android:background="#f3f3f3">
 
     <ScrollView
-        android:layout_below="@+id/simple_action_bar_1"
+        android:layout_below="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,6 +15,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <per.goweii.actionbarex.ActionBarEx
+                android:id="@+id/action_bar_ex_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#33ffffff"
+                app:ab_immersion="unchanged"
+                app:ab_backgroundLayerImageRes="@mipmap/action_bar_img"
+                app:ab_bottomLineColor="@color/line"
+                app:ab_bottomLineHeight="0dp"
+                app:ab_clickToFinish="@id/iv_click_to_finish"
+                app:ab_foregroundLayerLayout="@layout/loading_bar"
+                app:ab_statusBarColor="@color/transparent"
+                app:ab_statusBarMode="unchanged"
+                app:ab_statusBarVisible="false"
+                app:ab_titleBarLayout="@layout/title_bar_custom_2" />
+
+            <per.goweii.actionbarex.common.ActionBarCommon
+                android:id="@+id/simple_action_bar_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                app:ab_immersion="unchanged"
+                app:ab_foregroundLayerLayout="@layout/loading_bar"
+                app:ab_statusBarColor="@color/transparent"
+                app:ab_statusBarMode="dark"
+                app:ab_statusBarVisible="false"
+                app:ab_titleBarHeight="48dp"
+                app:abc_leftIconColor="@color/black"
+                app:abc_leftIconRes="@mipmap/back"
+                app:abc_rightIconColor="@color/black"
+                app:abc_rightIconRes="@mipmap/search"
+                app:abc_titleText="这个标题有点长我试试长标题什么样子" />
 
             <per.goweii.actionbarex.common.ActionBarCommon
                 android:id="@+id/simple_action_bar_2"
@@ -29,7 +64,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
+                app:abc_titleBarHeight="48dp"
                 app:abc_leftText="返回"
                 app:abc_leftTextColor="@color/white"
                 app:abc_rightText="确定"
@@ -50,7 +85,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
+                app:abc_titleBarHeight="48dp"
                 app:abc_leftIconColor="@color/black"
                 app:abc_leftIconRes="@mipmap/back"
                 app:abc_leftText="返回"
@@ -77,7 +112,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
+                app:abs_titleBarHeight="48dp"
                 app:abs_leftIconColor="@color/black"
                 app:abs_leftIconRes="@mipmap/back"
                 app:abs_rightIconColor="@color/black"
@@ -100,7 +135,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
+                app:abs_titleBarHeight="48dp"
                 app:abs_leftIconColor="@color/black"
                 app:abs_leftIconRes="@mipmap/back"
                 app:abs_rightIconColor="@color/black"
@@ -126,26 +161,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
                 app:ab_titleBarLayout="@layout/title_bar_custom" />
-
-            <per.goweii.actionbarex.ActionBarEx
-                android:id="@+id/action_bar_ex_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="#33ffffff"
-                app:ab_immersion="unchanged"
-                app:ab_backgroundLayerImageRes="@mipmap/action_bar_img"
-                app:ab_bottomLineColor="@color/line"
-                app:ab_bottomLineHeight="0dp"
-                app:ab_clickToFinish="@id/iv_click_to_finish"
-                app:ab_foregroundLayerLayout="@layout/loading_bar"
-                app:ab_statusBarColor="@color/transparent"
-                app:ab_statusBarMode="unchanged"
-                app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
-                app:ab_titleBarLayout="@layout/title_bar_custom_2" />
 
             <per.goweii.actionbarex.common.ActionBarSuper
                 android:id="@+id/action_bar_super_1"
@@ -160,7 +176,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
+                app:absuper_titleBarHeight="48dp"
                 app:absuper_left1Icon="@mipmap/back"
                 app:absuper_left1IconClickToFinish="true"
                 app:absuper_left2Text="返回"
@@ -187,7 +203,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="58dp"
+                app:absuper_titleBarHeight="58dp"
                 app:absuper_titleText="侧边大标题"
                 app:absuper_subtitleText="侧边副标题"
                 app:absuper_subtitleTextColor="#aaffffff"
@@ -212,7 +228,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
+                app:absuper_titleBarHeight="48dp"
                 app:absuper_left1Icon="@mipmap/back"
                 app:absuper_left1IconClickToFinish="true"
                 app:absuper_left2Text="侧边大标题"
@@ -236,7 +252,7 @@
                 app:ab_statusBarColor="@color/transparent"
                 app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="false"
-                app:ab_titleBarHeight="48dp"
+                app:absuper_titleBarHeight="48dp"
                 app:absuper_left1Icon="@mipmap/back"
                 app:absuper_left1IconClickToFinish="true"
                 app:absuper_left2Icon="@mipmap/search"
@@ -270,8 +286,8 @@
 
     </ScrollView>
 
-    <per.goweii.actionbarex.common.ActionBarCommon
-        android:id="@+id/simple_action_bar_1"
+    <per.goweii.actionbarex.ActionBarEx
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -282,12 +298,69 @@
         app:ab_foregroundLayerLayout="@layout/loading_bar"
         app:ab_statusBarColor="@color/transparent"
         app:ab_statusBarMode="dark"
-        app:ab_statusBarVisible="true"
-        app:ab_titleBarHeight="48dp"
-        app:abc_leftIconColor="@color/black"
-        app:abc_leftIconRes="@mipmap/back"
-        app:abc_rightIconColor="@color/black"
-        app:abc_rightIconRes="@mipmap/search"
-        app:abc_titleText="这个标题有点长我试试长标题什么样子" />
+        app:ab_statusBarVisible="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/black"
+                    android:src="@mipmap/back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="自定义布局"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/black"
+                    android:src="@mipmap/download" />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/black"
+                    android:src="@mipmap/delete" />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/black"
+                    android:src="@mipmap/more" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </per.goweii.actionbarex.ActionBarEx>
 
 </RelativeLayout>

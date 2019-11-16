@@ -10,7 +10,7 @@
         android:id="@+id/actionbarex_status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:layout_height="20dp" />
+        tools:layout_height="24dp" />
 
     <FrameLayout
         android:id="@+id/actionbarex_title_bar"

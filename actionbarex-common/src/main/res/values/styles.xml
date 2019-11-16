@@ -2,7 +2,7 @@
 
     <style name="actionbarex_common_action_bar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_height">@dimen/actionbarex_common_title_bar_height_def</item>
     </style>
 
     <style name="actionbarex_common_action_bar_view">

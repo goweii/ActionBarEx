@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
@@ -44,21 +44,21 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
             android:id="@+id/actionbarex_common_av_left3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            tools:av_icon="@color/text_color_def" />
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def" />
 
         <per.goweii.actionbarex.common.ActionView
             android:id="@+id/actionbarex_common_av_left4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
     </LinearLayout>
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
@@ -106,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
         <per.goweii.actionbarex.common.ActionView
@@ -114,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:av_icon="@color/text_color_def"
+            tools:av_icon="@color/actionbarex_common_title_bar_text_color_def"
             tools:visibility="visible" />
 
     </LinearLayout>
