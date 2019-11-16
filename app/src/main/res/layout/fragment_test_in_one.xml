@@ -16,6 +16,7 @@
         app:ab_immersion="immersed"
         app:abc_leftIconRes="@mipmap/back"
         app:abc_rightText="切换"
+        app:ab_statusBarVisible="true"
         app:ab_statusBarColor="#330000ff"
         app:abc_rightTextColor="@color/white"
         app:abc_titleText="第一个Fragment"
