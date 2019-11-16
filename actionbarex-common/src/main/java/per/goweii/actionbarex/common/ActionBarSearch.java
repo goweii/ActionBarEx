@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,8 +21,6 @@ import per.goweii.actionbarex.ActionBarEx;
  * @date 2018/8/30-上午11:10
  */
 public final class ActionBarSearch extends ActionBarEx {
-
-    private int titleBarHeight;
 
     private String leftText;
     private float leftTextSize;
@@ -105,9 +102,6 @@ public final class ActionBarSearch extends ActionBarEx {
         int titleTextColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_title_text_color_def);
         int titleTextHintColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_title_bar_title_text_hint_color_def);
 
-        titleBarHeight = (int) getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_height_def);
-        titleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarSearch_abs_titleBarHeight, titleBarHeight);
-
         leftTextClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftTextClickToFinish, false);
         leftIconClickToFinish = typedArray.getBoolean(R.styleable.ActionBarCommon_abc_leftIconClickToFinish, false);
         leftText = typedArray.getString(R.styleable.ActionBarSearch_abs_leftText);
@@ -142,9 +136,6 @@ public final class ActionBarSearch extends ActionBarEx {
     @Override
     protected View inflateTitleBar() {
         RelativeLayout titleBarChild = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.actionbarex_common_action_bar_title_bar_search, getTitleBar(), false);
-        ViewGroup.LayoutParams params = titleBarChild.getLayoutParams();
-        params.height = titleBarHeight;
-        titleBarChild.setLayoutParams(params);
 
         leftIconView = titleBarChild.findViewById(R.id.actionbarex_common_iv_left);
         leftTextView = titleBarChild.findViewById(R.id.actionbarex_common_tv_left);

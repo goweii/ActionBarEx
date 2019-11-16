@@ -12,7 +12,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,8 +26,6 @@ import per.goweii.actionbarex.ActionBarEx;
  * @date 2018/8/30-上午11:10
  */
 public final class ActionBarSuper extends ActionBarEx {
-
-    private int titleBarHeight;
 
     @IntDef({TextStyle.NORMAL, TextStyle.BOLD})
     @Retention(RetentionPolicy.SOURCE)
@@ -208,9 +205,6 @@ public final class ActionBarSuper extends ActionBarEx {
         rightIconMargins = new int[5][4];
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ActionBarSuper);
-
-        titleBarHeight = (int) getContext().getResources().getDimension(R.dimen.actionbarex_common_title_bar_height_def);
-        titleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarSuper_absuper_titleBarHeight, titleBarHeight);
 
         titleGravity = typedArray.getInt(R.styleable.ActionBarSuper_absuper_titleGravity, TitleGravity.CENTER);
         titleTextStyle = typedArray.getInt(R.styleable.ActionBarSuper_absuper_titleTextStyle, TextStyle.NORMAL);
@@ -627,9 +621,6 @@ public final class ActionBarSuper extends ActionBarEx {
     @Override
     protected View inflateTitleBar() {
         titleBarChild = (FrameLayout) LayoutInflater.from(getContext()).inflate(R.layout.actionbarex_common_action_bar_title_bar_super, getTitleBar(), false);
-        ViewGroup.LayoutParams params = titleBarChild.getLayoutParams();
-        params.height = titleBarHeight;
-        titleBarChild.setLayoutParams(params);
         initTitleTextView();
         initLeftActionViews();
         initRightActionViews();

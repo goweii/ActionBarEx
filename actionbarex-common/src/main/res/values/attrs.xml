@@ -2,7 +2,6 @@
 <resources>
 
     <declare-styleable name="ActionBarCommon">
-        <attr name="abc_titleBarHeight" format="dimension|reference" />
         <attr name="abc_leftTextClickToFinish" format="boolean|reference" />
         <attr name="abc_leftIconClickToFinish" format="boolean|reference" />
         <attr name="abc_leftText" format="string|dimension" />
@@ -30,7 +29,6 @@
     </declare-styleable>
 
     <declare-styleable name="ActionBarSearch">
-        <attr name="abs_titleBarHeight" format="dimension|reference" />
         <attr name="abs_leftTextClickToFinish" format="boolean|reference" />
         <attr name="abs_leftIconClickToFinish" format="boolean|reference" />
         <attr name="abs_leftText" format="string|dimension" />
@@ -87,7 +85,6 @@
     </declare-styleable>
 
     <declare-styleable name="ActionBarSuper">
-        <attr name="absuper_titleBarHeight" format="dimension|reference" />
         <attr name="absuper_titleGravity" format="enum">
             <enum name="center" value="0" />
             <enum name="left" value="1" />

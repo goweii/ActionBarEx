@@ -52,6 +52,7 @@ public class ActionBarEx extends FrameLayout {
     private boolean mStatusBarVisible = false;
     private int mStatusBarMode = STATUS_BAR_MODE_UNCHANGED;
     private int mStatusBarColor = Color.TRANSPARENT;
+    private int mTitleBarHeight = -1;
     private int mTitleBarLayoutRes = 0;
     private int mBottomLineColor = Color.TRANSPARENT;
     private int mBottomLineResId = 0;
@@ -268,6 +269,7 @@ public class ActionBarEx extends FrameLayout {
         mStatusBarVisible = typedArray.getBoolean(R.styleable.ActionBarEx_ab_statusBarVisible, mStatusBarVisible);
         mStatusBarMode = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarMode, mStatusBarMode);
         mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_statusBarColor, mStatusBarColor);
+        mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_titleBarHeight, mTitleBarHeight);
         mTitleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_titleBarLayout, mTitleBarLayoutRes);
         mBottomLineHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_bottomLineHeight, mBottomLineHeight);
         mBottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottomLineColor, mBottomLineColor);
@@ -320,11 +322,32 @@ public class ActionBarEx extends FrameLayout {
         mTitleBar.setClickable(true);
         mTitleBar.setFocusable(true);
         mTitleBar.setFocusableInTouchMode(true);
-        mTitleBar.setLayoutParams(makeLayoutParamsWithHeight(ViewGroup.LayoutParams.WRAP_CONTENT));
+        LinearLayout.LayoutParams titleBarParams;
         View titleBarChild = inflateTitleBar();
         if (titleBarChild != null) {
             mTitleBar.addView(titleBarChild);
+            if (titleBarChild.getLayoutParams() != null) {
+                if (mTitleBarHeight < 0) {
+                    titleBarParams = makeLayoutParamsWithHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                } else {
+                    titleBarParams = makeLayoutParamsWithHeight(mTitleBarHeight);
+                    titleBarChild.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+                }
+            } else {
+                if (mTitleBarHeight < 0) {
+                    titleBarParams = makeLayoutParamsWithHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                } else {
+                    titleBarParams = makeLayoutParamsWithHeight(mTitleBarHeight);
+                }
+            }
+        } else {
+            if (mTitleBarHeight < 0) {
+                titleBarParams = makeLayoutParamsWithHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+            } else {
+                titleBarParams = makeLayoutParamsWithHeight(mTitleBarHeight);
+            }
         }
+        mTitleBar.setLayoutParams(titleBarParams);
         // 2.3 初始BottomLine
         mBottomLine = mActionBar.findViewById(R.id.actionbarex_bottom_line);
         mBottomLine.setLayoutParams(makeLayoutParamsWithHeight(mBottomLineHeight));
