@@ -2,7 +2,11 @@
 <resources>
 
     <declare-styleable name="ActionBarEx">
-        <attr name="ab_autoImmersion" format="boolean" />
+        <attr name="ab_immersion" format="enum">
+            <enum name="unchanged" value="0" />
+            <enum name="ordinary" value="1" />
+            <enum name="immersed" value="2" />
+        </attr>
         <!--背景层布局-->
         <attr name="ab_backgroundLayerLayout" format="reference" />
         <!--背景层为图片-->
@@ -11,8 +15,9 @@
         <attr name="ab_statusBarVisible" format="boolean|reference" />
         <attr name="ab_statusBarColor" format="color|reference" />
         <attr name="ab_statusBarMode" format="enum">
-            <enum name="light" value="0" />
-            <enum name="dark" value="1" />
+            <enum name="unchanged" value="0" />
+            <enum name="light" value="1" />
+            <enum name="dark" value="2" />
         </attr>
         <attr name="ab_clickToFinish" format="reference" />
         <attr name="ab_titleBarLayout" format="reference" />

@@ -12,7 +12,6 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,14 +33,21 @@ import per.goweii.statusbarcompat.StatusBarCompat;
  */
 public class ActionBarEx extends FrameLayout {
 
-    private static final int STATUS_BAR_MODE_LIGHT = 0;
-    private static final int STATUS_BAR_MODE_DARK = 1;
+    private static final int STATUS_BAR_MODE_UNCHANGED = 0;
+    private static final int STATUS_BAR_MODE_LIGHT = 1;
+    private static final int STATUS_BAR_MODE_DARK = 2;
 
-    private boolean mAutoImmersion;
+    private static final int IMMERSION_UNCHANGED = 0;
+    private static final int IMMERSION_ORDINARY = 1;
+    private static final int IMMERSION_IMMERSED = 2;
+
+    private Activity mActivity = null;
+
+    private int mImmersion;
     private int mBackgroundLayerLayoutRes;
     private int mBackgroundLayerImageRes;
     private boolean mStatusBarVisible;
-    private boolean mStatusBarDarkMode;
+    private int mStatusBarMode;
     private int mStatusBarHeight;
     private int mStatusBarColor;
     private int mTitleBarLayoutRes;
@@ -73,10 +79,11 @@ public class ActionBarEx extends FrameLayout {
 
     public ActionBarEx(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        hintSystemActionBar();
         mStatusBarHeight = StatusBarCompat.getHeight(context);
         initAttrs(attrs);
-        makeImmersion();
         initView();
+        refresh();
     }
 
     public View getBackgroundLayer() {
@@ -159,11 +166,11 @@ public class ActionBarEx extends FrameLayout {
         int bottomLineColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_bottom_line_color_def);
         int statusBarColorDef = ContextCompat.getColor(getContext(), R.color.actionbarex_common_status_bar_color_def);
 
-        mAutoImmersion = typedArray.getBoolean(R.styleable.ActionBarEx_ab_autoImmersion, true);
+        mImmersion = typedArray.getInt(R.styleable.ActionBarEx_ab_immersion, IMMERSION_UNCHANGED);
         mBackgroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerLayout, 0);
         mBackgroundLayerImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerImageRes, 0);
         mStatusBarVisible = typedArray.getBoolean(R.styleable.ActionBarEx_ab_statusBarVisible, true);
-        mStatusBarDarkMode = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarMode, STATUS_BAR_MODE_LIGHT) == STATUS_BAR_MODE_DARK;
+        mStatusBarMode = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarMode, STATUS_BAR_MODE_UNCHANGED);
         mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_statusBarColor, statusBarColorDef);
         mTitleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_titleBarLayout, 0);
         mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_titleBarHeight, titleBarHeightDef);
@@ -209,7 +216,6 @@ public class ActionBarEx extends FrameLayout {
         // 2.1 初始StatusBar
         mStatusBar = mActionBar.findViewById(R.id.actionbarex_status_bar);
         mStatusBar.setLayoutParams(makeLayoutParamsWithHeight(mStatusBarHeight));
-        mStatusBar.setBackgroundColor(mStatusBarColor);
         mStatusBar.setVisibility(mStatusBarVisible ? VISIBLE : GONE);
         // 2.2 初始TitleBar
         mTitleBar = mActionBar.findViewById(R.id.actionbarex_title_bar);
@@ -282,25 +288,65 @@ public class ActionBarEx extends FrameLayout {
     /**
      * 设置沉浸模式
      */
-    private void makeImmersion() {
-        hintSystemActionBar();
-        refreshStatusBar();
+    public void refresh() {
+        refreshImmersion();
+        refreshStatusBarMode();
+        refreshStatusBarColor();
     }
 
     /**
-     * 透明状态栏，改变状态栏图标颜色模式
+     * 透明状态栏
      */
-    public void refreshStatusBar() {
+    public void refreshImmersion() {
         Activity activity = getActivity();
         if (activity == null) {
             return;
         }
-        StatusBarCompat.setIconMode(activity, mStatusBarDarkMode);
-        if (mAutoImmersion) {
-            StatusBarCompat.transparent(activity);
-        } else {
-            Window window = activity.getWindow();
-            StatusBarCompat.setColor(window, mStatusBarColor);
+        switch (mImmersion) {
+            case IMMERSION_ORDINARY:
+                StatusBarCompat.unTransparent(activity);
+                break;
+            case IMMERSION_IMMERSED:
+                StatusBarCompat.transparent(activity);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 改变状态栏图标颜色模式
+     */
+    public void refreshStatusBarMode() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        switch (mStatusBarMode) {
+            case STATUS_BAR_MODE_LIGHT:
+                StatusBarCompat.setIconMode(activity, false);
+                break;
+            case STATUS_BAR_MODE_DARK:
+                StatusBarCompat.setIconMode(activity, true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void refreshStatusBarColor() {
+        switch (mImmersion) {
+            case IMMERSION_ORDINARY:
+                Activity activity = getActivity();
+                if (activity != null) {
+                    StatusBarCompat.setColor(activity.getWindow(), mStatusBarColor);
+                }
+                break;
+            case IMMERSION_IMMERSED:
+                mStatusBar.setBackgroundColor(mStatusBarColor);
+                break;
+            default:
+                break;
         }
     }
 
@@ -328,7 +374,11 @@ public class ActionBarEx extends FrameLayout {
      */
     @Nullable
     private Activity getActivity() {
-        return Utils.getActivity(getContext());
+        if (mActivity != null) {
+            return mActivity;
+        }
+        mActivity = Utils.getActivity(getContext());
+        return mActivity;
     }
 
     public void finishActivity() {
