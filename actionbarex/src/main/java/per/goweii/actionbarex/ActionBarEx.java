@@ -22,10 +22,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import per.goweii.statusbarcompat.StatusBarCompat;
 
-import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
  * 高拓展性和定制性的ActionBar
@@ -42,7 +42,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  */
 public class ActionBarEx extends FrameLayout {
 
-    @Retention(SOURCE)
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusBarMode.UNCHANGED, StatusBarMode.LIGHT, StatusBarMode.DARK, StatusBarMode.AUTO})
     public @interface StatusBarMode {
         int UNCHANGED = 0;
@@ -51,7 +51,7 @@ public class ActionBarEx extends FrameLayout {
         int AUTO = 3;
     }
 
-    @Retention(SOURCE)
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusBarVisible.AUTO, StatusBarVisible.VISIBLE, StatusBarVisible.GONE})
     public @interface StatusBarVisible {
         int AUTO = 0;
@@ -59,7 +59,7 @@ public class ActionBarEx extends FrameLayout {
         int GONE = 2;
     }
 
-    @Retention(SOURCE)
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({Immersion.UNCHANGED, Immersion.ORDINARY, Immersion.IMMERSED})
     public @interface Immersion {
         int UNCHANGED = 0;
@@ -89,12 +89,12 @@ public class ActionBarEx extends FrameLayout {
 
     private Activity mActivity = null;
 
-    private View mBackgroundLayer;
     private LinearLayout mActionBar;
     private StatusBarView mStatusBar;
     private FrameLayout mTitleBar;
     private View mBottomLine;
     private View mForegroundLayer;
+    private View mBackgroundLayer;
 
     private SparseArray<View> views = null;
 
@@ -144,13 +144,14 @@ public class ActionBarEx extends FrameLayout {
             if (mBackgroundLayerImageRes > 0) {
                 ImageView actionBarImageView = new ImageView(getContext());
                 mBackgroundLayer = actionBarImageView;
+                addViewInLayout(mBackgroundLayer, getChildCount(), makeLayerLayoutParamsMatch(), true);
                 actionBarImageView.setImageResource(mBackgroundLayerImageRes);
                 actionBarImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                addViewInLayout(actionBarImageView, getChildCount(), makeLayerLayoutParamsMatch(), true);
             }
         }
         // 2 初始ActionBarLayer
         mActionBar = (LinearLayout) inflate(getContext(), R.layout.actionbarex_action_bar, null);
+        addViewInLayout(mActionBar, getChildCount(), makeLayerLayoutParamsWrap(), true);
         // 2.1 初始StatusBar
         mStatusBar = mActionBar.findViewById(R.id.actionbarex_status_bar);
         // 2.2 初始TitleBar
@@ -174,7 +175,6 @@ public class ActionBarEx extends FrameLayout {
             mActionBar.setClipChildren(false);
             setClipChildren(false);
         }
-        addViewInLayout(mActionBar, getChildCount(), makeLayerLayoutParamsWrap(), true);
         // 3 初始ForegroundLayer
         if (mForegroundLayerLayoutRes > 0) {
             mForegroundLayer = inflate(getContext(), mForegroundLayerLayoutRes, null);
