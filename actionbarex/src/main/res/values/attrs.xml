@@ -22,6 +22,7 @@
             <enum name="unchanged" value="0" />
             <enum name="light" value="1" />
             <enum name="dark" value="2" />
+            <enum name="auto" value="3" />
         </attr>
         <attr name="ab_clickToFinish" format="reference" />
         <attr name="ab_titleBarLayout" format="reference" />

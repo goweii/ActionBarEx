@@ -42,7 +42,7 @@
                 app:ab_immersion="unchanged"
                 app:ab_foregroundLayerLayout="@layout/loading_bar"
                 app:ab_statusBarColor="@color/transparent"
-                app:ab_statusBarMode="dark"
+                app:ab_statusBarMode="unchanged"
                 app:ab_statusBarVisible="gone"
                 app:ab_titleBarHeight="48dp"
                 app:abc_leftIconColor="@color/black"
@@ -290,14 +290,14 @@
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@mipmap/action_bar_img"
         app:ab_immersion="immersed"
         app:ab_bottomLineHeight="10dp"
         app:ab_bottomLineOutside="true"
         app:ab_bottomLineResId="@drawable/bottom_line_bg"
         app:ab_foregroundLayerLayout="@layout/loading_bar"
         app:ab_statusBarColor="@color/transparent"
-        app:ab_statusBarMode="dark"
+        app:ab_statusBarMode="auto"
         app:ab_statusBarVisible="visible">
 
         <RelativeLayout
@@ -318,10 +318,11 @@
                     android:src="@mipmap/back" />
 
                 <TextView
+                    android:id="@+id/tv_title_refresh_bg"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="自定义布局"
+                    android:text="点击随机设置颜色"
                     android:textColor="@color/black"
                     android:textSize="17sp" />
 

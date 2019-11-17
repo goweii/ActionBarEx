@@ -6,7 +6,9 @@ import android.content.ContextWrapper;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.CallSuper;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IdRes;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
@@ -19,7 +21,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.lang.annotation.Retention;
+
 import per.goweii.statusbarcompat.StatusBarCompat;
+
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
  * 高拓展性和定制性的ActionBar
@@ -36,32 +42,50 @@ import per.goweii.statusbarcompat.StatusBarCompat;
  */
 public class ActionBarEx extends FrameLayout {
 
-    private static final int STATUS_BAR_MODE_UNCHANGED = 0;
-    private static final int STATUS_BAR_MODE_LIGHT = 1;
-    private static final int STATUS_BAR_MODE_DARK = 2;
+    @Retention(SOURCE)
+    @IntDef({StatusBarMode.UNCHANGED, StatusBarMode.LIGHT, StatusBarMode.DARK, StatusBarMode.AUTO})
+    public @interface StatusBarMode {
+        int UNCHANGED = 0;
+        int LIGHT = 1;
+        int DARK = 2;
+        int AUTO = 3;
+    }
 
-    private static final int STATUS_BAR_VISIBLE_AUTO = 0;
-    private static final int STATUS_BAR_VISIBLE_SHOW = 1;
-    private static final int STATUS_BAR_VISIBLE_GONE = 2;
+    @Retention(SOURCE)
+    @IntDef({StatusBarVisible.AUTO, StatusBarVisible.VISIBLE, StatusBarVisible.GONE})
+    public @interface StatusBarVisible {
+        int AUTO = 0;
+        int VISIBLE = 1;
+        int GONE = 2;
+    }
 
-    private static final int IMMERSION_UNCHANGED = 0;
-    private static final int IMMERSION_ORDINARY = 1;
-    private static final int IMMERSION_IMMERSED = 2;
+    @Retention(SOURCE)
+    @IntDef({Immersion.UNCHANGED, Immersion.ORDINARY, Immersion.IMMERSED})
+    public @interface Immersion {
+        int UNCHANGED = 0;
+        int ORDINARY = 1;
+        int IMMERSED = 2;
+    }
 
-    private int mImmersion = IMMERSION_UNCHANGED;
-    private int mBackgroundLayerLayoutRes = 0;
-    private int mBackgroundLayerImageRes = 0;
-    private int mStatusBarVisible = STATUS_BAR_VISIBLE_AUTO;
-    private int mStatusBarMode = STATUS_BAR_MODE_UNCHANGED;
+    @Immersion
+    private int mImmersion = Immersion.UNCHANGED;
+    @StatusBarVisible
+    private int mStatusBarVisible = StatusBarVisible.AUTO;
+    @StatusBarMode
+    private int mStatusBarMode = StatusBarMode.UNCHANGED;
+    @ColorInt
     private int mStatusBarColor = Color.TRANSPARENT;
     private int mTitleBarHeight = -1;
     private int mTitleBarLayoutRes = 0;
+    @ColorInt
     private int mBottomLineColor = Color.TRANSPARENT;
     private int mBottomLineResId = 0;
     private int mBottomLineHeight = 0;
-    private int mForegroundLayerLayoutRes = 0;
-    private int mClickToFinishViewId = 0;
     private boolean mBottomLineOutside = false;
+    private int mForegroundLayerLayoutRes = 0;
+    private int mBackgroundLayerLayoutRes = 0;
+    private int mBackgroundLayerImageRes = 0;
+    private int mClickToFinishViewId = 0;
 
     private Activity mActivity = null;
 
@@ -160,12 +184,20 @@ public class ActionBarEx extends FrameLayout {
         return mForegroundLayer;
     }
 
-    /**
-     * 获取View并缓存，以便下次获取，避免频繁调用findViewById
-     *
-     * @param id View的id
-     * @return View
-     */
+    public void setTitleBarChild(View titleBarChild) {
+        mTitleBar.removeAllViewsInLayout();
+        if (titleBarChild != null) {
+            ViewGroup.LayoutParams titleBarChildParams = titleBarChild.getLayoutParams();
+            if (titleBarChildParams == null) {
+                titleBarChildParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            }
+            if (mTitleBarHeight >= 0) {
+                titleBarChildParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            }
+            mTitleBar.addView(titleBarChild, titleBarChildParams);
+        }
+    }
+
     public <V extends View> V getView(@IdRes int id) {
         if (views == null) {
             views = new SparseArray<>();
@@ -176,6 +208,22 @@ public class ActionBarEx extends FrameLayout {
             views.put(id, view);
         }
         return (V) view;
+    }
+
+    public void setImmersion(@Immersion int immersion) {
+        mImmersion = immersion;
+    }
+
+    public void setStatusBarVisible(@StatusBarVisible int statusBarVisible) {
+        mStatusBarVisible = statusBarVisible;
+    }
+
+    public void setStatusBarMode(@StatusBarMode int statusBarMode) {
+        mStatusBarMode = statusBarMode;
+    }
+
+    public void setStatusBarColor(@ColorInt int statusBarColor) {
+        mStatusBarColor = statusBarColor;
     }
 
     public void refresh() {
@@ -191,12 +239,13 @@ public class ActionBarEx extends FrameLayout {
             return;
         }
         switch (mImmersion) {
-            case IMMERSION_ORDINARY:
+            case Immersion.ORDINARY:
                 StatusBarCompat.unTransparent(activity);
                 break;
-            case IMMERSION_IMMERSED:
+            case Immersion.IMMERSED:
                 StatusBarCompat.transparent(activity);
                 break;
+            case Immersion.UNCHANGED:
             default:
                 break;
         }
@@ -204,17 +253,19 @@ public class ActionBarEx extends FrameLayout {
 
     public void refreshStatusBarVisible() {
         switch (mStatusBarVisible) {
-            case STATUS_BAR_VISIBLE_GONE:
-                mStatusBar.setVisibility(false);
-                break;
-            case STATUS_BAR_VISIBLE_SHOW:
-                mStatusBar.setVisibility(true);
-                break;
-            default:
+            case StatusBarVisible.AUTO:
                 Activity activity = getActivity();
                 if (activity != null) {
                     mStatusBar.setVisibility(StatusBarCompat.isTransparent(activity));
                 }
+                break;
+            case StatusBarVisible.VISIBLE:
+                mStatusBar.setVisibility(true);
+                break;
+            case StatusBarVisible.GONE:
+                mStatusBar.setVisibility(false);
+                break;
+            default:
                 break;
         }
     }
@@ -225,15 +276,31 @@ public class ActionBarEx extends FrameLayout {
             return;
         }
         switch (mStatusBarMode) {
-            case STATUS_BAR_MODE_LIGHT:
+            case StatusBarMode.LIGHT:
                 StatusBarCompat.setIconMode(activity, false);
                 break;
-            case STATUS_BAR_MODE_DARK:
+            case StatusBarMode.DARK:
                 StatusBarCompat.setIconMode(activity, true);
                 break;
+            case StatusBarMode.AUTO:
+                refreshStatusBarModeAuto();
+                break;
+            case StatusBarMode.UNCHANGED:
             default:
                 break;
         }
+    }
+
+    private void refreshStatusBarModeAuto() {
+        post(new Runnable() {
+            @Override
+            public void run() {
+                Activity activity = getActivity();
+                if (activity != null) {
+                    StatusBarCompat.setIconMode(activity, isStatusBarBgLight());
+                }
+            }
+        });
     }
 
     public void refreshStatusBarColor() {
@@ -247,6 +314,22 @@ public class ActionBarEx extends FrameLayout {
         } else {
             StatusBarCompat.setColor(activity.getWindow(), mStatusBarColor);
         }
+    }
+
+    public boolean isStatusBarIconDark() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            return false;
+        }
+        return StatusBarCompat.isIconDark(activity);
+    }
+
+    public boolean isStatusBarBgLight() {
+        return LuminanceUtils.isLight(calculateStatusBarBgLuminance());
+    }
+
+    public double calculateStatusBarBgLuminance() {
+        return LuminanceUtils.calcStatusBarLuminance(getActivity());
     }
 
     /**
@@ -302,17 +385,7 @@ public class ActionBarEx extends FrameLayout {
         if (mTitleBarHeight >= 0) {
             mTitleBar.getLayoutParams().height = mTitleBarHeight;
         }
-        View titleBarChild = inflateTitleBar();
-        if (titleBarChild != null) {
-            mTitleBar.addView(titleBarChild);
-            ViewGroup.LayoutParams titleBarChildParams = titleBarChild.getLayoutParams();
-            if (titleBarChildParams == null) {
-                titleBarChildParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            }
-            if (mTitleBarHeight >= 0) {
-                titleBarChildParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-            }
-        }
+        setTitleBarChild(inflateTitleBar());
         // 2.3 初始BottomLine
         mBottomLine = mActionBar.findViewById(R.id.actionbarex_bottom_line);
         mBottomLine.getLayoutParams().height = mBottomLineHeight;
