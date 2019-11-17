@@ -114,6 +114,86 @@ public class ActionBarEx extends FrameLayout {
         refresh();
     }
 
+    @CallSuper
+    protected void initAttrs(AttributeSet attrs) {
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
+        mImmersion = typedArray.getInt(R.styleable.ActionBarEx_ab_immersion, mImmersion);
+        mBackgroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerLayout, mBackgroundLayerLayoutRes);
+        mBackgroundLayerImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerImageRes, mBackgroundLayerLayoutRes);
+        mStatusBarVisible = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarVisible, mStatusBarVisible);
+        mStatusBarMode = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarMode, mStatusBarMode);
+        mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_statusBarColor, mStatusBarColor);
+        mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_titleBarHeight, mTitleBarHeight);
+        mTitleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_titleBarLayout, mTitleBarLayoutRes);
+        mBottomLineHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_bottomLineHeight, mBottomLineHeight);
+        mBottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottomLineColor, mBottomLineColor);
+        mBottomLineResId = typedArray.getResourceId(R.styleable.ActionBarEx_ab_bottomLineResId, mBottomLineResId);
+        mBottomLineOutside = typedArray.getBoolean(R.styleable.ActionBarEx_ab_bottomLineOutside, mBottomLineOutside);
+        mForegroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_foregroundLayerLayout, mForegroundLayerLayoutRes);
+        mClickToFinishViewId = typedArray.getResourceId(R.styleable.ActionBarEx_ab_clickToFinish, mClickToFinishViewId);
+        typedArray.recycle();
+    }
+
+    @CallSuper
+    protected void initView() {
+        // 1 初始化BackgroundLayer
+        if (mBackgroundLayerLayoutRes > 0) {
+            mBackgroundLayer = inflate(getContext(), mBackgroundLayerLayoutRes, null);
+            addViewInLayout(mBackgroundLayer, getChildCount(), makeLayerLayoutParamsMatch(), true);
+        } else {
+            if (mBackgroundLayerImageRes > 0) {
+                ImageView actionBarImageView = new ImageView(getContext());
+                mBackgroundLayer = actionBarImageView;
+                actionBarImageView.setImageResource(mBackgroundLayerImageRes);
+                actionBarImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                addViewInLayout(actionBarImageView, getChildCount(), makeLayerLayoutParamsMatch(), true);
+            }
+        }
+        // 2 初始ActionBarLayer
+        mActionBar = (LinearLayout) inflate(getContext(), R.layout.actionbarex_action_bar, null);
+        // 2.1 初始StatusBar
+        mStatusBar = mActionBar.findViewById(R.id.actionbarex_status_bar);
+        // 2.2 初始TitleBar
+        mTitleBar = mActionBar.findViewById(R.id.actionbarex_title_bar);
+        mTitleBar.setClickable(true);
+        mTitleBar.setFocusable(true);
+        mTitleBar.setFocusableInTouchMode(true);
+        if (mTitleBarHeight >= 0) {
+            mTitleBar.getLayoutParams().height = mTitleBarHeight;
+        }
+        setTitleBarChild(inflateTitleBar());
+        // 2.3 初始BottomLine
+        mBottomLine = mActionBar.findViewById(R.id.actionbarex_bottom_line);
+        mBottomLine.getLayoutParams().height = mBottomLineHeight;
+        if (mBottomLineResId > 0) {
+            mBottomLine.setBackgroundResource(mBottomLineResId);
+        } else {
+            mBottomLine.setBackgroundColor(mBottomLineColor);
+        }
+        if (mBottomLineOutside) {
+            mActionBar.setClipChildren(false);
+            setClipChildren(false);
+        }
+        addViewInLayout(mActionBar, getChildCount(), makeLayerLayoutParamsWrap(), true);
+        // 3 初始ForegroundLayer
+        if (mForegroundLayerLayoutRes > 0) {
+            mForegroundLayer = inflate(getContext(), mForegroundLayerLayoutRes, null);
+            addViewInLayout(mForegroundLayer, getChildCount(), makeLayerLayoutParamsMatch(), true);
+        }
+        performClickToFinish();
+    }
+
+    protected View inflateTitleBar() {
+        if (getTitleBarRes() > 0) {
+            return LayoutInflater.from(getContext()).inflate(getTitleBarRes(), mTitleBar, false);
+        }
+        return null;
+    }
+
+    protected int getTitleBarRes() {
+        return mTitleBarLayoutRes;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -124,21 +204,6 @@ public class ActionBarEx extends FrameLayout {
                 viewGroup.setClipChildren(false);
             }
         }
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        mActionBar.measure(widthMeasureSpec, heightMeasureSpec);
-        int width = mActionBar.getMeasuredWidth();
-        int height;
-        if (mBottomLineOutside) {
-            height = mStatusBar.getMeasuredHeight() + mTitleBar.getMeasuredHeight();
-        } else {
-            height = mActionBar.getMeasuredHeight();
-        }
-        int widthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
-        int heightSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-        super.onMeasure(widthSpec, heightSpec);
     }
 
     @Override
@@ -158,6 +223,21 @@ public class ActionBarEx extends FrameLayout {
             removeView(child);
             mTitleBar.addView(child, 0);
         }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        mActionBar.measure(widthMeasureSpec, heightMeasureSpec);
+        int width = mActionBar.getMeasuredWidth();
+        int height;
+        if (mBottomLineOutside) {
+            height = mStatusBar.getMeasuredHeight() + mTitleBar.getMeasuredHeight();
+        } else {
+            height = mActionBar.getMeasuredHeight();
+        }
+        int widthSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
+        int heightSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
+        super.onMeasure(widthSpec, heightSpec);
     }
 
     public View getBackgroundLayer() {
@@ -332,95 +412,11 @@ public class ActionBarEx extends FrameLayout {
         return LuminanceUtils.calcStatusBarLuminance(getActivity());
     }
 
-    /**
-     * 初始化布局文件传入的配置
-     * 子类可重写并初始化自己定义的属性配置，必须保证在第一行调用super方法
-     *
-     * @param attrs AttributeSet
-     */
-    @CallSuper
-    protected void initAttrs(AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ActionBarEx);
-        mImmersion = typedArray.getInt(R.styleable.ActionBarEx_ab_immersion, mImmersion);
-        mBackgroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerLayout, mBackgroundLayerLayoutRes);
-        mBackgroundLayerImageRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_backgroundLayerImageRes, mBackgroundLayerLayoutRes);
-        mStatusBarVisible = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarVisible, mStatusBarVisible);
-        mStatusBarMode = typedArray.getInt(R.styleable.ActionBarEx_ab_statusBarMode, mStatusBarMode);
-        mStatusBarColor = typedArray.getColor(R.styleable.ActionBarEx_ab_statusBarColor, mStatusBarColor);
-        mTitleBarHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_titleBarHeight, mTitleBarHeight);
-        mTitleBarLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_titleBarLayout, mTitleBarLayoutRes);
-        mBottomLineHeight = (int) typedArray.getDimension(R.styleable.ActionBarEx_ab_bottomLineHeight, mBottomLineHeight);
-        mBottomLineColor = typedArray.getColor(R.styleable.ActionBarEx_ab_bottomLineColor, mBottomLineColor);
-        mBottomLineResId = typedArray.getResourceId(R.styleable.ActionBarEx_ab_bottomLineResId, mBottomLineResId);
-        mBottomLineOutside = typedArray.getBoolean(R.styleable.ActionBarEx_ab_bottomLineOutside, mBottomLineOutside);
-        mForegroundLayerLayoutRes = typedArray.getResourceId(R.styleable.ActionBarEx_ab_foregroundLayerLayout, mForegroundLayerLayoutRes);
-        mClickToFinishViewId = typedArray.getResourceId(R.styleable.ActionBarEx_ab_clickToFinish, mClickToFinishViewId);
-        typedArray.recycle();
-    }
-
-    @CallSuper
-    protected void initView() {
-        // 1 初始化BackgroundLayer
-        if (mBackgroundLayerLayoutRes > 0) {
-            mBackgroundLayer = inflate(getContext(), mBackgroundLayerLayoutRes, null);
-            addViewInLayout(mBackgroundLayer, getChildCount(), makeLayerLayoutParamsMatch(), true);
-        } else {
-            if (mBackgroundLayerImageRes > 0) {
-                ImageView actionBarImageView = new ImageView(getContext());
-                mBackgroundLayer = actionBarImageView;
-                actionBarImageView.setImageResource(mBackgroundLayerImageRes);
-                actionBarImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                addViewInLayout(actionBarImageView, getChildCount(), makeLayerLayoutParamsMatch(), true);
-            }
+    public void finishActivity() {
+        Activity activity = getActivity();
+        if (activity != null && !activity.isFinishing()) {
+            activity.finish();
         }
-        // 2 初始ActionBarLayer
-        mActionBar = (LinearLayout) inflate(getContext(), R.layout.actionbarex_action_bar, null);
-        // 2.1 初始StatusBar
-        mStatusBar = mActionBar.findViewById(R.id.actionbarex_status_bar);
-        // 2.2 初始TitleBar
-        mTitleBar = mActionBar.findViewById(R.id.actionbarex_title_bar);
-        mTitleBar.setClickable(true);
-        mTitleBar.setFocusable(true);
-        mTitleBar.setFocusableInTouchMode(true);
-        if (mTitleBarHeight >= 0) {
-            mTitleBar.getLayoutParams().height = mTitleBarHeight;
-        }
-        setTitleBarChild(inflateTitleBar());
-        // 2.3 初始BottomLine
-        mBottomLine = mActionBar.findViewById(R.id.actionbarex_bottom_line);
-        mBottomLine.getLayoutParams().height = mBottomLineHeight;
-        if (mBottomLineResId > 0) {
-            mBottomLine.setBackgroundResource(mBottomLineResId);
-        } else {
-            mBottomLine.setBackgroundColor(mBottomLineColor);
-        }
-        if (mBottomLineOutside) {
-            mActionBar.setClipChildren(false);
-            setClipChildren(false);
-        }
-        addViewInLayout(mActionBar, getChildCount(), makeLayerLayoutParamsWrap(), true);
-        // 3 初始ForegroundLayer
-        if (mForegroundLayerLayoutRes > 0) {
-            mForegroundLayer = inflate(getContext(), mForegroundLayerLayoutRes, null);
-            addViewInLayout(mForegroundLayer, getChildCount(), makeLayerLayoutParamsMatch(), true);
-        }
-        performClickToFinish();
-    }
-
-    /**
-     * 初始化子TitleBar
-     *
-     * @return TitleBarChild
-     */
-    protected View inflateTitleBar() {
-        if (getTitleBarRes() > 0) {
-            return LayoutInflater.from(getContext()).inflate(getTitleBarRes(), mTitleBar, false);
-        }
-        return null;
-    }
-
-    protected int getTitleBarRes() {
-        return mTitleBarLayoutRes;
     }
 
     private void performClickToFinish() {
@@ -444,9 +440,6 @@ public class ActionBarEx extends FrameLayout {
         return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     }
 
-    /**
-     * 隐藏默认的ActionBar
-     */
     private void hintSystemActionBar() {
         Activity activity = getActivity();
         if (activity == null) {
@@ -463,9 +456,6 @@ public class ActionBarEx extends FrameLayout {
         }
     }
 
-    /**
-     * 从当前上下文获取Activity
-     */
     @Nullable
     private Activity getActivity() {
         if (mActivity != null) {
@@ -482,12 +472,5 @@ public class ActionBarEx extends FrameLayout {
             }
         }
         return mActivity;
-    }
-
-    public void finishActivity() {
-        Activity activity = getActivity();
-        if (activity != null && !activity.isFinishing()) {
-            activity.finish();
-        }
     }
 }
