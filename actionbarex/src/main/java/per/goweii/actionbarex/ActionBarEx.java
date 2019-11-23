@@ -43,12 +43,13 @@ import per.goweii.statusbarcompat.StatusBarCompat;
 public class ActionBarEx extends FrameLayout {
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({StatusBarMode.UNCHANGED, StatusBarMode.LIGHT, StatusBarMode.DARK, StatusBarMode.AUTO})
+    @IntDef({StatusBarMode.UNCHANGED, StatusBarMode.LIGHT, StatusBarMode.DARK, StatusBarMode.AUTO, StatusBarMode.REAL_TIME})
     public @interface StatusBarMode {
         int UNCHANGED = 0;
         int LIGHT = 1;
         int DARK = 2;
         int AUTO = 3;
+        int REAL_TIME = 4;
     }
 
     @Retention(RetentionPolicy.SOURCE)
@@ -314,16 +315,12 @@ public class ActionBarEx extends FrameLayout {
     }
 
     public void refreshImmersion() {
-        Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
         switch (mImmersion) {
             case Immersion.ORDINARY:
-                StatusBarCompat.unTransparent(activity);
+                StatusBarCompat.unTransparent(getContext());
                 break;
             case Immersion.IMMERSED:
-                StatusBarCompat.transparent(activity);
+                StatusBarCompat.transparent(getContext());
                 break;
             case Immersion.UNCHANGED:
             default:
@@ -334,10 +331,7 @@ public class ActionBarEx extends FrameLayout {
     public void refreshStatusBarVisible() {
         switch (mStatusBarVisible) {
             case StatusBarVisible.AUTO:
-                Activity activity = getActivity();
-                if (activity != null) {
-                    mStatusBar.setVisibility(StatusBarCompat.isTransparent(activity));
-                }
+                mStatusBar.setVisibility(StatusBarCompat.isTransparent(getContext()));
                 break;
             case StatusBarVisible.VISIBLE:
                 mStatusBar.setVisibility(true);
@@ -351,19 +345,19 @@ public class ActionBarEx extends FrameLayout {
     }
 
     public void refreshStatusBarMode() {
-        Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
+        StatusBarCompat.unregisterToAutoChangeIconMode(getContext());
         switch (mStatusBarMode) {
             case StatusBarMode.LIGHT:
-                StatusBarCompat.setIconMode(activity, false);
+                StatusBarCompat.setIconMode(getContext(), false);
                 break;
             case StatusBarMode.DARK:
-                StatusBarCompat.setIconMode(activity, true);
+                StatusBarCompat.setIconMode(getContext(), true);
                 break;
             case StatusBarMode.AUTO:
                 refreshStatusBarModeAuto();
+                break;
+            case StatusBarMode.REAL_TIME:
+                StatusBarCompat.registerToAutoChangeIconMode(getContext());
                 break;
             case StatusBarMode.UNCHANGED:
             default:
@@ -375,41 +369,30 @@ public class ActionBarEx extends FrameLayout {
         post(new Runnable() {
             @Override
             public void run() {
-                Activity activity = getActivity();
-                if (activity != null) {
-                    StatusBarCompat.setIconMode(activity, isStatusBarBgLight());
-                }
+                StatusBarCompat.setIconModeAuto(getContext());
             }
         });
     }
 
     public void refreshStatusBarColor() {
         mStatusBar.setBackgroundColor(mStatusBarColor);
-        Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-        if (StatusBarCompat.isTransparent(activity) && mStatusBar.isVisibility()) {
-            StatusBarCompat.setColor(activity.getWindow(), Color.TRANSPARENT);
+        if (StatusBarCompat.isTransparent(getContext()) && mStatusBar.isVisibility()) {
+            StatusBarCompat.setColor(getContext(), Color.TRANSPARENT);
         } else {
-            StatusBarCompat.setColor(activity.getWindow(), mStatusBarColor);
+            StatusBarCompat.setColor(getContext(), mStatusBarColor);
         }
     }
 
     public boolean isStatusBarIconDark() {
-        Activity activity = getActivity();
-        if (activity == null) {
-            return false;
-        }
-        return StatusBarCompat.isIconDark(activity);
+        return StatusBarCompat.isIconDark(getContext());
     }
 
     public boolean isStatusBarBgLight() {
-        return LuminanceUtils.isLight(calculateStatusBarBgLuminance());
+        return StatusBarCompat.isBgLight(getContext());
     }
 
     public double calculateStatusBarBgLuminance() {
-        return LuminanceUtils.calcStatusBarLuminance(getActivity());
+        return StatusBarCompat.calcBgLuminance(getContext());
     }
 
     public void finishActivity() {
