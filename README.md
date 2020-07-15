@@ -1074,3 +1074,9 @@ protected View inflateTitleBar() {
 
 4. 还没想到，未完待续
 
+
+
+# 如果你觉得App还不错，就请我喝杯咖啡吧~
+
+| ![wx_qrcode](https://gitee.com/goweii/WanAndroidServer/raw/master/about/wx_qrcode.png) |
+|---|
